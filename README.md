@@ -25,3 +25,6 @@
    referência e devolve o link de pagamento. Quando o Mercado Pago avisa que ficou "authorized", o webhook
    liga `profiles.active`; se for cancelada ou pausada, desliga.
    Para ativar alguém na mão: `update profiles set active = true where email = '...';`
+
+
+   --teste--
