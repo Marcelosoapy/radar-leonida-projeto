@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radar Leonida: ideias de vídeo sobre GTA 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a0f2e;--surface:#27173f;--line:#3d2a5c;--text:#f8ecdc;--muted:#b9a8d0;--hot:#ff5d73;--sun:#ffb347;--sea:#35d0ba;--ink:#1a0f2e;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fff4e4;--surface:#ffffff;--line:#ecd5b8;--text:#2a1745;--muted:#6f5a8a;--hot:#d6304a;--sun:#c9700a;--sea:#0b8f7c;--ink:#fff4e4;color-scheme:light}}
+:root[data-theme="dark"]{--bg:#1a0f2e;--surface:#27173f;--line:#3d2a5c;--text:#f8ecdc;--muted:#b9a8d0;--hot:#ff5d73;--sun:#ffb347;--sea:#35d0ba;--ink:#1a0f2e}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.55 "DM Sans",system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.01em;line-height:1.05;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font:400 22px Anton,sans-serif}
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 22px;font:700 15px "DM Sans",sans-serif;cursor:pointer;background:var(--hot);color:#fff;text-decoration:none}
+.btn.alt{background:transparent;border:2px solid var(--line);color:var(--text)}
+.hero{padding:44px 0 36px}
+.hero h1{font-size:clamp(46px,9vw,104px);max-width:12ch}
+.hero p{max-width:52ch;color:var(--muted);font-size:18px;margin:20px 0 26px}
+.sun{display:inline-block;color:var(--sun)}
+.tag{display:inline-block;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:13px;color:var(--sea);margin:0 6px 6px 0}
+.tags{margin-top:6px}
+section{padding:36px 0}
+h2{font-size:clamp(30px,5vw,46px);margin-bottom:8px}
+.sub{color:var(--muted);margin:0 0 22px;max-width:60ch}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:7px 16px;font:500 14px "DM Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--sun);color:#1a0f2e;border-color:var(--sun)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{aspect-ratio:16/9;display:flex;align-items:flex-end;justify-content:space-between;padding:10px;color:#fff;font-weight:700;font-size:13px}
+.thumb.short{aspect-ratio:16/7}
+.thumb span{background:rgba(0,0,0,.55);padding:2px 8px;border-radius:6px}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.body h3{font-size:21px}
+.meta{color:var(--muted);font-size:14px}
+.up{color:var(--sea);font-weight:700}
+.idea{margin-top:8px;border-left:4px solid var(--hot);padding:8px 12px;background:rgba(255,93,115,.1);border-radius:0 8px 8px 0;font-size:15px;position:relative}
+.idea b{display:block;margin-bottom:2px}
+.idea.locked p{filter:blur(5px);user-select:none;margin:0}
+.lock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.lock a{background:var(--hot);color:#fff;border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;text-decoration:none}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:700px}
+.plan{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:24px}
+.plan.best{border-color:var(--sun)}
+.price{font:400 54px Anton,sans-serif;margin:8px 0}
+.price small{font:500 16px "DM Sans",sans-serif;color:var(--muted)}
+.plan ul{padding-left:20px;margin:14px 0 20px;color:var(--muted)}
+form{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+input,select{flex:1 1 200px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit}
+.note{font-size:14px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:12px 16px;margin-top:30px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sea);color:#102;padding:10px 20px;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.modal{position:fixed;inset:0;background:rgba(10,5,20,.7);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}.modal[hidden]{display:none}.box{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:24px;width:100%;max-width:420px}.fld{display:flex;flex-direction:column;gap:10px}.thumb img{position:absolute}.thumb{position:relative;background-size:cover;background-position:center}.thumb span{position:relative}footer{padding:30px 0 50px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><div class="logo">Radar <span class="sun">Leonida</span></div><div style="display:flex;gap:10px;align-items:center"><span class="meta" id="status"></span><a class="btn alt" href="#planos">Ver planos</a><button class="btn" id="auth-btn" type="button">Entrar</button></div></nav>
+
+<header class="hero">
+  <h1>Todo vídeo de GTA 6, virando ideia para o seu.</h1>
+  <p>Coletamos vídeos e Shorts com as hashtags do jogo, mostramos o que está crescendo e entregamos um ângulo novo para você criar o seu conteúdo. Por menos que um lanche, por mês.</p>
+  <a class="btn" href="#feed">Explorar o radar</a>
+  <div class="tags"><span class="tag">#gta6</span><span class="tag">#gta6trailer</span><span class="tag">#leonida</span><span class="tag">#viceCity</span><span class="tag">#lucia</span></div>
+</header>
+
+<section id="feed">
+  <h2>Radar de hoje</h2>
+  <p class="sub">Vídeos coletados nas últimas 24 horas. As 2 ideias de maior crescimento são grátis; as demais ficam liberadas para assinantes.</p>
+  <div class="filters" id="fmt" role="group" aria-label="Filtrar por formato"></div>
+  <div class="filters" id="ord" role="group" aria-label="Ordenar"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="mural">
+  <h2>Mural dos criadores</h2>
+  <p class="sub">Publicou um vídeo usando as hashtags? Cadastre aqui e apareça no radar para os demais assinantes.</p>
+  <form id="form">
+    <input id="f-title" placeholder="Título do seu vídeo" required aria-label="Título do vídeo">
+    <input id="f-chan" placeholder="Nome do canal" required aria-label="Nome do canal">
+    <input id="f-url" type="url" placeholder="Link do vídeo (https://...)" required aria-label="Link do vídeo"><select id="f-fmt" aria-label="Formato"><option>Short</option><option>Vídeo</option><option>Teoria</option><option>Comparação</option></select>
+    <button class="btn" type="submit">Publicar no mural</button>
+  </form>
+  <div class="grid" id="mural-grid"></div>
+</section>
+
+<section id="planos">
+  <h2>Escolha seu plano</h2>
+  <p class="sub">Cancele quando quiser. Pagamento por Pix ou cartão.</p>
+  <div class="plans">
+    <div class="plan"><h3>Mensal</h3><div class="price">R$ 14,90<small> /mês</small></div>
+      <ul><li>Todas as ideias do radar</li><li>Filtros por formato e crescimento</li><li>Mural dos criadores</li></ul>
+      <button class="btn alt" data-plan="Mensal">Assinar mensal</button></div>
+    <div class="plan best"><h3>Anual</h3><div class="price">R$ 9,90<small> /mês</small></div>
+      <ul><li>Tudo do plano mensal</li><li>Alerta diário com as ideias do dia</li><li>Cobrança única de R$ 118,80</li></ul>
+      <button class="btn" data-plan="Anual">Assinar anual</button></div>
+  </div>
+  <p class="note">Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.</p>
+</section>
+<footer>Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.</footer>
+</div>
+<div class="modal" id="modal" hidden><div class="box" role="dialog" aria-modal="true" aria-labelledby="m-title">
+<h2 id="m-title">Entrar no Radar</h2><p class="sub" style="margin-bottom:14px">Use seu e-mail para entrar ou criar a conta.</p>
+<div class="fld"><input id="a-email" type="email" placeholder="Seu e-mail" autocomplete="email" aria-label="E-mail"><input id="a-pass" type="password" placeholder="Senha (mínimo 6 caracteres)" autocomplete="current-password" aria-label="Senha"></div>
+<p id="a-msg" class="meta" role="alert" style="min-height:22px"></p>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="a-in" type="button">Entrar</button><button class="btn alt" id="a-up" type="button">Criar conta</button><button class="btn alt" id="a-x" type="button">Fechar</button></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+var cfg=window.RADAR_CONFIG,sb=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY);
+var D=[],M=[],ideas={},user=null,active=false,fmt="Todos",ord="Crescimento";
+var FM=["Todos","Short","Vídeo","Teoria","Comparação"],OR=["Crescimento","Mais recentes"];
+function $(id){return document.getElementById(id)}
+function esc(s){var e=document.createElement("div");e.textContent=s==null?"":s;return e.innerHTML.replace(/"/g,"&quot;")}
+function safeUrl(u){return /^https?:\/\//i.test(u)?u:"#"}
+function toast(m){var t=$("toast")||document.querySelector(".toast");t.textContent=m;t.className="toast on";setTimeout(function(){t.className="toast"},2800)}
+function chips(box,list,cur,fn){box.innerHTML="";list.forEach(function(x){var b=document.createElement("button");b.className="chip";b.textContent=x;b.setAttribute("aria-pressed",x===cur);b.onclick=function(){fn(x)};box.appendChild(b)})}
+function hours(d){return Math.max(0,Math.round((Date.now()-new Date(d))/36e5))}
+function fmtDur(s){if(!s)return"";var m=Math.floor(s/60),r=s%60;return m+":"+(r<10?"0":"")+r}
+function card(v,community){
+ var url=community?safeUrl(v.url):"https://www.youtube.com/watch?v="+encodeURIComponent(v.id);
+ var idea=community?"Vídeo de um criador da comunidade. Assista, veja o ângulo e crie a sua versão.":ideas[v.id];
+ var locked=!community&&!idea;
+ var g=v.growth!=null?'<div class="meta"><span class="up">+'+Math.round(v.growth)+'%</span> de crescimento</div>':"";
+ var views=v.views!=null?Number(v.views).toLocaleString("pt-BR")+" views · há "+hours(v.published_at)+" h":"publicado por "+esc(v.channel);
+ return '<article class="card"><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" style="text-decoration:none"><div class="thumb'+(v.format==="Short"?" short":"")+'" style="'+(v.thumb?"background-image:url('"+esc(v.thumb)+"')":"background:linear-gradient(135deg,#35d0ba,#7b2ff7)")+'"><span>'+esc(v.format||"Vídeo")+'</span><span>'+fmtDur(v.duration_s)+'</span></div></a><div class="body"><h3>'+esc(v.title)+'</h3><div class="meta">'+esc(v.channel)+' · '+views+'</div>'+g+'<div class="tags"><span class="tag">#gta6</span><span class="tag">#leonida</span></div><div class="idea'+(locked?" locked":"")+'"><b>Ideia para o seu vídeo</b><p>'+esc(idea||"Ideia disponível apenas para assinantes do Radar Leonida.")+'</p>'+(locked?'<div class="lock"><a href="#planos">Assinar para ver</a></div>':'')+'</div></div></article>'}
+function render(){
+ chips($("fmt"),FM,fmt,function(x){fmt=x;render()});chips($("ord"),OR,ord,function(x){ord=x;render()});
+ var l=D.filter(function(v){return fmt==="Todos"||v.format===fmt});
+ l.sort(function(a,b){return ord==="Crescimento"?(b.growth||0)-(a.growth||0):new Date(b.published_at)-new Date(a.published_at)});
+ $("grid").innerHTML=l.map(function(v){return card(v,false)}).join("")||'<p class="sub">Nenhum vídeo coletado ainda. A próxima coleta roda em até 3 horas.</p>';
+ $("mural-grid").innerHTML=M.length?M.map(function(v){return card(v,true)}).join(""):'<p class="sub">O mural está vazio. Assinantes podem publicar o primeiro vídeo.</p>';
+ $("auth-btn").textContent=user?"Sair":"Entrar";
+ $("status").textContent=user?(active?"Assinatura ativa":"Plano gratuito"):"";
+}
+async function load(){
+ var s=await sb.auth.getSession();user=s.data.session?s.data.session.user:null;active=false;
+ if(user){var p=await sb.from("profiles").select("active").eq("id",user.id).maybeSingle();active=!!(p.data&&p.data.active)}
+ var since=new Date(Date.now()-48*36e5).toISOString();
+ var v=await sb.from("videos").select("*").gte("published_at",since).limit(200);D=v.data||[];
+ var i=await sb.from("ideas").select("video_id,idea");ideas={};(i.data||[]).forEach(function(x){ideas[x.video_id]=x.idea});
+ var m=await sb.from("community").select("*").order("created_at",{ascending:false}).limit(30);M=m.data||[];
+ render()}
+function openModal(){$("a-msg").textContent="";$("modal").hidden=false;$("a-email").focus()}
+function closeModal(){$("modal").hidden=true}
+async function auth(kind){
+ var email=$("a-email").value.trim(),pass=$("a-pass").value;
+ if(!email||pass.length<6){$("a-msg").textContent="Informe um e-mail válido e uma senha com pelo menos 6 caracteres.";return}
+ var r=kind==="up"?await sb.auth.signUp({email:email,password:pass}):await sb.auth.signInWithPassword({email:email,password:pass});
+ if(r.error){$("a-msg").textContent=r.error.message;return}
+ if(kind==="up"&&!r.data.session){$("a-msg").textContent="Conta criada. Confirme o link enviado ao seu e-mail e depois clique em Entrar.";return}
+ closeModal();toast("Você entrou");load()}
+$("auth-btn").onclick=async function(){if(user){await sb.auth.signOut();toast("Você saiu");load()}else openModal()};
+$("a-in").onclick=function(){auth("in")};$("a-up").onclick=function(){auth("up")};$("a-x").onclick=closeModal;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()});
+$("form").onsubmit=async function(e){e.preventDefault();
+ if(!user){openModal();return}
+ if(!active){toast("Assine um plano para publicar no mural");location.hash="planos";return}
+ var r=await sb.from("community").insert({user_id:user.id,title:$("f-title").value,channel:$("f-chan").value,url:$("f-url").value,format:$("f-fmt").value});
+ if(r.error){toast("Não foi possível publicar: "+r.error.message);return}
+ e.target.reset();toast("Publicado no mural");load()};
+document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=async function(){
+ if(!user){openModal();return}
+ b.disabled=true;toast("Abrindo o pagamento...");
+ var r=await sb.functions.invoke("create-checkout",{body:{plan:b.dataset.plan}});
+ b.disabled=false;
+ if(r.error||!r.data||!r.data.init_point){toast("Não foi possível abrir o pagamento. Tente de novo.");return}
+ window.location.href=r.data.init_point}});
+sb.auth.onAuthStateChange(function(){});
+load();
+
+</script>
+</body>
+</html>
