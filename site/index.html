@@ -68,6 +68,7 @@ h2{font-size:clamp(30px,5vw,46px);margin-bottom:8px}
 .copy{margin-top:8px;border:0;background:none;color:var(--sea);font-weight:700;font-size:13px;cursor:pointer;padding:0}
 .idea.locked p{filter:blur(5px);user-select:none}
 .lock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(26,15,46,.35)}
+.more{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:26px}
 .skel{height:330px;border-radius:16px;background:linear-gradient(90deg,var(--surface) 25%,var(--surface2) 50%,var(--surface) 75%);background-size:200% 100%;animation:sh 1.4s infinite}
 @keyframes sh{to{background-position:-200% 0}}
 .empty{color:var(--muted);border:1px dashed var(--line);border-radius:14px;padding:26px;text-align:center;grid-column:1/-1}
@@ -138,6 +139,7 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
     <div class="chips" id="ord" role="group" aria-label="Ordenar"></div>
   </div>
   <div class="grid" id="grid"></div>
+  <div class="more" id="more"></div>
 </section>
 
 <section id="mural">
@@ -201,7 +203,7 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
 <script src="config.js"></script>
 <script>
 var cfg=window.RADAR_CONFIG,sb=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY);
-var D=[],M=[],ideas={},user=null,active=false,fmt="Todos",ord="Em alta",mode="in",loaded=false;
+var D=[],M=[],ideas={},user=null,active=false,fmt="Todos",ord="Em alta",mode="in",loaded=false,shown=6;
 var FM=["Todos","Short","Vídeo","Teoria","Comparação"],OR=["Em alta","Mais recentes","Mais vistos"];
 function $(id){return document.getElementById(id)}
 function esc(s){var e=document.createElement("div");e.textContent=s==null?"":s;return e.innerHTML.replace(/"/g,"&quot;")}
@@ -241,15 +243,17 @@ function chips(box,list,cur,fn,counts){box.innerHTML="";list.forEach(function(x)
 function render(){
  var counts={Todos:D.length,Short:0,"Vídeo":0,Teoria:0,"Comparação":0};
  D.forEach(function(v){counts[kind(v)]++});
- chips($("fmt"),FM,fmt,function(x){fmt=x;render()},counts);
- chips($("ord"),OR,ord,function(x){ord=x;render()});
+ chips($("fmt"),FM,fmt,function(x){fmt=x;shown=6;render()},counts);
+ chips($("ord"),OR,ord,function(x){ord=x;shown=6;render()});
  var l=D.filter(function(v){return fmt==="Todos"||kind(v)===fmt});
  l.sort(function(a,b){
   if(ord==="Mais recentes")return new Date(b.published_at)-new Date(a.published_at);
   if(ord==="Mais vistos")return (b.views||0)-(a.views||0);
   return ((b.growth||0)-(a.growth||0))||((b.views||0)-(a.views||0))});
- $("grid").innerHTML=l.length?l.map(function(v){return card(v,false)}).join(""):'<div class="empty">'+(loaded?'Nenhum vídeo nesse formato nas últimas 48 horas. Tente outro filtro.':'Carregando...')+'</div>';
- $("mural-grid").innerHTML=M.length?M.map(function(v){return card(v,true)}).join(""):'<div class="empty">O mural está vazio. Assinantes podem publicar o primeiro vídeo.</div>';
+ var vis=l.slice(0,shown);
+ $("more").innerHTML=(l.length>shown?'<button class="btn alt" type="button" data-more>Ver mais vídeos ('+(l.length-shown)+')</button>':"")+(shown>6?'<button class="btn alt" type="button" data-less>Mostrar menos</button>':"");
+ $("grid").innerHTML=l.length?vis.map(function(v){return card(v,false)}).join(""):'<div class="empty">'+(loaded?'Nenhum vídeo nesse formato nas últimas 48 horas. Tente outro filtro.':'Carregando...')+'</div>';
+ $("mural-grid").innerHTML=M.length?M.slice(0,6).map(function(v){return card(v,true)}).join(""):'<div class="empty">O mural está vazio. Assinantes podem publicar o primeiro vídeo.</div>';
  $("auth-btn").textContent=user?"Sair":"Entrar";
  var st=$("status");st.hidden=!user;st.textContent=active?"Assinatura ativa":"Plano gratuito";st.className="pill"+(active?" on":"");
  $("s-v").textContent=D.length;$("s-s").textContent=counts.Short;$("s-t").textContent=counts.Teoria+counts["Comparação"];
@@ -326,6 +330,8 @@ sb.auth.onAuthStateChange(function(ev){if(ev==="PASSWORD_RECOVERY")openAuth("res
 document.addEventListener("click",function(e){
  var u=e.target.closest("[data-unlock]");
  if(u){if(!user)openAuth("up");else location.hash="planos";return}
+ if(e.target.closest("[data-more]")){shown+=6;render();return}
+ if(e.target.closest("[data-less]")){shown=6;render();$("feed").scrollIntoView();return}
  var c=e.target.closest("[data-copy]");
  if(c){try{navigator.clipboard.writeText(c.getAttribute("data-copy"));toast("Ideia copiada")}catch(x){toast("Não foi possível copiar")}}});
 $("form").onsubmit=async function(e){e.preventDefault();
