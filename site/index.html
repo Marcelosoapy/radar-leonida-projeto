@@ -393,7 +393,7 @@ document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=async fun
 /* Transcrição e roteiro com IA */
 var R={t:{},s:{}},pv=null,ptab="transcript";
 async function callAssist(action,id,again){
- var r=await sb.functions.invoke("video-assist",{body:{action:action,video_id:id,again:!!again}});
+ var r=await sb.functions.invoke((cfg.ASSIST_FN||"video-assist"),{body:{action:action,video_id:id,again:!!again}});
  if(r.error){var m="Não foi possível concluir agora. Tente de novo.",code="",st="";
   try{var c=r.error.context;st=c.status;var j=await c.json();m=j.error||j.message||m;code=j.code||""}
   catch(x){if(!st)m="Não foi possível falar com o servidor. Confira se a função video-assist está publicada."}
