@@ -1,7 +1,7 @@
 // Node 18+. Coleta vídeos do YouTube por hashtag, salva no Supabase e gera ideias com Claude.
 const { YT_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY, ANTHROPIC_API_KEY } = process.env;
-const BASE = (SUPABASE_URL || "").trim().replace(//+$/, "").replace(//rest/v1$/, "");
-const QUERIES = ["#gta6", "#gta6trailer", "#gta6leonida", "#gtavi"]; // cada busca custa 100 unidades de cota
+const BASE = (SUPABASE_URL || "").trim().replace(/\/+$/, "").replace(/\/rest\/v1$/, "");
+const QUERIES = ["#gta6", "#gta6trailer", "#gta6leonida", "#gtavi"];
 const sbH = { apikey: SUPABASE_SERVICE_KEY, Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`, "Content-Type": "application/json" };
 
 const dur = (iso) => { const m = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/.exec(iso || "") || []; return (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0); };
@@ -13,7 +13,7 @@ async function yt(path, params) {
 }
 
 async function sb(path, opts = {}) {
-  const r = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, { ...opts, headers: { ...sbH, ...(opts.headers || {}) } });
+  const r = await fetch(`${BASE}/rest/v1/${path}`, { ...opts, headers: { ...sbH, ...(opts.headers || {}) } });
   if (!r.ok) throw new Error(`Supabase ${r.status}: ${await r.text()}`);
   return r.status === 204 ? null : r.json().catch(() => null);
 }
@@ -43,7 +43,7 @@ async function makeIdea(v) {
     const d = await yt("videos", { part: "snippet,statistics,contentDetails", id: list.slice(i, i + 50).join(",") });
     for (const v of d.items) {
       const txt = (v.snippet.title + " " + v.snippet.description).toLowerCase();
-      if (!/#?gta\s?(6|vi)|leonida|vice city/.test(txt)) continue; // descarta resultados fora do tema
+      if (!/#?gta\s?(6|vi)|leonida|vice city/.test(txt)) continue;
       desc[v.id] = v.snippet.description;
       rows.push({
         id: v.id, title: v.snippet.title, channel: v.snippet.channelTitle, duration_s: dur(v.contentDetails.duration),
