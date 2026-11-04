@@ -4,89 +4,150 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Radar Leonida: ideias de vídeo sobre GTA 6</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌴</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#1a0f2e;--surface:#27173f;--line:#3d2a5c;--text:#f8ecdc;--muted:#b9a8d0;--hot:#ff5d73;--sun:#ffb347;--sea:#35d0ba;--ink:#1a0f2e;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fff4e4;--surface:#ffffff;--line:#ecd5b8;--text:#2a1745;--muted:#6f5a8a;--hot:#d6304a;--sun:#c9700a;--sea:#0b8f7c;--ink:#fff4e4;color-scheme:light}}
-:root[data-theme="dark"]{--bg:#1a0f2e;--surface:#27173f;--line:#3d2a5c;--text:#f8ecdc;--muted:#b9a8d0;--hot:#ff5d73;--sun:#ffb347;--sea:#35d0ba;--ink:#1a0f2e}
-*,*:before,*:after{box-sizing:inherit}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.55 "DM Sans",system-ui,sans-serif}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+:root{--bg:#1a0f2e;--surface:#27173f;--surface2:#31204d;--line:#3d2a5c;--text:#f8ecdc;--muted:#b9a8d0;--hot:#ff5d73;--sun:#ffb347;--sea:#35d0ba;--ink:#1a0f2e;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fff4e4;--surface:#ffffff;--surface2:#fff9f0;--line:#ecd5b8;--text:#2a1745;--muted:#6f5a8a;--hot:#d6304a;--sun:#c9700a;--sea:#0b8f7c;--ink:#fff4e4;color-scheme:light}}
+*,*:before,*:after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.55 "DM Sans",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 h1,h2,h3{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.01em;line-height:1.05;margin:0}
 a{color:inherit}
+button{font-family:inherit}
 :focus-visible{outline:3px solid var(--sea);outline-offset:2px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
-.logo{font:400 22px Anton,sans-serif}
-.btn{display:inline-block;border:0;border-radius:999px;padding:12px 22px;font:700 15px "DM Sans",sans-serif;cursor:pointer;background:var(--hot);color:#fff;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;flex-wrap:wrap}
+.logo{font:400 24px Anton,sans-serif}
+.sun{color:var(--sun)}
+.navr{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pill{font-size:13px;font-weight:700;border-radius:999px;padding:5px 12px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.pill.on{color:#102;background:var(--sea);border-color:var(--sea)}
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 24px;font:700 15px "DM Sans",sans-serif;cursor:pointer;background:var(--hot);color:#fff;text-decoration:none;transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .btn.alt{background:transparent;border:2px solid var(--line);color:var(--text)}
-.hero{padding:44px 0 36px}
-.hero h1{font-size:clamp(46px,9vw,104px);max-width:12ch}
-.hero p{max-width:52ch;color:var(--muted);font-size:18px;margin:20px 0 26px}
-.sun{display:inline-block;color:var(--sun)}
-.tag{display:inline-block;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:13px;color:var(--sea);margin:0 6px 6px 0}
-.tags{margin-top:6px}
-section{padding:36px 0}
+.btn.sm{padding:8px 16px;font-size:14px}
+.btn[disabled]{opacity:.6;cursor:wait}
+.hero{padding:36px 0 18px}
+.hero h1{font-size:clamp(44px,8.5vw,98px);max-width:13ch}
+.hero p{max-width:54ch;color:var(--muted);font-size:18px;margin:18px 0 24px}
+.stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;color:var(--muted);font-size:14px}
+.stats b{display:block;font:400 30px Anton,sans-serif;color:var(--text)}
+section{padding:30px 0}
 h2{font-size:clamp(30px,5vw,46px);margin-bottom:8px}
-.sub{color:var(--muted);margin:0 0 22px;max-width:60ch}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
-.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:7px 16px;font:500 14px "DM Sans",sans-serif;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--sun);color:#1a0f2e;border-color:var(--sun)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.thumb{aspect-ratio:16/9;display:flex;align-items:flex-end;justify-content:space-between;padding:10px;color:#fff;font-weight:700;font-size:13px}
-.thumb.short{aspect-ratio:16/7}
-.thumb span{background:rgba(0,0,0,.55);padding:2px 8px;border-radius:6px}
-.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
-.body h3{font-size:21px}
-.meta{color:var(--muted);font-size:14px}
-.up{color:var(--sea);font-weight:700}
-.idea{margin-top:8px;border-left:4px solid var(--hot);padding:8px 12px;background:rgba(255,93,115,.1);border-radius:0 8px 8px 0;font-size:15px;position:relative}
-.idea b{display:block;margin-bottom:2px}
-.idea.locked p{filter:blur(5px);user-select:none;margin:0}
-.lock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.lock a{background:var(--hot);color:#fff;border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;text-decoration:none}
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:700px}
-.plan{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:24px}
+.sub{color:var(--muted);margin:0 0 20px;max-width:62ch}
+.bar{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:8px 16px;font:500 14px "DM Sans",sans-serif;cursor:pointer;transition:background .15s}
+.chip:hover{background:var(--surface2)}
+.chip[aria-pressed="true"]{background:var(--sun);color:#1a0f2e;border-color:var(--sun);font-weight:700}
+.chip small{opacity:.7;margin-left:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:var(--sun);box-shadow:0 14px 34px rgba(0,0,0,.28)}
+.media{position:relative;display:block;aspect-ratio:16/9;background:linear-gradient(135deg,#7b2ff7,#ff5d73 60%,#ffb347);overflow:hidden}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.card:hover .media img{transform:scale(1.06)}
+.media:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,5,20,.7),transparent 55%)}
+.play{position:absolute;z-index:2;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(255,93,115,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;padding-left:4px;opacity:0;transform:scale(.8);transition:.2s}
+.card:hover .play,.media:focus-visible .play{opacity:1;transform:scale(1)}
+.badge{position:absolute;z-index:2;top:10px;left:10px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:3px 9px;background:var(--sun);color:#1a0f2e}
+.badge.Short{background:var(--hot);color:#fff}
+.badge.Teoria{background:#7b2ff7;color:#fff}
+.badge.Comparação{background:var(--sea);color:#102}
+.dur{position:absolute;z-index:2;right:10px;bottom:10px;font-size:12px;font-weight:700;background:rgba(0,0,0,.75);color:#fff;border-radius:6px;padding:2px 7px}
+.hot{position:absolute;z-index:2;left:10px;bottom:10px;font-size:12px;font-weight:700;background:rgba(0,0,0,.75);color:var(--sea);border-radius:6px;padding:2px 8px}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.title{font:700 16px/1.35 "DM Sans",sans-serif;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
+.chan{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px}
+.av{flex:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--hot),var(--sun));color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+.chan b{color:var(--text);font-weight:700}
+.idea{margin-top:auto;border-radius:12px;padding:12px 14px;background:var(--surface2);border:1px solid var(--line);position:relative;overflow:hidden}
+.ihead{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sun);margin-bottom:4px}
+.idea p{margin:0;font-size:14.5px}
+.copy{margin-top:8px;border:0;background:none;color:var(--sea);font-weight:700;font-size:13px;cursor:pointer;padding:0}
+.idea.locked p{filter:blur(5px);user-select:none}
+.lock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(26,15,46,.35)}
+.skel{height:330px;border-radius:16px;background:linear-gradient(90deg,var(--surface) 25%,var(--surface2) 50%,var(--surface) 75%);background-size:200% 100%;animation:sh 1.4s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.empty{color:var(--muted);border:1px dashed var(--line);border-radius:14px;padding:26px;text-align:center;grid-column:1/-1}
+form.mural{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+input,select{flex:1 1 190px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:720px}
+.plan{background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:26px;position:relative}
 .plan.best{border-color:var(--sun)}
+.tagbest{position:absolute;top:-12px;right:18px;background:var(--sun);color:#1a0f2e;font-size:12px;font-weight:700;border-radius:999px;padding:3px 12px}
 .price{font:400 54px Anton,sans-serif;margin:8px 0}
 .price small{font:500 16px "DM Sans",sans-serif;color:var(--muted)}
-.plan ul{padding-left:20px;margin:14px 0 20px;color:var(--muted)}
-form{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
-input,select{flex:1 1 200px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit}
-.note{font-size:14px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:12px 16px;margin-top:30px}
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sea);color:#102;padding:10px 20px;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s}
+.plan ul{padding-left:20px;margin:14px 0 22px;color:var(--muted)}
+.note{font-size:14px;color:var(--muted);margin-top:22px}
+footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sea);color:#102;padding:10px 20px;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
 .toast.on{opacity:1}
-.modal{position:fixed;inset:0;background:rgba(10,5,20,.7);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}.modal[hidden]{display:none}.box{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:24px;width:100%;max-width:420px}.fld{display:flex;flex-direction:column;gap:10px}.thumb img{position:absolute}.thumb{position:relative;background-size:cover;background-position:center}.thumb span{position:relative}footer{padding:30px 0 50px;color:var(--muted);font-size:14px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* Tela de login */
+.auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
+.auth[hidden]{display:none}
+.auth-side{background:linear-gradient(160deg,#ff5d73 0%,#7b2ff7 70%,#1a0f2e 100%);color:#fff;padding:48px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.auth-side h2{font-size:clamp(38px,5vw,64px);color:#fff}
+.auth-side p{margin:0;font-size:18px;opacity:.92;max-width:40ch}
+.auth-side ul{list-style:none;padding:0;margin:6px 0 0;display:grid;gap:12px;font-size:16px}
+.auth-side li:before{content:"✓";display:inline-block;width:24px;height:24px;border-radius:50%;background:#fff;color:#7b2ff7;font-weight:700;text-align:center;line-height:24px;margin-right:10px;font-size:14px}
+.auth-main{padding:40px 32px;display:flex;flex-direction:column;justify-content:center;max-width:460px;width:100%;margin:0 auto;position:relative}
+.xbtn{position:absolute;top:18px;right:18px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:20px;cursor:pointer}
+.tabs{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:24px}
+.tabs button{flex:1;border:0;background:none;color:var(--muted);font-weight:700;font-size:15px;padding:10px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--hot);color:#fff}
+.auth-main h3{font-size:34px;margin-bottom:6px}
+.auth-main .sub{margin-bottom:18px}
+.f{display:block;margin-bottom:14px;font-size:14px;font-weight:700}
+.f input{width:100%;margin-top:6px;font-weight:400}
+.pw{position:relative}
+.pw button{position:absolute;right:8px;top:12px;border:0;background:none;color:var(--sea);font-weight:700;font-size:13px;cursor:pointer;padding:4px 8px}
+.pw input{padding-right:76px}
+.msg{min-height:22px;margin:0 0 10px;font-size:14px;color:var(--hot);font-weight:500}
+.msg.ok{color:var(--sea)}
+.link{border:0;background:none;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:14px;margin-top:14px;padding:0;align-self:flex-start}
+.fine{font-size:12.5px;color:var(--muted);margin-top:20px}
+@media (max-width:820px){.auth{grid-template-columns:1fr}.auth-side{padding:28px 24px;gap:12px}.auth-side ul,.auth-side p{display:none}.auth-main{padding:26px 22px 40px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<nav><div class="logo">Radar <span class="sun">Leonida</span></div><div style="display:flex;gap:10px;align-items:center"><span class="meta" id="status"></span><a class="btn alt" href="#planos">Ver planos</a><button class="btn" id="auth-btn" type="button">Entrar</button></div></nav>
+<nav>
+  <div class="logo">Radar <span class="sun">Leonida</span></div>
+  <div class="navr">
+    <span class="pill" id="status" hidden></span>
+    <a class="btn alt sm" href="#planos">Planos</a>
+    <button class="btn sm" id="auth-btn" type="button">Entrar</button>
+  </div>
+</nav>
 
 <header class="hero">
   <h1>Todo vídeo de GTA 6, virando ideia para o seu.</h1>
-  <p>Coletamos vídeos e Shorts com as hashtags do jogo, mostramos o que está crescendo e entregamos um ângulo novo para você criar o seu conteúdo. Por menos que um lanche, por mês.</p>
+  <p>Coletamos os vídeos e Shorts que estão bombando com as hashtags do jogo e entregamos um ângulo novo para você criar o seu conteúdo. Por menos que um lanche, por mês.</p>
   <a class="btn" href="#feed">Explorar o radar</a>
-  <div class="tags"><span class="tag">#gta6</span><span class="tag">#gta6trailer</span><span class="tag">#leonida</span><span class="tag">#viceCity</span><span class="tag">#lucia</span></div>
+  <div class="stats"><div><b id="s-v">0</b>vídeos nas últimas 48 h</div><div><b id="s-s">0</b>Shorts</div><div><b id="s-t">0</b>teorias e comparações</div></div>
 </header>
 
 <section id="feed">
   <h2>Radar de hoje</h2>
-  <p class="sub">Vídeos coletados nas últimas 24 horas. As 2 ideias de maior crescimento são grátis; as demais ficam liberadas para assinantes.</p>
-  <div class="filters" id="fmt" role="group" aria-label="Filtrar por formato"></div>
-  <div class="filters" id="ord" role="group" aria-label="Ordenar"></div>
+  <p class="sub">As 2 ideias de maior crescimento são grátis. Para liberar todas as outras, assine um plano.</p>
+  <div class="bar">
+    <div class="chips" id="fmt" role="group" aria-label="Filtrar por formato"></div>
+    <div class="chips" id="ord" role="group" aria-label="Ordenar"></div>
+  </div>
   <div class="grid" id="grid"></div>
 </section>
 
 <section id="mural">
   <h2>Mural dos criadores</h2>
-  <p class="sub">Publicou um vídeo usando as hashtags? Cadastre aqui e apareça no radar para os demais assinantes.</p>
-  <form id="form">
+  <p class="sub">Publicou um vídeo com as hashtags do jogo? Cadastre aqui e apareça para os demais assinantes. Só assinantes podem publicar.</p>
+  <form class="mural" id="form">
     <input id="f-title" placeholder="Título do seu vídeo" required aria-label="Título do vídeo">
     <input id="f-chan" placeholder="Nome do canal" required aria-label="Nome do canal">
-    <input id="f-url" type="url" placeholder="Link do vídeo (https://...)" required aria-label="Link do vídeo"><select id="f-fmt" aria-label="Formato"><option>Short</option><option>Vídeo</option><option>Teoria</option><option>Comparação</option></select>
+    <input id="f-url" type="url" placeholder="Link do vídeo (https://...)" required aria-label="Link do vídeo">
+    <select id="f-fmt" aria-label="Formato"><option>Short</option><option>Vídeo</option><option>Teoria</option><option>Comparação</option></select>
     <button class="btn" type="submit">Publicar no mural</button>
   </form>
   <div class="grid" id="mural-grid"></div>
@@ -94,54 +155,104 @@ input,select{flex:1 1 200px;background:var(--surface);color:var(--text);border:1
 
 <section id="planos">
   <h2>Escolha seu plano</h2>
-  <p class="sub">Cancele quando quiser. Pagamento por Pix ou cartão.</p>
+  <p class="sub">Cancele quando quiser. Pagamento pelo Mercado Pago.</p>
   <div class="plans">
     <div class="plan"><h3>Mensal</h3><div class="price">R$ 14,90<small> /mês</small></div>
-      <ul><li>Todas as ideias do radar</li><li>Filtros por formato e crescimento</li><li>Mural dos criadores</li></ul>
-      <button class="btn alt" data-plan="Mensal">Assinar mensal</button></div>
-    <div class="plan best"><h3>Anual</h3><div class="price">R$ 9,90<small> /mês</small></div>
-      <ul><li>Tudo do plano mensal</li><li>Alerta diário com as ideias do dia</li><li>Cobrança única de R$ 118,80</li></ul>
-      <button class="btn" data-plan="Anual">Assinar anual</button></div>
+      <ul><li>Todas as ideias do radar</li><li>Filtros por formato e crescimento</li><li>Publicação no mural</li></ul>
+      <button class="btn alt" data-plan="Mensal" type="button">Assinar mensal</button></div>
+    <div class="plan best"><span class="tagbest">Mais econômico</span><h3>Anual</h3><div class="price">R$ 9,90<small> /mês</small></div>
+      <ul><li>Tudo do plano mensal</li><li>Cobrança única de R$ 118,80</li><li>Economia de 33%</li></ul>
+      <button class="btn" data-plan="Anual" type="button">Assinar anual</button></div>
   </div>
   <p class="note">Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.</p>
 </section>
 <footer>Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.</footer>
 </div>
-<div class="modal" id="modal" hidden><div class="box" role="dialog" aria-modal="true" aria-labelledby="m-title">
-<h2 id="m-title">Entrar no Radar</h2><p class="sub" style="margin-bottom:14px">Use seu e-mail para entrar ou criar a conta.</p>
-<div class="fld"><input id="a-email" type="email" placeholder="Seu e-mail" autocomplete="email" aria-label="E-mail"><input id="a-pass" type="password" placeholder="Senha (mínimo 6 caracteres)" autocomplete="current-password" aria-label="Senha"></div>
-<p id="a-msg" class="meta" role="alert" style="min-height:22px"></p>
-<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="a-in" type="button">Entrar</button><button class="btn alt" id="a-up" type="button">Criar conta</button><button class="btn alt" id="a-x" type="button">Fechar</button></div></div></div>
+
+<div class="auth" id="auth" hidden role="dialog" aria-modal="true" aria-labelledby="a-title">
+  <div class="auth-side">
+    <div class="logo" style="font-size:28px">Radar Leonida</div>
+    <h2>Ideias novas de GTA 6, todo dia.</h2>
+    <p>Veja o que está crescendo e crie o seu vídeo com um ângulo pronto.</p>
+    <ul><li>Radar atualizado de 3 em 3 horas</li><li>Ideia pronta para cada vídeo</li><li>Mural para divulgar o seu canal</li></ul>
+  </div>
+  <div class="auth-main">
+    <button class="xbtn" id="a-x" type="button" aria-label="Fechar">×</button>
+    <div class="tabs" id="tabs" role="tablist">
+      <button id="t-in" type="button" role="tab" aria-selected="true">Entrar</button>
+      <button id="t-up" type="button" role="tab" aria-selected="false">Criar conta</button>
+    </div>
+    <h3 id="a-title">Bem-vindo de volta</h3>
+    <p class="sub" id="a-sub">Entre com o seu e-mail e senha.</p>
+    <form id="a-form" novalidate>
+      <label class="f" id="w-email">E-mail<input id="a-email" type="email" autocomplete="email" placeholder="voce@email.com"></label>
+      <label class="f">Senha<div class="pw"><input id="a-pass" type="password" autocomplete="current-password" placeholder="Mínimo de 6 caracteres"><button type="button" id="a-eye">Mostrar</button></div></label>
+      <label class="f" id="w-conf" hidden>Confirmar senha<input id="a-conf" type="password" autocomplete="new-password" placeholder="Repita a senha"></label>
+      <p class="msg" id="a-msg" role="alert"></p>
+      <button class="btn" id="a-submit" type="submit" style="width:100%">Entrar</button>
+      <button class="link" id="a-forgot" type="button">Esqueci minha senha</button>
+    </form>
+    <p class="fine">Ao criar a conta, você concorda em usar o Radar Leonida de forma pessoal e respeitar os direitos dos criadores dos vídeos.</p>
+  </div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="config.js"></script>
 <script>
 var cfg=window.RADAR_CONFIG,sb=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY);
-var D=[],M=[],ideas={},user=null,active=false,fmt="Todos",ord="Crescimento";
-var FM=["Todos","Short","Vídeo","Teoria","Comparação"],OR=["Crescimento","Mais recentes"];
+var D=[],M=[],ideas={},user=null,active=false,fmt="Todos",ord="Em alta",mode="in",loaded=false;
+var FM=["Todos","Short","Vídeo","Teoria","Comparação"],OR=["Em alta","Mais recentes","Mais vistos"];
 function $(id){return document.getElementById(id)}
 function esc(s){var e=document.createElement("div");e.textContent=s==null?"":s;return e.innerHTML.replace(/"/g,"&quot;")}
-function safeUrl(u){return /^https?:\/\//i.test(u)?u:"#"}
-function toast(m){var t=$("toast")||document.querySelector(".toast");t.textContent=m;t.className="toast on";setTimeout(function(){t.className="toast"},2800)}
-function chips(box,list,cur,fn){box.innerHTML="";list.forEach(function(x){var b=document.createElement("button");b.className="chip";b.textContent=x;b.setAttribute("aria-pressed",x===cur);b.onclick=function(){fn(x)};box.appendChild(b)})}
-function hours(d){return Math.max(0,Math.round((Date.now()-new Date(d))/36e5))}
-function fmtDur(s){if(!s)return"";var m=Math.floor(s/60),r=s%60;return m+":"+(r<10?"0":"")+r}
-function card(v,community){
- var url=community?safeUrl(v.url):"https://www.youtube.com/watch?v="+encodeURIComponent(v.id);
- var idea=community?"Vídeo de um criador da comunidade. Assista, veja o ângulo e crie a sua versão.":ideas[v.id];
- var locked=!community&&!idea;
- var g=v.growth!=null?'<div class="meta"><span class="up">+'+Math.round(v.growth)+'%</span> de crescimento</div>':"";
- var views=v.views!=null?Number(v.views).toLocaleString("pt-BR")+" views · há "+hours(v.published_at)+" h":"publicado por "+esc(v.channel);
- return '<article class="card"><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" style="text-decoration:none"><div class="thumb'+(v.format==="Short"?" short":"")+'" style="'+(v.thumb?"background-image:url('"+esc(v.thumb)+"')":"background:linear-gradient(135deg,#35d0ba,#7b2ff7)")+'"><span>'+esc(v.format||"Vídeo")+'</span><span>'+fmtDur(v.duration_s)+'</span></div></a><div class="body"><h3>'+esc(v.title)+'</h3><div class="meta">'+esc(v.channel)+' · '+views+'</div>'+g+'<div class="tags"><span class="tag">#gta6</span><span class="tag">#leonida</span></div><div class="idea'+(locked?" locked":"")+'"><b>Ideia para o seu vídeo</b><p>'+esc(idea||"Ideia disponível apenas para assinantes do Radar Leonida.")+'</p>'+(locked?'<div class="lock"><a href="#planos">Assinar para ver</a></div>':'')+'</div></div></article>'}
+function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:"#"}
+function toast(m){var t=$("toast");t.textContent=m;t.className="toast on";setTimeout(function(){t.className="toast"},2800)}
+
+/* Classifica o formato pelo próprio vídeo (duração e título) */
+function kind(v){
+ var t=(v.title||"").toLowerCase();
+ if((v.duration_s&&v.duration_s<=90)||/#shorts?\b/.test(t))return "Short";
+ if(/\bvs\b|\bx\b|versus|compara|antes e depois|diferen[çc]as?/.test(t))return "Comparação";
+ if(/teoria|theory|explica|significa|segredo|easter|an[áa]lise|rumor|vazou|o que sabemos|revelad/.test(t))return "Teoria";
+ return "Vídeo"}
+function views(n){n=Number(n)||0;if(n>=1e6)return(n/1e6).toFixed(1).replace(".",",")+" mi";if(n>=1e3)return Math.round(n/1e3)+" mil";return String(n)}
+function ago(d){var h=Math.round((Date.now()-new Date(d))/36e5);if(h<1)return "agora";if(h<24)return "há "+h+" h";return "há "+Math.round(h/24)+" d"}
+function dur(s){if(!s)return "";var m=Math.floor(s/60),r=s%60;return m+":"+(r<10?"0":"")+r}
+function ytThumb(u){var m=/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/.exec(u||"");return m?"https://i.ytimg.com/vi/"+m[1]+"/mqdefault.jpg":""}
+
+function card(v,comm){
+ var k=comm?(v.format||"Vídeo"):kind(v);
+ var url=comm?safeUrl(v.url):"https://www.youtube.com/watch?v="+encodeURIComponent(v.id);
+ var th=comm?ytThumb(v.url):v.thumb;
+ var idea=comm?"Vídeo de um criador da comunidade. Assista, veja o ângulo e crie a sua versão.":ideas[v.id];
+ var locked=!comm&&!idea;
+ var meta=comm?"no mural":views(v.views)+" views · "+ago(v.published_at);
+ var hot=(!comm&&v.growth>0)?'<span class="hot">🔥 +'+Math.round(v.growth)+'%</span>':"";
+ return '<article class="card"><a class="media" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" aria-label="Assistir: '+esc(v.title)+'">'+
+  (th?'<img loading="lazy" src="'+esc(th)+'" alt="" onerror="this.remove()">':"")+
+  '<span class="badge '+k+'">'+k+'</span>'+(v.duration_s?'<span class="dur">'+dur(v.duration_s)+'</span>':"")+hot+'<span class="play">▶</span></a>'+
+  '<div class="body"><h3 class="title">'+esc(v.title)+'</h3>'+
+  '<div class="chan"><span class="av">'+esc((v.channel||"?").charAt(0).toUpperCase())+'</span><span><b>'+esc(v.channel)+'</b><br>'+meta+'</span></div>'+
+  '<div class="idea'+(locked?" locked":"")+'"><div class="ihead">💡 Ideia para o seu vídeo</div><p>'+esc(idea||"Ideia disponível para assinantes do Radar Leonida.")+'</p>'+
+  (locked?'<div class="lock"><button class="btn sm" type="button" data-unlock>Liberar ideia</button></div>':'<button class="copy" type="button" data-copy="'+esc(idea)+'">Copiar ideia</button>')+
+  '</div></div></article>'}
+
+function chips(box,list,cur,fn,counts){box.innerHTML="";list.forEach(function(x){var b=document.createElement("button");b.type="button";b.className="chip";b.innerHTML=esc(x)+(counts?"<small>"+counts[x]+"</small>":"");b.setAttribute("aria-pressed",x===cur);b.onclick=function(){fn(x)};box.appendChild(b)})}
 function render(){
- chips($("fmt"),FM,fmt,function(x){fmt=x;render()});chips($("ord"),OR,ord,function(x){ord=x;render()});
- var l=D.filter(function(v){return fmt==="Todos"||v.format===fmt});
- l.sort(function(a,b){return ord==="Crescimento"?(b.growth||0)-(a.growth||0):new Date(b.published_at)-new Date(a.published_at)});
- $("grid").innerHTML=l.map(function(v){return card(v,false)}).join("")||'<p class="sub">Nenhum vídeo coletado ainda. A próxima coleta roda em até 3 horas.</p>';
- $("mural-grid").innerHTML=M.length?M.map(function(v){return card(v,true)}).join(""):'<p class="sub">O mural está vazio. Assinantes podem publicar o primeiro vídeo.</p>';
+ var counts={Todos:D.length,Short:0,"Vídeo":0,Teoria:0,"Comparação":0};
+ D.forEach(function(v){counts[kind(v)]++});
+ chips($("fmt"),FM,fmt,function(x){fmt=x;render()},counts);
+ chips($("ord"),OR,ord,function(x){ord=x;render()});
+ var l=D.filter(function(v){return fmt==="Todos"||kind(v)===fmt});
+ l.sort(function(a,b){
+  if(ord==="Mais recentes")return new Date(b.published_at)-new Date(a.published_at);
+  if(ord==="Mais vistos")return (b.views||0)-(a.views||0);
+  return ((b.growth||0)-(a.growth||0))||((b.views||0)-(a.views||0))});
+ $("grid").innerHTML=l.length?l.map(function(v){return card(v,false)}).join(""):'<div class="empty">'+(loaded?'Nenhum vídeo nesse formato nas últimas 48 horas. Tente outro filtro.':'Carregando...')+'</div>';
+ $("mural-grid").innerHTML=M.length?M.map(function(v){return card(v,true)}).join(""):'<div class="empty">O mural está vazio. Assinantes podem publicar o primeiro vídeo.</div>';
  $("auth-btn").textContent=user?"Sair":"Entrar";
- $("status").textContent=user?(active?"Assinatura ativa":"Plano gratuito"):"";
+ var st=$("status");st.hidden=!user;st.textContent=active?"Assinatura ativa":"Plano gratuito";st.className="pill"+(active?" on":"");
+ $("s-v").textContent=D.length;$("s-s").textContent=counts.Short;$("s-t").textContent=counts.Teoria+counts["Comparação"];
 }
 async function load(){
  var s=await sb.auth.getSession();user=s.data.session?s.data.session.user:null;active=false;
@@ -150,35 +261,89 @@ async function load(){
  var v=await sb.from("videos").select("*").gte("published_at",since).limit(200);D=v.data||[];
  var i=await sb.from("ideas").select("video_id,idea");ideas={};(i.data||[]).forEach(function(x){ideas[x.video_id]=x.idea});
  var m=await sb.from("community").select("*").order("created_at",{ascending:false}).limit(30);M=m.data||[];
- render()}
-function openModal(){$("a-msg").textContent="";$("modal").hidden=false;$("a-email").focus()}
-function closeModal(){$("modal").hidden=true}
-async function auth(kind){
- var email=$("a-email").value.trim(),pass=$("a-pass").value;
- if(!email||pass.length<6){$("a-msg").textContent="Informe um e-mail válido e uma senha com pelo menos 6 caracteres.";return}
- var r=kind==="up"?await sb.auth.signUp({email:email,password:pass}):await sb.auth.signInWithPassword({email:email,password:pass});
- if(r.error){$("a-msg").textContent=r.error.message;return}
- if(kind==="up"&&!r.data.session){$("a-msg").textContent="Conta criada. Confirme o link enviado ao seu e-mail e depois clique em Entrar.";return}
- closeModal();toast("Você entrou");load()}
-$("auth-btn").onclick=async function(){if(user){await sb.auth.signOut();toast("Você saiu");load()}else openModal()};
-$("a-in").onclick=function(){auth("in")};$("a-up").onclick=function(){auth("up")};$("a-x").onclick=closeModal;
-document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()});
+ loaded=true;render()}
+
+/* Login e cadastro */
+function msg(t,ok){var m=$("a-msg");m.textContent=t||"";m.className="msg"+(ok?" ok":"")}
+function setMode(m){
+ mode=m;msg("");
+ var up=m==="up",rs=m==="reset";
+ $("tabs").hidden=rs;
+ $("t-in").setAttribute("aria-selected",!up);$("t-up").setAttribute("aria-selected",up);
+ $("w-email").hidden=rs;$("w-conf").hidden=!(up||rs);$("a-forgot").hidden=(up||rs);
+ $("a-title").textContent=rs?"Crie uma nova senha":up?"Crie a sua conta":"Bem-vindo de volta";
+ $("a-sub").textContent=rs?"Digite a nova senha para a sua conta.":up?"Leva menos de um minuto. Você já vê as 2 ideias grátis.":"Entre com o seu e-mail e senha.";
+ $("a-submit").textContent=rs?"Salvar nova senha":up?"Criar conta":"Entrar";
+ $("a-pass").autocomplete=(up||rs)?"new-password":"current-password"}
+function openAuth(m){setMode(m||"in");$("auth").hidden=false;document.body.style.overflow="hidden";setTimeout(function(){(m==="reset"?$("a-pass"):$("a-email")).focus()},50)}
+function closeAuth(){$("auth").hidden=true;document.body.style.overflow=""}
+function ptErr(e){var t=(e&&e.message)||"";
+ if(/invalid login/i.test(t))return "E-mail ou senha incorretos.";
+ if(/already registered|already been registered/i.test(t))return "Este e-mail já tem conta. Use a aba Entrar.";
+ if(/not confirmed/i.test(t))return "Confirme o seu e-mail pelo link que enviamos e tente de novo.";
+ if(/rate limit|too many/i.test(t))return "Muitas tentativas. Aguarde alguns minutos e tente de novo.";
+ if(/at least 6/i.test(t))return "A senha precisa ter pelo menos 6 caracteres.";
+ if(/same password/i.test(t))return "Escolha uma senha diferente da anterior.";
+ return "Não foi possível concluir. "+t}
+function busy(b){var s=$("a-submit");s.disabled=b;if(b)s.textContent="Aguarde..."}
+$("a-form").onsubmit=async function(e){
+ e.preventDefault();msg("");
+ var email=$("a-email").value.trim(),pass=$("a-pass").value,conf=$("a-conf").value;
+ if(mode!=="reset"&&!/^\S+@\S+\.\S+$/.test(email))return msg("Digite um e-mail válido.");
+ if(pass.length<6)return msg("A senha precisa ter pelo menos 6 caracteres.");
+ if(mode!=="in"&&pass!==conf)return msg("As senhas não conferem.");
+ busy(true);
+ try{
+  if(mode==="reset"){
+   var u=await sb.auth.updateUser({password:pass});
+   if(u.error){msg(ptErr(u.error));return}
+   closeAuth();toast("Senha alterada");load();return}
+  if(mode==="up"){
+   var r=await sb.auth.signUp({email:email,password:pass,options:{emailRedirectTo:location.origin+location.pathname}});
+   if(r.error){msg(ptErr(r.error));return}
+   if(r.data.user&&r.data.user.identities&&r.data.user.identities.length===0){msg("Este e-mail já tem conta. Use a aba Entrar.");return}
+   if(!r.data.session){msg("Conta criada! Enviamos um link de confirmação para o seu e-mail. Depois de confirmar, volte e entre.",true);return}
+   closeAuth();toast("Conta criada. Bem-vindo!");load();return}
+  var s=await sb.auth.signInWithPassword({email:email,password:pass});
+  if(s.error){msg(ptErr(s.error));return}
+  closeAuth();toast("Você entrou");load();
+ }catch(err){msg("Falha de conexão. Tente de novo.")}
+ finally{busy(false);if(mode!=="reset")$("a-submit").textContent=mode==="up"?"Criar conta":"Entrar";else $("a-submit").textContent="Salvar nova senha"}};
+$("a-forgot").onclick=async function(){
+ var email=$("a-email").value.trim();
+ if(!/^\S+@\S+\.\S+$/.test(email))return msg("Digite o seu e-mail acima e clique de novo em Esqueci minha senha.");
+ var r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+ if(r.error)return msg(ptErr(r.error));
+ msg("Enviamos um link para redefinir a senha. Confira a sua caixa de entrada.",true)};
+$("t-in").onclick=function(){setMode("in")};$("t-up").onclick=function(){setMode("up")};
+$("a-x").onclick=closeAuth;
+$("a-eye").onclick=function(){var p=$("a-pass"),show=p.type==="password";p.type=show?"text":"password";$("a-conf").type=p.type;this.textContent=show?"Ocultar":"Mostrar"};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("auth").hidden&&mode!=="reset")closeAuth()});
+$("auth-btn").onclick=async function(){if(user){await sb.auth.signOut();toast("Você saiu");load()}else openAuth("in")};
+sb.auth.onAuthStateChange(function(ev){if(ev==="PASSWORD_RECOVERY")openAuth("reset")});
+
+/* Ações nos cards, mural e planos */
+document.addEventListener("click",function(e){
+ var u=e.target.closest("[data-unlock]");
+ if(u){if(!user)openAuth("up");else location.hash="planos";return}
+ var c=e.target.closest("[data-copy]");
+ if(c){try{navigator.clipboard.writeText(c.getAttribute("data-copy"));toast("Ideia copiada")}catch(x){toast("Não foi possível copiar")}}});
 $("form").onsubmit=async function(e){e.preventDefault();
- if(!user){openModal();return}
+ if(!user){openAuth("up");return}
  if(!active){toast("Assine um plano para publicar no mural");location.hash="planos";return}
  var r=await sb.from("community").insert({user_id:user.id,title:$("f-title").value,channel:$("f-chan").value,url:$("f-url").value,format:$("f-fmt").value});
- if(r.error){toast("Não foi possível publicar: "+r.error.message);return}
+ if(r.error){toast("Não foi possível publicar");return}
  e.target.reset();toast("Publicado no mural");load()};
 document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=async function(){
- if(!user){openModal();return}
+ if(!user){openAuth("up");return}
  b.disabled=true;toast("Abrindo o pagamento...");
  var r=await sb.functions.invoke("create-checkout",{body:{plan:b.dataset.plan}});
  b.disabled=false;
  if(r.error||!r.data||!r.data.init_point){toast("Não foi possível abrir o pagamento. Tente de novo.");return}
  window.location.href=r.data.init_point}});
-sb.auth.onAuthStateChange(function(){});
-load();
 
+$("grid").innerHTML=new Array(6).join('<div class="skel"></div>');
+load().catch(function(){loaded=true;$("grid").innerHTML='<div class="empty">Não foi possível carregar os vídeos agora. Atualize a página.</div>'});
 </script>
 </body>
 </html>
