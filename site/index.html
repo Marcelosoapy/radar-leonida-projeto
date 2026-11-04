@@ -85,6 +85,36 @@ input,select{flex:1 1 190px;background:var(--surface);color:var(--text);border:1
 footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sea);color:#102;padding:10px 20px;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
 .toast.on{opacity:1}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.panel{position:fixed;inset:0;z-index:70;background:rgba(10,5,20,.72);display:flex;justify-content:flex-end}
+.panel[hidden]{display:none}
+.p-box{background:var(--bg);width:100%;max-width:720px;height:100%;overflow:auto;padding:28px 26px 48px;position:relative;border-left:1px solid var(--line)}
+.p-box .xbtn{top:16px;right:16px}
+.p-box>h3{font-size:25px;margin:0 46px 14px 0;line-height:1.15}
+.p-box h4{font:400 24px Anton,sans-serif;margin:0 0 10px}
+.tbox{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;max-height:55vh;overflow:auto;font-size:15px;margin-bottom:12px}
+.load{padding:48px 10px;text-align:center;color:var(--muted)}
+.up{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:8px}
+.up ul{color:var(--muted);padding-left:20px;margin:10px 0 18px}
+.hook{background:var(--surface2);border-left:4px solid var(--hot);border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px}
+.hook b,.sec em{display:block;font-size:12px;font-style:normal;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sun);margin-bottom:2px}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.sec p{margin:8px 0 0}
+.sec .vis{color:var(--muted)}
+.sh{display:flex;justify-content:space-between;gap:10px}
+.sh span{color:var(--sea);font-weight:700;font-size:14px}
+.p-box .tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.tag{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:13px;color:var(--sea)}
+.tm{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-bottom:10px}
+.tm-txt{position:absolute;top:50%;transform:translateY(-50%);width:52%;display:flex;flex-direction:column;gap:6px;text-shadow:0 3px 0 rgba(0,0,0,.35)}
+.tm-txt.esquerda{left:5%}.tm-txt.direita{right:5%;text-align:right}.tm-txt.centro{left:50%;transform:translate(-50%,-50%);text-align:center;width:80%}
+.tm-txt b{font:400 clamp(26px,6vw,56px)/1 Anton,sans-serif;text-transform:uppercase}
+.tm-txt span{font:700 clamp(13px,2.4vw,20px) "DM Sans",sans-serif;text-transform:uppercase}
+.tm-scene{position:absolute;border:2px dashed rgba(255,255,255,.7);border-radius:10px;color:#fff;font-size:12px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;background:rgba(0,0,0,.18)}
+.tm-scene.esquerda{right:4%;top:10%;bottom:10%;width:38%}.tm-scene.direita{left:4%;top:10%;bottom:10%;width:38%}.tm-scene.centro{left:20%;right:20%;bottom:5%;height:34%}
+.specs{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;align-items:center}
+.sw i{display:inline-block;width:22px;height:22px;border-radius:6px;border:1px solid var(--line);margin-right:4px;vertical-align:middle}
+@media (max-width:820px){.p-box{padding:24px 18px 48px}}
 /* Tela de login */
 .auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
 .auth[hidden]{display:none}
@@ -197,6 +227,14 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
     <p class="fine">Ao criar a conta, você concorda em usar o Radar Leonida de forma pessoal e respeitar os direitos dos criadores dos vídeos.</p>
   </div>
 </div>
+<div class="panel" id="panel" hidden role="dialog" aria-modal="true" aria-labelledby="p-title">
+  <div class="p-box">
+    <button class="xbtn" id="p-x" type="button" aria-label="Fechar">×</button>
+    <h3 id="p-title"></h3>
+    <div class="tabs"><button id="p-t1" type="button" aria-selected="true">Transcrição</button><button id="p-t2" type="button" aria-selected="false">Roteiro + thumbnail</button></div>
+    <div id="p-body"></div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -236,8 +274,8 @@ function card(v,comm){
   '<div class="body"><h3 class="title">'+esc(v.title)+'</h3>'+
   '<div class="chan"><span class="av">'+esc((v.channel||"?").charAt(0).toUpperCase())+'</span><span><b>'+esc(v.channel)+'</b><br>'+meta+'</span></div>'+
   '<div class="idea'+(locked?" locked":"")+'"><div class="ihead">💡 Ideia para o seu vídeo</div><p>'+esc(idea||"Ideia disponível para assinantes do Radar Leonida.")+'</p>'+
-  (locked?'<div class="lock"><button class="btn sm" type="button" data-unlock>Liberar ideia</button></div>':'<button class="copy" type="button" data-copy="'+esc(idea)+'">Copiar ideia</button>')+
-  '</div></div></article>'}
+  (locked?'<div class="lock"><button class="btn sm" type="button" data-unlock data-id="'+esc(v.id)+'">Liberar ideia</button></div>':'<button class="copy" type="button" data-copy="'+esc(idea)+'">Copiar ideia</button>')+
+  '</div>'+(comm?"":'<div class="acts"><button class="btn alt sm" type="button" data-assist="transcript" data-id="'+esc(v.id)+'">📝 Transcrição</button><button class="btn sm" type="button" data-assist="script" data-id="'+esc(v.id)+'">✨ Roteiro único'+(active?'':' · PRO')+'</button></div>')+'</div></article>'}
 
 function chips(box,list,cur,fn,counts){box.innerHTML="";list.forEach(function(x){var b=document.createElement("button");b.type="button";b.className="chip";b.innerHTML=esc(x)+(counts?"<small>"+counts[x]+"</small>":"");b.setAttribute("aria-pressed",x===cur);b.onclick=function(){fn(x)};box.appendChild(b)})}
 function render(){
@@ -328,8 +366,12 @@ sb.auth.onAuthStateChange(function(ev){if(ev==="PASSWORD_RECOVERY")openAuth("res
 
 /* Ações nos cards, mural e planos */
 document.addEventListener("click",function(e){
- var u=e.target.closest("[data-unlock]");
- if(u){if(!user)openAuth("up");else location.hash="planos";return}
+ var a=e.target.closest("[data-assist]");
+ if(a){openAssist(a.getAttribute("data-id"),a.getAttribute("data-assist"));return}
+ var un=e.target.closest("[data-unlock]");
+ if(un){if(!user){openAuth("up");return}openAssist(un.getAttribute("data-id"),"script");return}
+ if(e.target.closest("[data-plans]")){closePanel();location.hash="planos";return}
+ if(e.target.closest("[data-again]")){renderPanel(true);return}
  if(e.target.closest("[data-more]")){shown+=6;render();return}
  if(e.target.closest("[data-less]")){shown=6;render();$("feed").scrollIntoView();return}
  var c=e.target.closest("[data-copy]");
@@ -347,6 +389,68 @@ document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=async fun
  b.disabled=false;
  if(r.error||!r.data||!r.data.init_point){toast("Não foi possível abrir o pagamento. Tente de novo.");return}
  window.location.href=r.data.init_point}});
+
+/* Transcrição e roteiro com IA */
+var R={t:{},s:{}},pv=null,ptab="transcript";
+async function callAssist(action,id,again){
+ var r=await sb.functions.invoke("video-assist",{body:{action:action,video_id:id,again:!!again}});
+ if(r.error){var m="Não foi possível concluir agora. Tente de novo.",code="";
+  try{var j=await r.error.context.json();m=j.error||m;code=j.code||""}catch(x){}
+  return {error:m,code:code}}
+ return r.data||{error:"Resposta vazia. Tente de novo.",code:""}}
+function openAssist(id,tab){
+ if(!user){toast("Crie uma conta grátis para continuar");openAuth("up");return}
+ pv=D.filter(function(v){return v.id===id})[0];if(!pv)return;
+ ptab=tab;$("panel").hidden=false;document.body.style.overflow="hidden";renderPanel()}
+function closePanel(){$("panel").hidden=true;document.body.style.overflow=""}
+function hex(c,f){return /^#[0-9a-f]{6}$/i.test(c||"")?c:f}
+function upsell(){return '<div class="up"><h4>Roteiro único com IA</h4><p class="sub">Disponível para assinantes. A IA faz o trabalho pesado para você produzir mais rápido:</p><ul><li>Transcreve o vídeo, mesmo quando ele não tem legenda</li><li>Reescreve um roteiro original, com outra estrutura e outro ângulo</li><li>Entrega gancho, blocos com tempo e o que mostrar na tela</li><li>Inclui título, hashtags e o esboço da thumbnail</li></ul><button class="btn" type="button" data-plans>Ver planos</button></div>'}
+function viewTranscript(d){
+ return '<div class="tbox">'+esc(d.text)+'</div><div class="acts"><button class="btn alt sm" type="button" data-copy="'+esc(d.text)+'">Copiar transcrição</button></div><p class="note">Use a transcrição para estudar o assunto e criar o seu próprio conteúdo. Não republique o texto do outro criador.</p>'}
+function thumbMock(t){
+ t=t||{};var c=t.cores||[],a=hex(c[0],"#7b2ff7"),b=hex(c[1],"#ff5d73"),tx=hex(c[2],"#ffffff");
+ var pos=["esquerda","direita","centro"].indexOf(t.posicao_texto)>-1?t.posicao_texto:"esquerda";
+ return '<div class="tm" style="background:linear-gradient(135deg,'+a+','+b+')"><div class="tm-scene '+pos+'">'+esc(t.cena||"Cena principal")+'</div><div class="tm-txt '+pos+'" style="color:'+tx+'"><b>'+esc(t.texto_principal||"")+'</b><span>'+esc(t.texto_secundario||"")+'</span></div></div>'+
+ '<div class="specs"><div><b>Expressão:</b> '+esc(t.expressao||"-")+'</div><div><b>Destaque:</b> '+esc(t.elemento_destaque||"nenhum")+'</div><div class="sw"><i style="background:'+a+'"></i><i style="background:'+b+'"></i><i style="background:'+tx+'"></i></div></div><p class="note">Esboço de composição. Substitua a área tracejada pela sua imagem real.</p>'}
+function scriptText(o){
+ var s=(o.titulo_sugerido||"")+"\n\nGANCHO\n"+(o.gancho||"")+"\n";
+ (o.roteiro||[]).forEach(function(x){s+="\n["+(x.tempo||"")+"] "+(x.secao||"")+"\nFala: "+(x.fala||"")+"\nVisual: "+(x.visual||"")+"\n"});
+ return s+"\nCHAMADA FINAL\n"+(o.chamada_final||"")+"\n\n"+(o.hashtags||[]).join(" ")}
+function viewScript(o){
+ var h='<h4>'+esc(o.titulo_sugerido||"Roteiro")+'</h4><div class="hook"><b>Gancho</b>'+esc(o.gancho||"")+'</div>';
+ (o.roteiro||[]).forEach(function(x){h+='<div class="sec"><div class="sh"><b>'+esc(x.secao)+'</b><span>'+esc(x.tempo)+'</span></div><p><em>Fala</em>'+esc(x.fala)+'</p><p class="vis"><em>Visual</em>'+esc(x.visual)+'</p></div>'});
+ h+='<div class="sec"><div class="sh"><b>Chamada final</b></div><p>'+esc(o.chamada_final||"")+'</p></div>';
+ h+='<p class="note"><b>O que muda em relação ao original:</b> '+esc(o.diferencial||"")+'</p>';
+ h+='<div class="tags">'+(o.hashtags||[]).map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join("")+'</div>';
+ h+='<h4 style="margin-top:22px">Esboço da thumbnail</h4>'+thumbMock(o.thumbnail);
+ h+='<div class="acts"><button class="btn sm" type="button" data-copy="'+esc(scriptText(o))+'">Copiar roteiro</button><button class="btn alt sm" type="button" data-again>Gerar outra versão</button></div>';
+ return h}
+function renderPanel(again){
+ var b=$("p-body"),id=pv.id;
+ $("p-title").textContent=pv.title;
+ $("p-t1").setAttribute("aria-selected",ptab==="transcript");$("p-t2").setAttribute("aria-selected",ptab==="script");
+ if(ptab==="transcript"){
+  if(R.t[id]){b.innerHTML=viewTranscript(R.t[id]);return}
+  b.innerHTML='<div class="load">Buscando a transcrição...</div>';
+  callAssist("transcript",id).then(function(d){
+   if(!d.error)R.t[id]=d;
+   if(!pv||pv.id!==id||ptab!=="transcript"||$("panel").hidden)return;
+   if(d.error){b.innerHTML='<p class="msg">'+esc(d.error)+'</p>'+(d.code==="no_captions"&&!active?upsell():"");return}
+   renderPanel()});
+  return}
+ if(!active){b.innerHTML=upsell();return}
+ if(R.s[id]&&!again){b.innerHTML=viewScript(R.s[id]);return}
+ b.innerHTML='<div class="load">A IA está transcrevendo e reescrevendo o roteiro. Isso pode levar até 1 minuto...</div>';
+ callAssist("script",id,again).then(function(d){
+  if(!d.error)R.s[id]=d.output;
+  if(!pv||pv.id!==id||ptab!=="script"||$("panel").hidden)return;
+  if(d.error){b.innerHTML='<p class="msg">'+esc(d.error)+'</p>';return}
+  renderPanel()})}
+$("p-t1").onclick=function(){ptab="transcript";renderPanel()};
+$("p-t2").onclick=function(){ptab="script";renderPanel()};
+$("p-x").onclick=closePanel;
+$("panel").onclick=function(e){if(e.target===this)closePanel()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("panel").hidden&&$("auth").hidden)closePanel()});
 
 $("grid").innerHTML=new Array(6).join('<div class="skel"></div>');
 load().catch(function(){loaded=true;$("grid").innerHTML='<div class="empty">Não foi possível carregar os vídeos agora. Atualize a página.</div>'});
