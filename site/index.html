@@ -394,9 +394,10 @@ document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=async fun
 var R={t:{},s:{}},pv=null,ptab="transcript";
 async function callAssist(action,id,again){
  var r=await sb.functions.invoke("video-assist",{body:{action:action,video_id:id,again:!!again}});
- if(r.error){var m="Não foi possível concluir agora. Tente de novo.",code="";
-  try{var j=await r.error.context.json();m=j.error||m;code=j.code||""}catch(x){}
-  return {error:m,code:code}}
+ if(r.error){var m="Não foi possível concluir agora. Tente de novo.",code="",st="";
+  try{var c=r.error.context;st=c.status;var j=await c.json();m=j.error||j.message||m;code=j.code||""}
+  catch(x){if(!st)m="Não foi possível falar com o servidor. Confira se a função video-assist está publicada."}
+  return {error:m+(st?" (código "+st+")":""),code:code}}
  return r.data||{error:"Resposta vazia. Tente de novo.",code:""}}
 function openAssist(id,tab){
  if(!user){toast("Crie uma conta grátis para continuar");openAuth("up");return}
