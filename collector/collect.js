@@ -1,5 +1,6 @@
 // Node 18+. Coleta vídeos do YouTube por hashtag, salva no Supabase e gera ideias com Claude.
 const { YT_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY, ANTHROPIC_API_KEY } = process.env;
+const BASE = (SUPABASE_URL || "").trim().replace(//+$/, "").replace(//rest/v1$/, "");
 const QUERIES = ["#gta6", "#gta6trailer", "#gta6leonida", "#gtavi"]; // cada busca custa 100 unidades de cota
 const sbH = { apikey: SUPABASE_SERVICE_KEY, Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`, "Content-Type": "application/json" };
 
