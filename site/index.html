@@ -115,6 +115,35 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
 .specs{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;align-items:center}
 .sw i{display:inline-block;width:22px;height:22px;border-radius:6px;border:1px solid var(--line);margin-right:4px;vertical-align:middle}
 @media (max-width:820px){.p-box{padding:24px 18px 48px}}
+.filters{display:grid;gap:10px;margin-bottom:22px}
+.fg{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.fl{width:64px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.badges{position:absolute;z-index:2;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap}
+.badges .badge{position:static}
+.badge.Guias{background:var(--sea);color:#102}
+.badge.Easter{background:var(--sun);color:#1a0f2e}
+.badge.Gameplay{background:#7b2ff7;color:#fff}
+.badge.Noticias{background:#3b82f6;color:#fff}
+.badge.Outros{background:var(--surface2);color:var(--text);border:1px solid var(--line)}
+.hot.new{color:var(--sun)}
+.rise{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:22px}
+.rise h3{font-size:22px;margin-bottom:8px}
+.rise ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.rise a{display:flex;align-items:center;gap:12px;text-decoration:none;padding:6px 8px;border-radius:10px}
+.rise a:hover{background:var(--surface2)}
+.rise .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--hot);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+.rise .rt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rise .rv{flex:none;color:var(--sea);font-weight:700;font-size:14px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:20px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:center;font-weight:500}
+.step b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--sun);color:#1a0f2e;display:flex;align-items:center;justify-content:center;font-weight:700}
+.demo{display:grid;grid-template-columns:1fr 1.35fr;gap:20px;align-items:start}
+.demo h4{font:400 22px Anton,sans-serif;margin:0 0 10px}
+.demo-in .tbox{max-height:none}
+.demo-out{position:relative;max-height:560px;overflow:hidden;border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--surface2)}
+.demo-out:after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(to top,var(--surface2),transparent);pointer-events:none}
+.tagex{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sun);margin-bottom:8px}
+@media (max-width:820px){.demo{grid-template-columns:1fr}.fl{width:100%}}
 /* Tela de login */
 .auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
 .auth[hidden]{display:none}
@@ -157,16 +186,31 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
 <header class="hero">
   <h1>Todo vídeo de GTA 6, virando ideia para o seu.</h1>
   <p>Coletamos os vídeos e Shorts que estão bombando com as hashtags do jogo e entregamos um ângulo novo para você criar o seu conteúdo. Por menos que um lanche, por mês.</p>
-  <a class="btn" href="#feed">Explorar o radar</a>
-  <div class="stats"><div><b id="s-v">0</b>vídeos nas últimas 48 h</div><div><b id="s-s">0</b>Shorts</div><div><b id="s-t">0</b>teorias e comparações</div></div>
+  <a class="btn" href="#feed">Explorar o radar</a> <a class="btn alt" href="#exemplo">Ver exemplo</a>
+  <div class="stats"><div><b id="s-v">0</b>vídeos nas últimas 48 h</div><div><b id="s-s">0</b>Shorts</div><div><b id="s-t">0</b>guias e easter eggs</div></div>
 </header>
+
+<section id="exemplo">
+  <h2>Veja o que você recebe</h2>
+  <p class="sub">Exemplo ilustrativo do que o Radar entrega: você acha o vídeo que está subindo, lê a transcrição e recebe um roteiro novo, com o esboço da thumbnail.</p>
+  <div class="steps"><div class="step"><b>1</b>Veja o que está crescendo agora</div><div class="step"><b>2</b>Leia a transcrição do vídeo</div><div class="step"><b>3</b>Receba o roteiro e a thumbnail</div></div>
+  <div class="demo">
+    <div class="demo-in"><span class="tagex">Exemplo</span><h4>Trecho de uma transcrição</h4>
+      <div class="tbox">...a galera vai querer jogar ao mesmo tempo e muita gente vai travar logo no começo, porque deixou tudo para a última hora. Então antes do dia do lançamento eu separei algumas coisas que você precisa conferir no console, desde o espaço livre até a atualização do sistema...</div>
+      <p class="note">Texto inventado para ilustrar. Na ferramenta, você vê a transcrição real do vídeo que escolher.</p></div>
+    <div><span class="tagex">Exemplo</span><h4>Roteiro novo gerado pela IA</h4><div class="demo-out" id="demo-out"></div>
+      <div class="acts" style="margin-top:16px"><button class="btn" type="button" data-demo-signup>Criar conta grátis</button><a class="btn alt" href="#planos">Ver planos</a></div></div>
+  </div>
+</section>
 
 <section id="feed">
   <h2>Radar de hoje</h2>
-  <p class="sub">As 2 ideias de maior crescimento são grátis. Para liberar todas as outras, assine um plano.</p>
-  <div class="bar">
-    <div class="chips" id="fmt" role="group" aria-label="Filtrar por formato"></div>
-    <div class="chips" id="ord" role="group" aria-label="Ordenar"></div>
+  <p class="sub">Algumas ideias são grátis. Para liberar todas as outras, assine um plano.</p>
+  <div id="rising"></div>
+  <div class="filters">
+    <div class="fg"><span class="fl">Formato</span><div class="chips" id="fmt" role="group" aria-label="Filtrar por formato"></div></div>
+    <div class="fg"><span class="fl">Tema</span><div class="chips" id="tema" role="group" aria-label="Filtrar por tema"></div></div>
+    <div class="fg"><span class="fl">Ordenar</span><div class="chips" id="ord" role="group" aria-label="Ordenar"></div></div>
   </div>
   <div class="grid" id="grid"></div>
   <div class="more" id="more"></div>
@@ -179,7 +223,7 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
     <input id="f-title" placeholder="Título do seu vídeo" required aria-label="Título do vídeo">
     <input id="f-chan" placeholder="Nome do canal" required aria-label="Nome do canal">
     <input id="f-url" type="url" placeholder="Link do vídeo (https://...)" required aria-label="Link do vídeo">
-    <select id="f-fmt" aria-label="Formato"><option>Short</option><option>Vídeo</option><option>Teoria</option><option>Comparação</option></select>
+    <select id="f-fmt" aria-label="Tema do vídeo"><option>Short</option><option>Guias</option><option>Easter eggs</option><option>Gameplay</option><option>Notícias</option><option>Teoria</option><option>Outros</option></select>
     <button class="btn" type="submit">Publicar no mural</button>
   </form>
   <div class="grid" id="mural-grid"></div>
@@ -241,36 +285,55 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
 <script src="config.js"></script>
 <script>
 var cfg=window.RADAR_CONFIG,sb=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY);
-var D=[],M=[],ideas={},user=null,active=false,fmt="Todos",ord="Em alta",mode="in",loaded=false,shown=6;
-var FM=["Todos","Short","Vídeo","Teoria","Comparação"],OR=["Em alta","Mais recentes","Mais vistos"];
+var D=[],M=[],ideas={},T={},user=null,active=false,fmt="Todos",tsel="Todos",ord="Em alta",mode="in",loaded=false,shown=6;
+var FF=["Todos","Short","Vídeo longo"],TEMAS=["Guias","Easter eggs","Gameplay","Notícias","Teoria","Outros"],OR=["Em alta","Mais recentes","Mais vistos"];
+var TKEY={"Short":"Short","Guias":"Guias","Easter eggs":"Easter","Gameplay":"Gameplay","Notícias":"Noticias","Teoria":"Teoria","Outros":"Outros"};
+var SAMPLE={titulo_sugerido:"Antes de ligar o GTA 6: 4 coisas para deixar o console pronto",
+ gancho:"Se você quer jogar no primeiro dia, não comece pelo jogo. Comece por estas quatro coisas, que evitam a maior dor de cabeça do lançamento.",
+ roteiro:[
+  {secao:"Abertura",tempo:"0:00-0:20",fala:"Todo mundo vai querer jogar ao mesmo tempo, e quem deixar tudo para a última hora vai travar no começo. Eu separei quatro checagens rápidas.",visual:"Você de frente para a câmera, com o console ao fundo e um relógio na tela."},
+  {secao:"Checagem 1: espaço livre",tempo:"0:20-1:10",fala:"Jogos desse tamanho cobram caro em espaço. Veja quanto você tem livre e apague o que não usa antes de começar o download.",visual:"Tela de armazenamento do console, com a barra de espaço livre em destaque."},
+  {secao:"Checagem 2: baixar com antecedência",tempo:"1:10-2:00",fala:"Se o seu jogo permite baixar antes, faça isso agora. Quanto mais cedo você começa, menos fila e menos susto.",visual:"Tela de download com a porcentagem subindo, e uma seta apontando para ela."},
+  {secao:"Checagens 3 e 4: sistema e controle",tempo:"2:00-2:50",fala:"Atualize o sistema do console e carregue o controle. Parece bobagem, mas são as duas coisas que mais atrapalham na hora.",visual:"Corte rápido entre a tela de atualização e o controle no carregador."}],
+ chamada_final:"Qual dessas você já esqueceu alguma vez? Conta nos comentários e salva este vídeo para o dia do lançamento.",
+ diferencial:"Em vez de repetir notícias, o vídeo vira uma lista prática de preparação, com um formato que ninguém precisa de teoria para entender.",
+ hashtags:["#gta6","#ps5","#xbox","#dicas"],
+ thumbnail:{texto_principal:"PREPARE O CONSOLE",texto_secundario:"antes do dia 1",cena:"Você segurando o controle, com a tela de download ao fundo",expressao:"ansioso, olhando para a tela",cores:["#7b2ff7","#ff5d73","#ffffff"],posicao_texto:"esquerda",elemento_destaque:"seta"}};
 function $(id){return document.getElementById(id)}
 function esc(s){var e=document.createElement("div");e.textContent=s==null?"":s;return e.innerHTML.replace(/"/g,"&quot;")}
 function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:"#"}
 function toast(m){var t=$("toast");t.textContent=m;t.className="toast on";setTimeout(function(){t.className="toast"},2800)}
 
-/* Classifica o formato pelo próprio vídeo (duração e título) */
-function kind(v){
+/* Formato e tema de cada vídeo, deduzidos do título e da duração */
+function isShort(v){return !!((v.duration_s&&v.duration_s<=90)||/#shorts?\b/i.test(v.title||""))}
+function tema(v){
  var t=(v.title||"").toLowerCase();
- if((v.duration_s&&v.duration_s<=90)||/#shorts?\b/.test(t))return "Short";
- if(/\bvs\b|\bx\b|versus|compara|antes e depois|diferen[çc]as?/.test(t))return "Comparação";
- if(/teoria|theory|explica|significa|segredo|easter|an[áa]lise|rumor|vazou|o que sabemos|revelad/.test(t))return "Teoria";
- return "Vídeo"}
+ if(/easter ?eggs?|segredos?|secrets?|hidden|escondid|refer[êe]ncias?|references?|curiosidades|you missed|n[ãa]o viu|despercebid/.test(t))return "Easter eggs";
+ if(/guia|guide|tutorial|walkthrough|dicas?|\btips?\b|how to|como (fazer|ganhar|conseguir|desbloquear|zerar|jogar|ter)|passo a passo|melhores? |best |cheats?|c[óo]digos?|iniciantes|beginner|primeir[ao]s? (horas|passos|coisas)|o que fazer/.test(t))return "Guias";
+ if(/gameplay|jogabilidade|primeiras? impress|first impressions|review|gr[áa]ficos?|graphics|\bfps\b|campanha|miss[ãa]o|mission|parte \d|part \d|playthrough|zerando|jogando|ao vivo|\blive\b/.test(t))return "Gameplay";
+ if(/teoria|theory|rumor|vazou|leak|especula|speculation|explicad|explained|significa|meaning/.test(t))return "Teoria";
+ if(/not[íi]cias?|\bnews\b|atualiza[çc][ãa]o|\bupdate\b|patch|an[uú]nci|announce|confirm|revel|pr[ée][- ]?(load|download|venda)|pre[- ]?(load|order)|\blaunch\b|lan[çc]amento|data de lan|release date|pre[çc]o|\bprice\b|tamanho|\d+ ?gb|rockstar|take-two/.test(t))return "Notícias";
+ return "Outros"}
 function views(n){n=Number(n)||0;if(n>=1e6)return(n/1e6).toFixed(1).replace(".",",")+" mi";if(n>=1e3)return Math.round(n/1e3)+" mil";return String(n)}
+function rate(n){n=Number(n)||0;return n>=1000?views(n):String(Math.round(n))}
+function vph(v){var t=T[v.id];return t&&Number(t.views_per_hour)>0?Number(t.views_per_hour):-1}
 function ago(d){var h=Math.round((Date.now()-new Date(d))/36e5);if(h<1)return "agora";if(h<24)return "há "+h+" h";return "há "+Math.round(h/24)+" d"}
 function dur(s){if(!s)return "";var m=Math.floor(s/60),r=s%60;return m+":"+(r<10?"0":"")+r}
 function ytThumb(u){var m=/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/.exec(u||"");return m?"https://i.ytimg.com/vi/"+m[1]+"/mqdefault.jpg":""}
 
 function card(v,comm){
- var k=comm?(v.format||"Vídeo"):kind(v);
+ var tm=comm?(v.format||"Outros"):tema(v),sh=comm?(v.format==="Short"):isShort(v);
  var url=comm?safeUrl(v.url):"https://www.youtube.com/watch?v="+encodeURIComponent(v.id);
  var th=comm?ytThumb(v.url):v.thumb;
  var idea=comm?"Vídeo de um criador da comunidade. Assista, veja o ângulo e crie a sua versão.":ideas[v.id];
  var locked=!comm&&!idea;
  var meta=comm?"no mural":views(v.views)+" views · "+ago(v.published_at);
- var hot=(!comm&&v.growth>0)?'<span class="hot">🔥 +'+Math.round(v.growth)+'%</span>':"";
+ var hot="",t=!comm&&T[v.id];
+ if(t&&Number(t.views_per_hour)>=1)hot='<span class="hot">🔥 +'+rate(t.views_per_hour)+' views/h</span>';
+ else if(!comm&&(Date.now()-new Date(v.published_at))<3*36e5)hot='<span class="hot new">✨ novo</span>';
  return '<article class="card"><a class="media" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" aria-label="Assistir: '+esc(v.title)+'">'+
   (th?'<img loading="lazy" src="'+esc(th)+'" alt="" onerror="this.remove()">':"")+
-  '<span class="badge '+k+'">'+k+'</span>'+(v.duration_s?'<span class="dur">'+dur(v.duration_s)+'</span>':"")+hot+'<span class="play">▶</span></a>'+
+  '<span class="badges">'+(sh?'<span class="badge Short">Short</span>':"")+'<span class="badge '+(TKEY[tm]||"Outros")+'">'+esc(tm)+'</span></span>'+(v.duration_s?'<span class="dur">'+dur(v.duration_s)+'</span>':"")+hot+'<span class="play">▶</span></a>'+
   '<div class="body"><h3 class="title">'+esc(v.title)+'</h3>'+
   '<div class="chan"><span class="av">'+esc((v.channel||"?").charAt(0).toUpperCase())+'</span><span><b>'+esc(v.channel)+'</b><br>'+meta+'</span></div>'+
   '<div class="idea'+(locked?" locked":"")+'"><div class="ihead">💡 Ideia para o seu vídeo</div><p>'+esc(idea||"Ideia disponível para assinantes do Radar Leonida.")+'</p>'+
@@ -278,23 +341,28 @@ function card(v,comm){
   '</div>'+(comm?"":'<div class="acts"><button class="btn alt sm" type="button" data-assist="transcript" data-id="'+esc(v.id)+'">📝 Transcrição</button><button class="btn sm" type="button" data-assist="script" data-id="'+esc(v.id)+'">✨ Roteiro único'+(active?'':' · PRO')+'</button></div>')+'</div></article>'}
 
 function chips(box,list,cur,fn,counts){box.innerHTML="";list.forEach(function(x){var b=document.createElement("button");b.type="button";b.className="chip";b.innerHTML=esc(x)+(counts?"<small>"+counts[x]+"</small>":"");b.setAttribute("aria-pressed",x===cur);b.onclick=function(){fn(x)};box.appendChild(b)})}
+function renderRising(){
+ var l=D.filter(function(v){return vph(v)>=1}).sort(function(a,b){return vph(b)-vph(a)}).slice(0,3);
+ $("rising").innerHTML=l.length?'<div class="rise"><h3>🚀 Subindo mais rápido agora</h3><ol>'+l.map(function(v,i){return '<li><a href="https://www.youtube.com/watch?v='+encodeURIComponent(v.id)+'" target="_blank" rel="noopener noreferrer"><span class="n">'+(i+1)+'</span><span class="rt">'+esc(v.title)+'</span><span class="rv">+'+rate(vph(v))+' views/h</span></a></li>'}).join("")+'</ol></div>':""}
 function render(){
- var counts={Todos:D.length,Short:0,"Vídeo":0,Teoria:0,"Comparação":0};
- D.forEach(function(v){counts[kind(v)]++});
- chips($("fmt"),FM,fmt,function(x){fmt=x;shown=6;render()},counts);
+ var nS=D.filter(isShort).length,cT={Todos:D.length},cF={Todos:D.length,"Short":nS,"Vídeo longo":D.length-nS};
+ TEMAS.forEach(function(x){cT[x]=0});D.forEach(function(v){cT[tema(v)]++});
+ chips($("fmt"),FF,fmt,function(x){fmt=x;shown=6;render()},cF);
+ chips($("tema"),["Todos"].concat(TEMAS),tsel,function(x){tsel=x;shown=6;render()},cT);
  chips($("ord"),OR,ord,function(x){ord=x;shown=6;render()});
- var l=D.filter(function(v){return fmt==="Todos"||kind(v)===fmt});
+ var l=D.filter(function(v){return (fmt==="Todos"||(fmt==="Short")===isShort(v))&&(tsel==="Todos"||tema(v)===tsel)});
  l.sort(function(a,b){
   if(ord==="Mais recentes")return new Date(b.published_at)-new Date(a.published_at);
   if(ord==="Mais vistos")return (b.views||0)-(a.views||0);
-  return ((b.growth||0)-(a.growth||0))||((b.views||0)-(a.views||0))});
+  return (vph(b)-vph(a))||((b.growth||0)-(a.growth||0))||((b.views||0)-(a.views||0))});
  var vis=l.slice(0,shown);
  $("more").innerHTML=(l.length>shown?'<button class="btn alt" type="button" data-more>Ver mais vídeos ('+(l.length-shown)+')</button>':"")+(shown>6?'<button class="btn alt" type="button" data-less>Mostrar menos</button>':"");
- $("grid").innerHTML=l.length?vis.map(function(v){return card(v,false)}).join(""):'<div class="empty">'+(loaded?'Nenhum vídeo nesse formato nas últimas 48 horas. Tente outro filtro.':'Carregando...')+'</div>';
+ $("grid").innerHTML=l.length?vis.map(function(v){return card(v,false)}).join(""):'<div class="empty">'+(loaded?'Nenhum vídeo com esses filtros nas últimas 48 horas. Tente outra combinação.':'Carregando...')+'</div>';
  $("mural-grid").innerHTML=M.length?M.slice(0,6).map(function(v){return card(v,true)}).join(""):'<div class="empty">O mural está vazio. Assinantes podem publicar o primeiro vídeo.</div>';
  $("auth-btn").textContent=user?"Sair":"Entrar";
  var st=$("status");st.hidden=!user;st.textContent=active?"Assinatura ativa":"Plano gratuito";st.className="pill"+(active?" on":"");
- $("s-v").textContent=D.length;$("s-s").textContent=counts.Short;$("s-t").textContent=counts.Teoria+counts["Comparação"];
+ $("s-v").textContent=D.length;$("s-s").textContent=nS;$("s-t").textContent=cT["Guias"]+cT["Easter eggs"];
+ renderRising();
 }
 async function load(){
  var s=await sb.auth.getSession();user=s.data.session?s.data.session.user:null;active=false;
@@ -302,6 +370,7 @@ async function load(){
  var since=new Date(Date.now()-48*36e5).toISOString();
  var v=await sb.from("videos").select("*").gte("published_at",since).limit(200);D=v.data||[];
  var i=await sb.from("ideas").select("video_id,idea");ideas={};(i.data||[]).forEach(function(x){ideas[x.video_id]=x.idea});
+ var tr=await sb.from("video_trends").select("*");T={};(tr.data||[]).forEach(function(x){T[x.video_id]=x});
  var m=await sb.from("community").select("*").order("created_at",{ascending:false}).limit(30);M=m.data||[];
  loaded=true;render()}
 
@@ -385,7 +454,7 @@ $("form").onsubmit=async function(e){e.preventDefault();
 document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=async function(){
  if(!user){openAuth("up");return}
  b.disabled=true;toast("Abrindo o pagamento...");
- var r=await sb.functions.invoke("create-checkout",{body:{plan:b.dataset.plan}});
+ var r=await sb.functions.invoke((cfg.CHECKOUT_FN||"create-checkout"),{body:{plan:b.dataset.plan}});
  b.disabled=false;
  if(r.error||!r.data||!r.data.init_point){toast("Não foi possível abrir o pagamento. Tente de novo.");return}
  window.location.href=r.data.init_point}});
@@ -417,14 +486,14 @@ function scriptText(o){
  var s=(o.titulo_sugerido||"")+"\n\nGANCHO\n"+(o.gancho||"")+"\n";
  (o.roteiro||[]).forEach(function(x){s+="\n["+(x.tempo||"")+"] "+(x.secao||"")+"\nFala: "+(x.fala||"")+"\nVisual: "+(x.visual||"")+"\n"});
  return s+"\nCHAMADA FINAL\n"+(o.chamada_final||"")+"\n\n"+(o.hashtags||[]).join(" ")}
-function viewScript(o){
+function viewScript(o,demo){
  var h='<h4>'+esc(o.titulo_sugerido||"Roteiro")+'</h4><div class="hook"><b>Gancho</b>'+esc(o.gancho||"")+'</div>';
  (o.roteiro||[]).forEach(function(x){h+='<div class="sec"><div class="sh"><b>'+esc(x.secao)+'</b><span>'+esc(x.tempo)+'</span></div><p><em>Fala</em>'+esc(x.fala)+'</p><p class="vis"><em>Visual</em>'+esc(x.visual)+'</p></div>'});
  h+='<div class="sec"><div class="sh"><b>Chamada final</b></div><p>'+esc(o.chamada_final||"")+'</p></div>';
  h+='<p class="note"><b>O que muda em relação ao original:</b> '+esc(o.diferencial||"")+'</p>';
  h+='<div class="tags">'+(o.hashtags||[]).map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join("")+'</div>';
  h+='<h4 style="margin-top:22px">Esboço da thumbnail</h4>'+thumbMock(o.thumbnail);
- h+='<div class="acts"><button class="btn sm" type="button" data-copy="'+esc(scriptText(o))+'">Copiar roteiro</button><button class="btn alt sm" type="button" data-again>Gerar outra versão</button></div>';
+ if(!demo)h+='<div class="acts"><button class="btn sm" type="button" data-copy="'+esc(scriptText(o))+'">Copiar roteiro</button><button class="btn alt sm" type="button" data-again>Gerar outra versão</button></div>';
  return h}
 function renderPanel(again){
  var b=$("p-body"),id=pv.id;
@@ -453,6 +522,8 @@ $("p-x").onclick=closePanel;
 $("panel").onclick=function(e){if(e.target===this)closePanel()};
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("panel").hidden&&$("auth").hidden)closePanel()});
 
+$("demo-out").innerHTML=viewScript(SAMPLE,true);
+document.addEventListener("click",function(e){if(e.target.closest("[data-demo-signup]")){if(user){location.hash="feed"}else openAuth("up")}});
 $("grid").innerHTML=new Array(6).join('<div class="skel"></div>');
 load().catch(function(){loaded=true;$("grid").innerHTML='<div class="empty">Não foi possível carregar os vídeos agora. Atualize a página.</div>'});
 </script>
