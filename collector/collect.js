@@ -1,7 +1,7 @@
-// Node 18+. Coleta vídeos do YouTube por hashtag, salva no Supabase e gera ideias com Claude.
+// Node 18+. Coleta vídeos do YouTube, guarda uma foto das views a cada rodada e gera ideias (opcional).
 const { YT_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY, ANTHROPIC_API_KEY } = process.env;
 const BASE = (SUPABASE_URL || "").trim().replace(/\/+$/, "").replace(/\/rest\/v1$/, "");
-const QUERIES = ["#gta6", "#gta6trailer", "#gta6leonida", "#gtavi"];
+const QUERIES = ["#gta6", "#gta6trailer", "#gta6leonida", "#gtavi"]; // cada busca custa 100 unidades de cota
 const sbH = { apikey: SUPABASE_SERVICE_KEY, Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`, "Content-Type": "application/json" };
 
 const dur = (iso) => { const m = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/.exec(iso || "") || []; return (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0); };
@@ -37,13 +37,17 @@ async function makeIdea(v) {
     const s = await yt("search", { part: "id", q, type: "video", order: "date", maxResults: 50, publishedAfter: after, regionCode: "BR", relevanceLanguage: "pt" });
     s.items.forEach((i) => ids.add(i.id.videoId));
   }
+  // também atualiza os vídeos que já estão no banco (últimas 48 h), para medir o crescimento (custa 1 unidade por 50 vídeos)
+  const known = await sb(`videos?select=id&published_at=gte.${encodeURIComponent(after)}&limit=1000`);
+  (known || []).forEach((x) => ids.add(x.id));
+
   const list = [...ids];
   const rows = [], desc = {};
   for (let i = 0; i < list.length; i += 50) {
     const d = await yt("videos", { part: "snippet,statistics,contentDetails", id: list.slice(i, i + 50).join(",") });
     for (const v of d.items) {
       const txt = (v.snippet.title + " " + v.snippet.description).toLowerCase();
-      if (!/#?gta\s?(6|vi)|leonida|vice city/.test(txt)) continue;
+      if (!/#?gta\s?(6|vi)|leonida|vice city/.test(txt)) continue; // descarta resultados fora do tema
       desc[v.id] = v.snippet.description;
       rows.push({
         id: v.id, title: v.snippet.title, channel: v.snippet.channelTitle, duration_s: dur(v.contentDetails.duration),
@@ -52,7 +56,12 @@ async function makeIdea(v) {
       });
     }
   }
-  if (rows.length) await sb("videos?on_conflict=id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" }, body: JSON.stringify(rows) });
+  if (rows.length) {
+    await sb("videos?on_conflict=id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" }, body: JSON.stringify(rows) });
+    await sb("video_stats", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify(rows.map((r) => ({ video_id: r.id, views: r.views }))) });
+  }
+  // apaga fotos com mais de 7 dias para o banco não crescer sem parar
+  await sb(`video_stats?captured_at=lt.${encodeURIComponent(new Date(Date.now() - 7 * 24 * 3600e3).toISOString())}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
   console.log(`${rows.length} vídeos salvos`);
 
   if (!ANTHROPIC_API_KEY) return;
@@ -60,7 +69,6 @@ async function makeIdea(v) {
   for (const v of rows.filter((r) => !have.has(r.id)).slice(0, 40)) {
     try {
       const o = await makeIdea({ ...v, description: desc[v.id] });
-      await sb(`videos?id=eq.${v.id}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ format: o.format }) });
       await sb("ideas", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ video_id: v.id, idea: o.idea }) });
     } catch (e) { console.error("ideia falhou", v.id, e.message); }
   }
