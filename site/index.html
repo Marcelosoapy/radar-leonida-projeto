@@ -281,7 +281,7 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
 
 <section id="planos">
   <h2>Escolha seu plano</h2>
-  <p class="sub">Cancele quando quiser. Pagamento pelo Mercado Pago.</p>
+  <p class="sub">Cancele quando quiser. O pagamento é feito na Cakto. Use o mesmo e-mail da sua conta do Radar ao pagar.</p>
   <div class="plans">
     <div class="plan"><h3>Mensal</h3><div class="price">R$ 14,90<small> /mês</small></div>
       <ul><li>Todas as ideias do radar</li><li>Filtros por formato e crescimento</li><li>Publicação no mural</li></ul>
@@ -501,13 +501,21 @@ $("form").onsubmit=async function(e){e.preventDefault();
  var r=await sb.from("community").insert({user_id:user.id,title:$("f-title").value,channel:$("f-chan").value,url:$("f-url").value,format:$("f-fmt").value});
  if(r.error){toast("Não foi possível publicar");return}
  e.target.reset();toast("Publicado no mural");load()};
-document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=async function(){
+var watching=null;
+function watchAccess(){
+ if(watching)return;var n=0;
+ watching=setInterval(async function(){
+  n++;if(!user||active||n>60){clearInterval(watching);watching=null;return}
+  var p=await sb.from("profiles").select("active").eq("id",user.id).maybeSingle();
+  if(p.data&&p.data.active){active=true;toast("Assinatura ativada! Bem-vindo.");load()}},5000)}
+document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){
  if(!user){openAuth("up");return}
- b.disabled=true;toast("Abrindo o pagamento...");
- var r=await sb.functions.invoke((cfg.CHECKOUT_FN||"create-checkout"),{body:{plan:b.dataset.plan}});
- b.disabled=false;
- if(r.error||!r.data||!r.data.init_point){toast("Não foi possível abrir o pagamento. Tente de novo.");return}
- window.location.href=r.data.init_point}});
+ var base=(cfg.CHECKOUT||{})[b.dataset.plan];
+ if(!base||/SEU-LINK/.test(base)){toast("O pagamento ainda não foi configurado.");return}
+ var url=base+(base.indexOf("?")>-1?"&":"?")+"callback="+encodeURIComponent(user.id);
+ window.open(url,"_blank","noopener");
+ toast("Pagamento aberto em uma nova aba. Use o mesmo e-mail da sua conta.");
+ watchAccess()}});
 
 /* Transcrição e roteiro com IA */
 var R={t:{},s:{}},pv=null,ptab="transcript";
