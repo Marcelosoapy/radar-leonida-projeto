@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){try{var t=localStorage.getItem("radar_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 <title>Termos de Uso | Radar Leonida</title>
 <meta name="robots" content="index,follow">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#1a0f2e;--surface:#27173f;--line:#3d2a5c;--text:#f8ecdc;--muted:#b9a8d0;--hot:#ff5d73;--sun:#ffb347;--sea:#35d0ba;color-scheme:dark}
-@media (prefers-color-scheme:light){:root{--bg:#fff4e4;--surface:#ffffff;--line:#ecd5b8;--text:#2a1745;--muted:#6f5a8a;--hot:#d6304a;--sun:#c9700a;--sea:#0b8f7c;color-scheme:light}}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fff4e4;--surface:#ffffff;--line:#ecd5b8;--text:#2a1745;--muted:#6f5a8a;--hot:#d6304a;--sun:#c9700a;--sea:#0b8f7c;color-scheme:light}}
+:root[data-theme="light"]{--bg:#fff4e4;--surface:#ffffff;--line:#ecd5b8;--text:#2a1745;--muted:#6f5a8a;--hot:#d6304a;--sun:#c9700a;--sea:#0b8f7c;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.7 "DM Sans",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .wrap{max-width:780px;margin:0 auto;padding:0 20px 60px}
