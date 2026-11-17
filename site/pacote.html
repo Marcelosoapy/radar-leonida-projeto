@@ -84,6 +84,8 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:12px;paddi
 .fine{font-size:13px;color:var(--muted);margin:12px 0 0}
 .fine a{color:var(--sea)}
 
+.life{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--sea);border:1.5px solid var(--sea);border-radius:999px;padding:2px 11px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 /* detalhes */
 .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:6px 0 40px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
@@ -115,7 +117,7 @@ footer a{color:var(--sea)}
 </head>
 <body>
 <div class="strip" id="strip"><div class="in">
-  <span><strong data-i="s.bf">Black Friday:</strong> <span data-i="s.txt">30% off com o cupom</span></span>
+  <span><strong data-i="s.bf">Black Friday:</strong> <span data-i="s.txt">pacote vitalício com 30% off</span></span>
   <span class="code">BLACK30 <button type="button" data-copy="BLACK30" data-i="copy">Copiar</button></span>
 </div></div>
 
@@ -138,7 +140,7 @@ footer a{color:var(--sea)}
     <div class="cv c1"><small data-i="cv.ebook">E-book completo</small><strong>Vice City Paga</strong></div>
   </div>
   <div style="min-width:0">
-    <span class="tag" data-i="tag">Black Friday · 30% off</span>
+    <div class="tags"><span class="tag" data-i="tag">Black Friday · 30% off</span><span class="life" data-i="life">Pagamento único · acesso vitalício</span></div>
     <h1 data-i="h1">O pacote completo para lucrar com GTA 6</h1>
     <p class="lead" data-i="lead">Tudo o que o checklist gratuito resume, em detalhes, com material pronto para usar desde o primeiro vídeo.</p>
     <ul class="items">
@@ -154,7 +156,7 @@ footer a{color:var(--sea)}
       <button class="btn sun sm" type="button" data-copy="BLACK30" data-i="c.copy">Copiar cupom</button>
     </div>
     <div class="cta"><a class="btn" id="buy" href="https://pay.cakto.com.br/upq8shg_1321826" target="_blank" rel="noopener" data-i="buy">Comprar com 30% off</a></div>
-    <p class="fine"><span data-i="fine">Pagamento seguro pela Cakto. Você tem 7 dias para desistir da compra e receber o valor de volta.</span> <a href="./#cancelamento" data-i="fine.l">Ver política de reembolso</a></p>
+    <p class="fine"><span data-i="fine">Pagamento único, sem mensalidade: os arquivos são seus para sempre. Pagamento seguro pela Cakto. Você tem 7 dias para desistir da compra e receber o valor de volta.</span> <a href="./#cancelamento" data-i="fine.l">Ver política de reembolso</a></p>
   </div>
 </section>
 
@@ -174,24 +176,24 @@ footer a{color:var(--sea)}
 
 <script>
 var I={pt:{
-"title":"Pacote Vice City Paga | Radar Leonida","s.bf":"Black Friday:","s.txt":"30% off com o cupom","copy":"Copiar","back":"Voltar ao radar",
-"cv.bonus":"Bônus","cv.sheet":"Planilha","cv.sheet2":"do Criador","cv.ebook":"E-book completo","tag":"Black Friday · 30% off",
+"title":"Pacote Vice City Paga | Radar Leonida","s.bf":"Black Friday:","s.txt":"pacote vitalício com 30% off","copy":"Copiar","back":"Voltar ao radar",
+"cv.bonus":"Bônus","cv.sheet":"Planilha","cv.sheet2":"do Criador","cv.ebook":"E-book completo","tag":"Black Friday · 30% off","life":"Pagamento único · acesso vitalício",
 "h1":"O pacote completo para lucrar com GTA 6","lead":"Tudo o que o checklist gratuito resume, em detalhes, com material pronto para usar desde o primeiro vídeo.",
 "i1":"o e-book completo de criação de conteúdo","i2b":"Bônus 100 Ganchos","i2":"aberturas prontas para adaptar aos seus vídeos","i3b":"Planilha do Criador","i3":"para organizar ideias, gravações e publicações","i4b":"Templates de Thumbnail","i4":"modelos editáveis para as suas capas",
 "p.old":"R$ 47,00","p.new":"R$ 32,90","p.off":"30% off com o cupom","p.fee":"No checkout é somada a taxa de serviço da Cakto de R$ 0,99. Total com o cupom: R$ 33,89.",
 "c.k":"Use este cupom no checkout","c.copy":"Copiar cupom","buy":"Comprar com 30% off",
-"fine":"Pagamento seguro pela Cakto. Você tem 7 dias para desistir da compra e receber o valor de volta.","fine.l":"Ver política de reembolso",
+"fine":"Pagamento único, sem mensalidade: os arquivos são seus para sempre. Pagamento seguro pela Cakto. Você tem 7 dias para desistir da compra e receber o valor de volta.","fine.l":"Ver política de reembolso",
 "h.1t":"Copie o cupom","h.1p":"Clique em Copiar cupom e cole o código BLACK30 no campo de desconto do checkout.","h.2t":"Pague com Pix ou cartão","h.2p":"O pagamento é feito na página segura da Cakto.","h.3t":"Receba os arquivos","h.3p":"Depois da confirmação, a Cakto envia o acesso aos 4 arquivos para o seu e-mail.",
 "foot":"Material independente, sem vínculo com a Rockstar Games nem com a Take-Two Interactive.","l.t":"Termos de Uso","l.p":"Política de Privacidade","l.c":"Cancelamento e Reembolso",
 "copied":"Cupom copiado: BLACK30","copyfail":"Cupom: BLACK30","th.light":"Ativar modo claro","th.dark":"Ativar modo escuro"
 },en:{
-"title":"Vice City Paga bundle | Radar Leonida","s.bf":"Black Friday:","s.txt":"30% off with code","copy":"Copy","back":"Back to the radar",
-"cv.bonus":"Bonus","cv.sheet":"Creator's","cv.sheet2":"Spreadsheet","cv.ebook":"Full e-book","tag":"Black Friday · 30% off",
+"title":"Vice City Paga bundle | Radar Leonida","s.bf":"Black Friday:","s.txt":"lifetime bundle, 30% off","copy":"Copy","back":"Back to the radar",
+"cv.bonus":"Bonus","cv.sheet":"Creator's","cv.sheet2":"Spreadsheet","cv.ebook":"Full e-book","tag":"Black Friday · 30% off","life":"One-time payment · lifetime access",
 "h1":"The complete bundle to earn with GTA 6","lead":"Everything the free checklist summarizes, in depth, with ready-to-use material from your very first video. All materials are in Portuguese.",
 "i1":"the complete content creation e-book","i2b":"Bonus: 100 Hooks","i2":"ready-made openings to adapt to your videos","i3b":"Creator's Spreadsheet","i3":"to organize ideas, recordings and uploads","i4b":"Thumbnail Templates","i4":"editable templates for your thumbnails",
 "p.old":"R$ 47.00","p.new":"R$ 32.90","p.off":"30% off with the code","p.fee":"Cakto adds a R$ 0.99 service fee at checkout. Total with the code: R$ 33.89 (Brazilian reais).",
 "c.k":"Use this code at checkout","c.copy":"Copy code","buy":"Buy with 30% off",
-"fine":"Secure payment via Cakto. You have 7 days to cancel the purchase and get your money back.","fine.l":"See the refund policy (PT)",
+"fine":"One-time payment, no subscription: the files are yours forever. Secure payment via Cakto. You have 7 days to cancel the purchase and get your money back.","fine.l":"See the refund policy (PT)",
 "h.1t":"Copy the code","h.1p":"Click Copy code and paste BLACK30 into the discount field at checkout.","h.2t":"Pay with Pix or card","h.2p":"Payment happens on Cakto's secure page.","h.3t":"Get the files","h.3p":"Once payment is confirmed, Cakto emails you access to the 4 files.",
 "foot":"Independent material, not affiliated with Rockstar Games or Take-Two Interactive.","l.t":"Terms of Use (PT)","l.p":"Privacy Policy (PT)","l.c":"Cancellation and Refunds (PT)",
 "copied":"Code copied: BLACK30","copyfail":"Code: BLACK30","th.light":"Switch to light mode","th.dark":"Switch to dark mode"
