@@ -176,7 +176,8 @@ footer{padding:30px 0 30px;color:var(--muted);font-size:14px}
 .lg-box .xbtn{top:16px;right:16px}
 .lg-box>h3{font-size:28px;margin:0 52px 16px 0}
 .lg-tabs{position:sticky;top:0;z-index:2;margin-bottom:18px}
-.lg-tabs button{font-size:14px;padding:10px 6px}
+.lg-tabs button{font-size:14px;padding:10px 6px;white-space:nowrap}
+@media (max-width:400px){.lg-tabs button{font-size:12.5px;padding:10px 4px}}
 .lg-note{font-size:13px;color:var(--muted);margin:-6px 0 12px}
 .lg-body{line-height:1.7;overflow-wrap:break-word}
 .lg-body h1{font-size:30px;margin:4px 0 4px}
@@ -275,6 +276,23 @@ img{max-width:100%}
 .btn.danger{background:transparent;border:2px solid var(--hot);color:var(--hot)}
 .acc-confirm{border:2px solid var(--hot);border-radius:16px;padding:18px;margin-bottom:14px}
 .acc-confirm h4{font:400 24px Anton,sans-serif;margin:0 0 8px}
+/* Retenção: favoritos, meus roteiros, novidades */
+.card{position:relative}
+.favb{position:absolute;top:8px;right:8px;z-index:3;width:38px;height:38px;border-radius:50%;border:0;background:rgba(10,5,20,.62);color:#fff;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.favb:hover{background:rgba(10,5,20,.85)}
+.favb.on{color:#ffb347}
+.newsince{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--sea);border-radius:14px;padding:10px 14px;margin:-6px 0 18px;font-size:15px}
+.newsince b{color:var(--sea)}
+.newsince button{border:0;background:none;color:var(--sea);font:700 14px "DM Sans",sans-serif;cursor:pointer;padding:0;text-decoration:underline}
+.gen-list{display:grid;gap:10px}
+.gen-item{display:flex;flex-direction:column;gap:3px;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;color:var(--text);cursor:pointer;font:inherit}
+.gen-item:hover{border-color:var(--sun)}
+.gen-item b{font-size:15.5px;line-height:1.35}
+.gen-item span{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.acc-grid{grid-template-columns:minmax(0,1fr)}
+.acc-empty{text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;padding:26px 16px}
+.acc-empty p{margin:0 0 14px}
+.saved-note{font-size:13px;color:var(--muted);margin:12px 0 0}
 /* Tela de login */
 .auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
 .auth[hidden]{display:none}
@@ -379,6 +397,7 @@ img{max-width:100%}
 <section id="feed">
   <h2 data-i="feed.h2">Radar de hoje</h2>
   <p class="sub" data-i="feed.sub">Algumas ideias são grátis. Para liberar todas as outras, assine um plano.</p>
+  <div class="newsince" id="newsince" hidden></div>
   <div id="rising"></div>
   <div class="filters">
     <div class="fg"><span class="fl" data-i="feed.fmt">Formato</span><div class="chips" id="fmt" role="group" aria-label="Filtrar por formato" data-i-aria="feed.afmt"></div></div>
@@ -458,7 +477,12 @@ img{max-width:100%}
 <div class="legalp" id="accp" hidden role="dialog" aria-modal="true" aria-labelledby="acc-title">
   <div class="lg-box acc-box">
     <button class="xbtn" id="acc-x" type="button" aria-label="Fechar" data-i-aria="aria.close">×</button>
-    <h3 id="acc-title" data-i="acc.title">Minha assinatura</h3>
+    <h3 id="acc-title" data-i="acc.title">Minha conta</h3>
+    <div class="tabs lg-tabs" id="acc-tabs" role="tablist">
+      <button type="button" role="tab" data-at="sub" data-i="acc.t1">Assinatura</button>
+      <button type="button" role="tab" data-at="gen" data-i="acc.t2">Meus roteiros</button>
+      <button type="button" role="tab" data-at="fav" data-i="acc.t3">Favoritos</button>
+    </div>
     <div id="acc-body"></div>
   </div>
 </div>
@@ -481,7 +505,7 @@ img{max-width:100%}
 <script src="config.js"></script>
 <script>
 var cfg=window.RADAR_CONFIG,sb=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY);
-var D=[],M=[],ideas={},T={},user=null,active=false,fmt="Todos",tsel="Todos",ord="Em alta",mode="in",loaded=false,shown=6;
+var D=[],M=[],ideas={},T={},FAV=new Set(),NEWC=0,user=null,active=false,fmt="Todos",tsel="Todos",ord="Em alta",mode="in",loaded=false,shown=6;
 var FF=["Todos","Short","Vídeo longo"],TEMAS=["Guias","Easter eggs","Gameplay","Notícias","Teoria","Outros"],OR=["Em alta","Mais recentes","Mais vistos"];
 var TKEY={"Short":"Short","Guias":"Guias","Easter eggs":"Easter","Gameplay":"Gameplay","Notícias":"Noticias","Teoria":"Teoria","Outros":"Outros"};
 var SAMPLE={titulo_sugerido:"Antes de ligar o GTA 6: 4 coisas para deixar o console pronto",
@@ -519,7 +543,12 @@ var I18N={pt:{
 "plans.m":"Mensal","plans.pm":"R$ 14,90<small> /mês</small>","plans.m1":"Todas as ideias do radar","plans.m2":"Filtros por formato e crescimento","plans.m3":"Publicação no mural","plans.mb":"Assinar mensal",
 "plans.best":"Mais econômico","plans.a":"Anual","plans.pa":"R$ 118,80<small> /ano</small>","plans.eq":"equivale a R$ 9,90 por mês","plans.a1":"Tudo do plano mensal","plans.a2":"Um pagamento por ano, renovado todo ano","plans.a3":"Economia de 33% em relação ao mensal","plans.ab":"Assinar anual",
 "plans.n1":"O valor final, com qualquer taxa de serviço ou parcelamento, aparece no checkout da Cakto antes de você pagar.","plans.n2":"Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.",
-"nav.pack":"E-book","bf.t":"Black Friday:","bf.txt":"Pacote Vice City Paga com acesso vitalício e 30% off","bf.short":"30% off no pacote vitalício","bf.copy":"Copiar","bf.see":"Ver pacote","bf.close":"Fechar aviso","bf.copied":"Cupom copiado: BLACK30","acc.title":"Minha assinatura","acc.email":"E-mail","acc.plan":"Plano","acc.status":"Situação","acc.next":"Próxima cobrança","acc.until":"Acesso até","acc.free":"Gratuito","acc.paid":"Assinatura paga","acc.monthly":"Mensal","acc.yearly":"Anual","acc.active":"Ativa","acc.canceled":"Cancelada",
+"nav.pack":"E-book","bf.t":"Black Friday:","bf.txt":"Pacote Vice City Paga com acesso vitalício e 30% off","bf.short":"30% off no pacote vitalício","bf.copy":"Copiar","bf.see":"Ver pacote","bf.close":"Fechar aviso","bf.copied":"Cupom copiado: BLACK30","acc.title":"Minha conta","acc.t1":"Assinatura","acc.t2":"Meus roteiros","acc.t3":"Favoritos",
+"gen.saved":"Este roteiro fica salvo em Minha conta > Meus roteiros.","gen.back":"Voltar à lista","gen.from":"Baseado em","gen.dl":"Baixar .txt","gen.count":function(n){return n===1?"1 roteiro salvo":n+" roteiros salvos"},
+"gen.empty":"Você ainda não gerou roteiros. Escolha um vídeo no radar e clique em Roteiro único.","gen.emptyfree":"Os roteiros com IA ficam salvos aqui para assinantes.","gen.go":"Ir para o radar",
+"fav.add":"Salvar nos favoritos","fav.rm":"Remover dos favoritos","fav.saved":"Salvo nos favoritos","fav.removed":"Removido dos favoritos","fav.err":"Não foi possível salvar agora","fav.empty":"Toque na estrela de um vídeo para guardá-lo aqui e voltar a ele quando for gravar.",
+"new.since":function(n){return n===1?"<b>1 vídeo novo</b> desde a sua última visita":"<b>"+n+" vídeos novos</b> desde a sua última visita"},"new.see":"Ver os mais recentes",
+"acc.email":"E-mail","acc.plan":"Plano","acc.status":"Situação","acc.next":"Próxima cobrança","acc.until":"Acesso até","acc.free":"Gratuito","acc.paid":"Assinatura paga","acc.monthly":"Mensal","acc.yearly":"Anual","acc.active":"Ativa","acc.canceled":"Cancelada",
 "acc.freenote":"Você está no plano gratuito. Assine para liberar todas as ideias e o roteiro com IA.","acc.cancel":"Cancelar assinatura","acc.sure":"Cancelar a assinatura?","acc.surep":function(d){return "A cobrança para agora e nenhum valor novo será cobrado. Você continua com acesso completo até "+d+"."},"acc.surep2":"A cobrança para agora e nenhum valor novo será cobrado. Você continua com acesso até o fim do período já pago.",
 "acc.confirm":"Confirmar cancelamento","acc.keep":"Manter assinatura","acc.done":"Assinatura cancelada","acc.cancnote":"Sua assinatura foi cancelada e não haverá novas cobranças. Você pode assinar de novo quando quiser.","acc.resub":"Assinar de novo",
 "acc.refund":"Cancelar não devolve valores já pagos. Nos primeiros 7 dias após o pagamento, você pode pedir o reembolso integral pelo e-mail de suporte.","acc.help":"Dúvidas ou problemas? Escreva para","acc.noapi":"Não foi possível consultar sua assinatura agora. Para cancelar, escreva para o suporte com o e-mail da sua conta.","acc.err":"Não foi possível concluir agora. Tente de novo.",
@@ -571,7 +600,12 @@ var I18N={pt:{
 "plans.m":"Monthly","plans.pm":"R$ 14.90<small> /month</small>","plans.m1":"All of the radar's ideas","plans.m2":"Filters by format and growth","plans.m3":"Posting on the wall","plans.mb":"Subscribe monthly",
 "plans.best":"Best value","plans.a":"Yearly","plans.pa":"R$ 118.80<small> /year</small>","plans.eq":"equals R$ 9.90 per month","plans.a1":"Everything in the monthly plan","plans.a2":"One payment per year, renewed every year","plans.a3":"33% savings compared to monthly","plans.ab":"Subscribe yearly",
 "plans.n1":"The final amount, including any service fee or installments, is shown at Cakto's checkout before you pay. Prices are in Brazilian reais (BRL).","plans.n2":"Videos come from the YouTube Data API and open on YouTube, on the original channel.",
-"nav.pack":"E-book","bf.t":"Black Friday:","bf.txt":"Vice City Paga bundle with lifetime access, 30% off","bf.short":"30% off, lifetime access","bf.copy":"Copy","bf.see":"See the bundle","bf.close":"Close notice","bf.copied":"Code copied: BLACK30","acc.title":"My subscription","acc.email":"Email","acc.plan":"Plan","acc.status":"Status","acc.next":"Next charge","acc.until":"Access until","acc.free":"Free","acc.paid":"Paid subscription","acc.monthly":"Monthly","acc.yearly":"Yearly","acc.active":"Active","acc.canceled":"Canceled",
+"nav.pack":"E-book","bf.t":"Black Friday:","bf.txt":"Vice City Paga bundle with lifetime access, 30% off","bf.short":"30% off, lifetime access","bf.copy":"Copy","bf.see":"See the bundle","bf.close":"Close notice","bf.copied":"Code copied: BLACK30","acc.title":"My account","acc.t1":"Subscription","acc.t2":"My scripts","acc.t3":"Favorites",
+"gen.saved":"This script is saved in My account > My scripts.","gen.back":"Back to list","gen.from":"Based on","gen.dl":"Download .txt","gen.count":function(n){return n===1?"1 saved script":n+" saved scripts"},
+"gen.empty":"You haven't generated any scripts yet. Pick a video on the radar and click Unique script.","gen.emptyfree":"AI scripts are saved here for subscribers.","gen.go":"Go to the radar",
+"fav.add":"Save to favorites","fav.rm":"Remove from favorites","fav.saved":"Saved to favorites","fav.removed":"Removed from favorites","fav.err":"Couldn't save right now","fav.empty":"Tap the star on a video to keep it here and come back to it when you record.",
+"new.since":function(n){return n===1?"<b>1 new video</b> since your last visit":"<b>"+n+" new videos</b> since your last visit"},"new.see":"See the newest",
+"acc.email":"Email","acc.plan":"Plan","acc.status":"Status","acc.next":"Next charge","acc.until":"Access until","acc.free":"Free","acc.paid":"Paid subscription","acc.monthly":"Monthly","acc.yearly":"Yearly","acc.active":"Active","acc.canceled":"Canceled",
 "acc.freenote":"You're on the free plan. Subscribe to unlock every idea and the AI script.","acc.cancel":"Cancel subscription","acc.sure":"Cancel your subscription?","acc.surep":function(d){return "Billing stops now and you won't be charged again. You keep full access until "+d+"."},"acc.surep2":"Billing stops now and you won't be charged again. You keep access until the end of the period you already paid for.",
 "acc.confirm":"Confirm cancellation","acc.keep":"Keep subscription","acc.done":"Subscription canceled","acc.cancnote":"Your subscription is canceled and there will be no new charges. You can subscribe again anytime.","acc.resub":"Subscribe again",
 "acc.refund":"Canceling doesn't refund amounts already paid. Within 7 days of payment, you can request a full refund through the support email.","acc.help":"Questions or problems? Email","acc.noapi":"We couldn't check your subscription right now. To cancel, email support from your account's email address.","acc.err":"Couldn't complete that right now. Try again.",
@@ -649,7 +683,8 @@ function card(v,comm){
  var hot="",tr=!comm&&T[v.id];
  if(tr&&Number(tr.views_per_hour)>=1)hot='<span class="hot">🔥 +'+rate(tr.views_per_hour)+' views/h</span>';
  else if(!comm&&(Date.now()-new Date(v.published_at))<3*36e5)hot='<span class="hot new">✨ '+t("card.new")+'</span>';
- return '<article class="card"><a class="media" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" aria-label="'+t("card.watch")+esc(v.title)+'">'+
+ var fon=!comm&&FAV.has(v.id),fb=comm?"":'<button class="favb'+(fon?' on':'')+'" type="button" data-fav="'+esc(v.id)+'" aria-pressed="'+fon+'" aria-label="'+(fon?t("fav.rm"):t("fav.add"))+'" title="'+(fon?t("fav.rm"):t("fav.add"))+'">'+(fon?'★':'☆')+'</button>';
+ return '<article class="card">'+fb+'<a class="media" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" aria-label="'+t("card.watch")+esc(v.title)+'">'+
   (th?'<img loading="lazy" src="'+esc(th)+'" alt="" onerror="this.remove()">':"")+
   '<span class="badges">'+(sh?'<span class="badge Short">Short</span>':"")+'<span class="badge '+(TKEY[tm]||"Outros")+'">'+esc(L(tm))+'</span></span>'+(v.duration_s?'<span class="dur">'+dur(v.duration_s)+'</span>':"")+hot+'<span class="play">▶</span></a>'+
   '<div class="body"><h3 class="title">'+esc(v.title)+'</h3>'+
@@ -681,6 +716,9 @@ function render(){
  var st=$("status");st.hidden=!user;st.textContent=(active?t("st.on"):t("st.free"))+" ▾";st.className="pill acct"+(active?" on":"");st.title=t("acc.title");st.setAttribute("aria-label",t("acc.title"));
  $("s-v").textContent=D.length;$("s-s").textContent=nS;$("s-t").textContent=cT["Guias"]+cT["Easter eggs"];
  renderRising();
+ var ns=$("newsince");ns.hidden=!(NEWC>0);
+ if(NEWC>0)ns.innerHTML='<span>✨ '+t("new.since",NEWC)+'</span><button type="button" id="ns-go">'+t("new.see")+'</button>';
+ var g=$("ns-go");if(g)g.onclick=function(){ord="Mais recentes";fmt="Todos";tsel="Todos";shown=Math.max(6,NEWC);render();$("grid").scrollIntoView({behavior:"smooth",block:"start"})};
 }
 async function load(){
  var s=await sb.auth.getSession();user=s.data.session?s.data.session.user:null;active=false;
@@ -690,6 +728,10 @@ async function load(){
  var i=await sb.from("ideas").select("video_id,idea");ideas={};(i.data||[]).forEach(function(x){ideas[x.video_id]=x.idea});
  var tr=await sb.from("video_trends").select("*");T={};(tr.data||[]).forEach(function(x){T[x.video_id]=x});
  var m=await sb.from("community").select("*").order("created_at",{ascending:false}).limit(30);M=m.data||[];
+ FAV=new Set();if(user){var fv=await sb.from("favorites").select("video_id");(fv.data||[]).forEach(function(x){FAV.add(x.video_id)})}
+ var last=0;try{last=+localStorage.getItem("radar_last_seen")||0}catch(e){}
+ NEWC=last?D.filter(function(v){return +new Date(v.created_at||v.published_at)>last}).length:0;
+ try{localStorage.setItem("radar_last_seen",String(Date.now()))}catch(e){}
  loaded=true;render()}
 
 /* Login e cadastro */
@@ -796,7 +838,8 @@ async function callAssist(action,id,again){
  return r.data||{error:t("e.empty"),code:""}}
 function openAssist(id,tab){
  if(!user){toast(t("e.needacc"));openAuth("up");return}
- pv=D.filter(function(v){return v.id===id})[0];if(!pv)return;
+ pv=D.filter(function(v){return v.id===id})[0]||(ACC.favs||[]).filter(function(v){return v.id===id})[0];if(!pv)return;
+ if(!$("accp").hidden)closeAcc();
  ptab=tab;$("panel").hidden=false;document.body.style.overflow="hidden";renderPanel()}
 function closePanel(){$("panel").hidden=true;document.body.style.overflow=""}
 function hex(c,f){return /^#[0-9a-f]{6}$/i.test(c||"")?c:f}
@@ -819,6 +862,7 @@ function viewScript(o,demo){
  h+='<p class="note"><b>'+t("sc.diff")+'</b> '+esc(o.diferencial||"")+'</p>';
  h+='<div class="tags">'+(o.hashtags||[]).map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join("")+'</div>';
  h+='<h4 style="margin-top:22px">'+t("sc.thumb")+'</h4>'+thumbMock(o.thumbnail);
+ if(!demo)h+='<p class="saved-note">'+t("gen.saved")+'</p>';
  if(!demo)h+='<div class="acts"><button class="btn sm" type="button" data-copy="'+esc(scriptText(o))+'">'+t("sc.copy")+'</button><button class="btn alt sm" type="button" data-again>'+t("sc.again")+'</button></div>';
  return h}
 function renderPanel(again){
@@ -922,14 +966,14 @@ var BF_END=new Date("2026-11-30T23:59:59-03:00");
 })();
 
 /* Minha assinatura */
-var ACC={data:null,confirm:false,busy:false},SUPPORT=["radarvicecitysuporte","outlook.com"].join("@");
+var ACC={data:null,confirm:false,busy:false,tab:"sub",gens:null,favs:null,view:null},SUPPORT=["radarvicecitysuporte","outlook.com"].join("@");
 function fdate(d){try{return new Date(d).toLocaleDateString(lang==="en"?"en-US":"pt-BR",{day:"2-digit",month:"2-digit",year:"numeric"})}catch(e){return ""}}
 async function callAcc(action){
  var r=await sb.functions.invoke((cfg.ACCOUNT_FN||"my-subscription"),{body:{action:action}});
  if(r.error){var j={};try{j=await r.error.context.json()}catch(x){}return Object.assign({error:j.error||t("acc.err"),code:j.code||"net"},j)}
  return r.data||{error:t("acc.err"),code:"empty"}}
 function supportLine(){return '<p class="acc-note">'+t("acc.help")+' <b>'+SUPPORT+'</b></p>'}
-function renderAcc(){
+function renderSub(){
  var b=$("acc-body"),d=ACC.data;
  if(!d){b.innerHTML='<div class="load">'+t("loading")+'</div>';return}
  var h='<div class="acc-card"><div class="acc-row"><span>'+t("acc.email")+'</span><b>'+esc(d.email||(user&&user.email)||"")+'</b></div>';
@@ -973,19 +1017,78 @@ function renderAcc(){
   ACC.confirm=false;ACC.data=Object.assign({},ACC.data,{sub_status:"canceled",access_until:r.access_until,active:true});
   if(ACC.data.sub)ACC.data.sub.canceled=true;
   toast(t("acc.done"));renderAcc()}}
-async function openAcc(){
+async function openAcc(tab){
  if(!user){openAuth("in");return}
- ACC={data:null,confirm:false,busy:false};$("accp").hidden=false;document.body.style.overflow="hidden";renderAcc();
+ ACC={data:null,confirm:false,busy:false,tab:(typeof tab==="string"?tab:"sub"),gens:null,favs:null,view:null};$("accp").hidden=false;document.body.style.overflow="hidden";renderAcc();
  setTimeout(function(){$("acc-x").focus()},30);
  var r=await callAcc("status");
  if(r.error&&r.active===undefined)r=Object.assign({email:user.email,active:active},r);
  ACC.data=r;if(!$("accp").hidden)renderAcc()}
 function closeAcc(){$("accp").hidden=true;document.body.style.overflow=($("auth").hidden&&$("panel").hidden&&$("legalp").hidden)?"":"hidden"}
-$("status").onclick=openAcc;
+$("status").onclick=function(){openAcc("sub")};
 $("acc-x").onclick=closeAcc;
 $("accp").onclick=function(e){if(e.target===this)closeAcc()};
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("accp").hidden&&$("legalp").hidden){e.stopImmediatePropagation();closeAcc()}},true);
 document.addEventListener("click",function(e){if(e.target.closest("#accp [data-plans]")){closeAcc()}},true);
+
+/* Retenção: abas da conta, meus roteiros e favoritos */
+function renderAcc(){
+ document.querySelectorAll("[data-at]").forEach(function(x){x.setAttribute("aria-selected",x.getAttribute("data-at")===ACC.tab)});
+ if(ACC.tab==="gen")return renderGen();
+ if(ACC.tab==="fav")return renderFav();
+ renderSub()}
+document.querySelectorAll("[data-at]").forEach(function(x){x.onclick=function(){ACC.tab=x.getAttribute("data-at");ACC.view=null;renderAcc();$("accp").querySelector(".lg-box").scrollTop=0}});
+function dlText(name,txt){try{var bl=new Blob([txt],{type:"text/plain;charset=utf-8"}),u=URL.createObjectURL(bl),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},3000)}catch(e){toast(t("e.copy"))}}
+function slug(x){return String(x||"roteiro").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,50)||"roteiro"}
+async function loadGens(){
+ var r=await sb.from("generations").select("id,video_id,output,created_at").order("created_at",{ascending:false}).limit(50);
+ var gs=(r.data||[]).filter(function(g){return g&&g.output}),ids=[],tt={};
+ gs.forEach(function(g){if(ids.indexOf(g.video_id)<0)ids.push(g.video_id)});
+ if(ids.length){var v=await sb.from("videos").select("id,title").in("id",ids);(v.data||[]).forEach(function(x){tt[x.id]=x.title})}
+ gs.forEach(function(g){g.vt=tt[g.video_id]||""});
+ ACC.gens=gs;if(!$("accp").hidden&&ACC.tab==="gen")renderAcc()}
+function renderGen(){
+ var b=$("acc-body");
+ if(!user){b.innerHTML="";return}
+ if(ACC.gens===null){b.innerHTML='<div class="load">'+t("loading")+'</div>';loadGens();return}
+ if(ACC.view!==null&&ACC.gens[ACC.view]){
+  var g=ACC.gens[ACC.view],o=g.output;
+  b.innerHTML='<div class="acc-acts" style="margin-bottom:14px"><button class="btn alt sm" type="button" id="gen-back">← '+t("gen.back")+'</button></div>'+
+   (g.vt?'<p class="acc-note">'+t("gen.from")+' <b>'+esc(g.vt)+'</b> · '+fdate(g.created_at)+'</p>':'')+viewScript(o,true)+
+   '<div class="acc-acts" style="margin-top:16px"><button class="btn sm" type="button" data-copy="'+esc(scriptText(o))+'">'+t("sc.copy")+'</button><button class="btn alt sm" type="button" id="gen-dl">'+t("gen.dl")+'</button></div>';
+  $("gen-back").onclick=function(){ACC.view=null;renderAcc()};
+  $("gen-dl").onclick=function(){dlText("roteiro-"+slug(o.titulo_sugerido)+".txt",scriptText(o))};
+  return}
+ if(!ACC.gens.length){
+  b.innerHTML='<div class="acc-empty"><p>'+(active?t("gen.empty"):t("gen.emptyfree"))+'</p>'+(active?'<button class="btn sm" type="button" id="gen-go">'+t("gen.go")+'</button>':'<button class="btn sm" type="button" data-plans>'+t("up.btn")+'</button>')+'</div>';
+  var go=$("gen-go");if(go)go.onclick=function(){closeAcc();$("feed").scrollIntoView({behavior:"smooth"})};
+  return}
+ b.innerHTML='<p class="acc-note" style="margin-top:0">'+t("gen.count",ACC.gens.length)+'</p><div class="gen-list">'+ACC.gens.map(function(g,i){
+  return '<button class="gen-item" type="button" data-gen="'+i+'"><b>'+esc(g.output.titulo_sugerido||t("sc.title"))+'</b><span>'+(g.vt?esc(g.vt)+' · ':'')+fdate(g.created_at)+'</span></button>'}).join("")+'</div>';
+ b.querySelectorAll("[data-gen]").forEach(function(x){x.onclick=function(){ACC.view=+x.getAttribute("data-gen");renderAcc();$("accp").querySelector(".lg-box").scrollTop=0}})}
+async function loadFavs(){
+ var r=await sb.from("favorites").select("video_id,created_at").order("created_at",{ascending:false}).limit(100);
+ var ids=(r.data||[]).map(function(x){return x.video_id}),by={};
+ if(ids.length){var v=await sb.from("videos").select("*").in("id",ids);(v.data||[]).forEach(function(x){by[x.id]=x})}
+ ACC.favs=ids.map(function(id){return by[id]}).filter(Boolean);
+ if(!$("accp").hidden&&ACC.tab==="fav")renderAcc()}
+function renderFav(){
+ var b=$("acc-body");
+ if(!user){b.innerHTML="";return}
+ if(ACC.favs===null){b.innerHTML='<div class="load">'+t("loading")+'</div>';loadFavs();return}
+ if(!ACC.favs.length){b.innerHTML='<div class="acc-empty"><p>'+t("fav.empty")+'</p><button class="btn sm" type="button" id="fav-go">'+t("gen.go")+'</button></div>';
+  $("fav-go").onclick=function(){closeAcc();$("feed").scrollIntoView({behavior:"smooth"})};return}
+ b.innerHTML='<div class="grid acc-grid">'+ACC.favs.map(function(v){return card(v,false)}).join("")+'</div>'}
+async function toggleFav(id){
+ if(!user){toast(t("e.needacc"));openAuth("up");return}
+ var on=FAV.has(id),r;
+ if(on){FAV.delete(id);r=await sb.from("favorites").delete().eq("user_id",user.id).eq("video_id",id)}
+ else{FAV.add(id);r=await sb.from("favorites").insert({user_id:user.id,video_id:id})}
+ if(r&&r.error){if(on)FAV.add(id);else FAV.delete(id);toast(t("fav.err"))}
+ else toast(on?t("fav.removed"):t("fav.saved"));
+ if(ACC.favs){if(on&&!(r&&r.error))ACC.favs=ACC.favs.filter(function(v){return v.id!==id});else ACC.favs=null}
+ render();if(!$("accp").hidden)renderAcc()}
+document.addEventListener("click",function(e){var f=e.target.closest("[data-fav]");if(!f)return;e.preventDefault();e.stopPropagation();toggleFav(f.getAttribute("data-fav"))},true);
 
 /* Idioma */
 function applyLang(){
