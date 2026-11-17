@@ -161,6 +161,9 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
 #gift-done h3{font-size:26px;margin-bottom:6px}
 .fine2{font-size:13px;color:var(--muted);margin:10px 0 0}
 @media (max-width:820px){.gift{grid-template-columns:1fr;padding:22px;gap:24px}.gift-cover{max-width:250px;margin:0 auto}}
+.lang{display:flex;border:2px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;color:var(--muted);font:700 13px "DM Sans",sans-serif;padding:7px 12px;cursor:pointer;min-height:36px}
+.lang button[aria-pressed="true"]{background:var(--sun);color:#1a0f2e}
 /* Tela de login */
 .auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
 .auth[hidden]{display:none}
@@ -195,137 +198,140 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
   <div class="logo">Radar <span class="sun">Leonida</span></div>
   <div class="navr">
     <span class="pill" id="status" hidden></span>
-    <a class="btn alt sm" href="#planos">Planos</a>
+    <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+    <a class="btn alt sm" href="#planos" data-i="nav.plans">Planos</a>
     <button class="btn sm" id="auth-btn" type="button">Entrar</button>
   </div>
 </nav>
 
 <header class="hero">
-  <a class="pill link" href="#checklist">🎁 Checklist grátis para o lançamento de GTA 6</a>
-  <h1>Todo vídeo de GTA 6, virando ideia para o seu.</h1>
-  <p>Coletamos os vídeos e Shorts que estão bombando com as hashtags do jogo e entregamos um ângulo novo para você criar o seu conteúdo. Por menos que um lanche, por mês.</p>
-  <a class="btn" href="#feed">Explorar o radar</a> <a class="btn alt" href="#exemplo">Ver exemplo</a>
-  <div class="stats"><div><b id="s-v">0</b>vídeos nas últimas 48 h</div><div><b id="s-s">0</b>Shorts</div><div><b id="s-t">0</b>guias e easter eggs</div></div>
+  <a class="pill link" href="#checklist" data-i="hero.pill">🎁 Checklist grátis para o lançamento de GTA 6</a>
+  <h1 data-i="hero.h1">Todo vídeo de GTA 6, virando ideia para o seu.</h1>
+  <p data-i="hero.p">Coletamos os vídeos e Shorts que estão bombando com as hashtags do jogo e entregamos um ângulo novo para você criar o seu conteúdo. Por menos que um lanche, por mês.</p>
+  <a class="btn" href="#feed" data-i="hero.b1">Explorar o radar</a> <a class="btn alt" href="#exemplo" data-i="hero.b2">Ver exemplo</a>
+  <div class="stats"><div><b id="s-v">0</b><span data-i="stat.v">vídeos nas últimas 48 h</span></div><div><b id="s-s">0</b><span data-i="stat.s">Shorts</span></div><div><b id="s-t">0</b><span data-i="stat.t">guias e easter eggs</span></div></div>
 </header>
 
 <section id="exemplo">
-  <h2>Veja o que você recebe</h2>
-  <p class="sub">Exemplo ilustrativo do que o Radar entrega: você acha o vídeo que está subindo, lê a transcrição e recebe um roteiro novo, com o esboço da thumbnail.</p>
-  <div class="steps"><div class="step"><b>1</b>Veja o que está crescendo agora</div><div class="step"><b>2</b>Leia a transcrição do vídeo</div><div class="step"><b>3</b>Receba o roteiro e a thumbnail</div></div>
+  <h2 data-i="ex.h2">Veja o que você recebe</h2>
+  <p class="sub" data-i="ex.sub">Exemplo ilustrativo do que o Radar entrega: você acha o vídeo que está subindo, lê a transcrição e recebe um roteiro novo, com o esboço da thumbnail.</p>
+  <div class="steps"><div class="step"><b>1</b><span data-i="ex.s1">Veja o que está crescendo agora</span></div><div class="step"><b>2</b><span data-i="ex.s2">Leia a transcrição do vídeo</span></div><div class="step"><b>3</b><span data-i="ex.s3">Receba o roteiro e a thumbnail</span></div></div>
   <div class="demo">
-    <div class="demo-in"><span class="tagex">Exemplo</span><h4>Trecho de uma transcrição</h4>
-      <div class="tbox">...a galera vai querer jogar ao mesmo tempo e muita gente vai travar logo no começo, porque deixou tudo para a última hora. Então antes do dia do lançamento eu separei algumas coisas que você precisa conferir no console, desde o espaço livre até a atualização do sistema...</div>
-      <p class="note">Texto inventado para ilustrar. Na ferramenta, você vê a transcrição real do vídeo que escolher.</p></div>
-    <div><span class="tagex">Exemplo</span><h4>Roteiro novo gerado pela IA</h4><div class="demo-out" id="demo-out"></div>
-      <div class="acts" style="margin-top:16px"><button class="btn" type="button" data-demo-signup>Criar conta grátis</button><a class="btn alt" href="#planos">Ver planos</a></div></div>
+    <div class="demo-in"><span class="tagex" data-i="ex.tag">Exemplo</span><h4 data-i="ex.h4a">Trecho de uma transcrição</h4>
+      <div class="tbox" data-i="ex.tx">...a galera vai querer jogar ao mesmo tempo e muita gente vai travar logo no começo, porque deixou tudo para a última hora. Então antes do dia do lançamento eu separei algumas coisas que você precisa conferir no console, desde o espaço livre até a atualização do sistema...</div>
+      <p class="note" data-i="ex.note">Texto inventado para ilustrar. Na ferramenta, você vê a transcrição real do vídeo que escolher.</p></div>
+    <div><span class="tagex" data-i="ex.tag">Exemplo</span><h4 data-i="ex.h4b">Roteiro novo gerado pela IA</h4><div class="demo-out" id="demo-out"></div>
+      <div class="acts" style="margin-top:16px"><button class="btn" type="button" data-demo-signup data-i="ex.cta">Criar conta grátis</button><a class="btn alt" href="#planos" data-i="ex.plans">Ver planos</a></div></div>
   </div>
 </section>
 
 <section id="checklist">
   <div class="gift">
-    <div class="gift-cover"><img src="materiais/capa-checklist.jpg" width="745" height="1053" loading="lazy" alt="Capa do material gratuito Checklist de lançamento de GTA 6 para criadores"></div>
+    <div class="gift-cover"><img src="materiais/capa-checklist.jpg" width="745" height="1053" loading="lazy" alt="Capa do material gratuito Checklist de lançamento de GTA 6 para criadores" data-i-alt="chk.alt"></div>
     <div>
-      <span class="tagex">Material gratuito · PDF · 8 páginas</span><span class="count" id="g-count"></span>
-      <h2>Checklist de lançamento de GTA 6 para criadores</h2>
-      <p class="sub">O passo a passo para chegar preparado ao lançamento e transformar atenção em audiência. Salve no celular ou imprima.</p>
+      <span class="tagex" data-i="chk.tag">Material gratuito · PDF · 8 páginas</span><span class="count" id="g-count"></span>
+      <h2 data-i="chk.h2">Checklist de lançamento de GTA 6 para criadores</h2>
+      <p class="sub" data-i="chk.sub">O passo a passo para chegar preparado ao lançamento e transformar atenção em audiência. Salve no celular ou imprima.</p>
       <ul class="gift-list">
-        <li>7 seções: do perfil e do equipamento ao dia 0 e à primeira semana</li>
-        <li>Linha do tempo de D-7 a D+7, com o que fazer em cada fase</li>
-        <li>Regras e segurança para evitar strikes, golpes e problemas</li>
-        <li>10 ganchos prontos para adaptar aos seus vídeos</li>
+        <li data-i="chk.l1">7 seções: do perfil e do equipamento ao dia 0 e à primeira semana</li>
+        <li data-i="chk.l2">Linha do tempo de D-7 a D+7, com o que fazer em cada fase</li>
+        <li data-i="chk.l3">Regras e segurança para evitar strikes, golpes e problemas</li>
+        <li data-i="chk.l4">10 ganchos prontos para adaptar aos seus vídeos</li>
       </ul>
       <div id="gift-form-wrap">
         <form id="gift-form" novalidate>
-          <input id="g-email" type="email" placeholder="Seu melhor e-mail" autocomplete="email" aria-label="E-mail">
+          <input id="g-email" type="email" placeholder="Seu melhor e-mail" data-i-ph="chk.ph" autocomplete="email" aria-label="E-mail" data-i-aria="chk.aria">
           <input id="g-hp" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button class="btn" id="g-btn" type="submit">Baixar o checklist grátis</button>
-          <label class="consent"><input type="checkbox" id="g-ok">Concordo em receber este material e novidades do Radar Leonida por e-mail. Posso cancelar quando quiser.</label>
+          <button class="btn" id="g-btn" type="submit" data-i="chk.btn">Baixar o checklist grátis</button>
+          <label class="consent"><input type="checkbox" id="g-ok"><span data-i="chk.consent">Concordo em receber este material e novidades do Radar Leonida por e-mail. Posso cancelar quando quiser.</span></label>
           <p class="msg" id="g-msg" role="alert"></p>
         </form>
       </div>
       <div id="gift-done" hidden>
-        <h3>Pronto! O seu download começou.</h3>
-        <p class="sub" style="margin-bottom:12px">Se o arquivo não abrir sozinho, use o botão abaixo. Depois veja o que está crescendo agora no radar.</p>
-        <div class="acts"><a class="btn" id="g-dl" href="materiais/checklist-lancamento-gta6.pdf" target="_blank" rel="noopener" download>Baixar o PDF</a><a class="btn alt" href="#feed">Ver o radar de hoje</a><button class="btn alt" id="g-acc" type="button" hidden>Criar conta grátis</button></div>
-        <p class="fine2">Material independente, sem vínculo com a Rockstar Games nem com a Take-Two Interactive.</p>
+        <h3 data-i="chk.dh">Pronto! O seu download começou.</h3>
+        <p class="sub" style="margin-bottom:12px" data-i="chk.dp">Se o arquivo não abrir sozinho, use o botão abaixo. Depois veja o que está crescendo agora no radar.</p>
+        <div class="acts"><a class="btn" id="g-dl" href="materiais/checklist-lancamento-gta6.pdf" target="_blank" rel="noopener" download data-i="chk.dl">Baixar o PDF</a><a class="btn alt" href="#feed" data-i="chk.radar">Ver o radar de hoje</a><button class="btn alt" id="g-acc" type="button" hidden data-i="ex.cta">Criar conta grátis</button></div>
+        <p class="fine2" data-i="chk.fine">Material independente, sem vínculo com a Rockstar Games nem com a Take-Two Interactive.</p>
       </div>
     </div>
   </div>
 </section>
 
 <section id="feed">
-  <h2>Radar de hoje</h2>
-  <p class="sub">Algumas ideias são grátis. Para liberar todas as outras, assine um plano.</p>
+  <h2 data-i="feed.h2">Radar de hoje</h2>
+  <p class="sub" data-i="feed.sub">Algumas ideias são grátis. Para liberar todas as outras, assine um plano.</p>
   <div id="rising"></div>
   <div class="filters">
-    <div class="fg"><span class="fl">Formato</span><div class="chips" id="fmt" role="group" aria-label="Filtrar por formato"></div></div>
-    <div class="fg"><span class="fl">Tema</span><div class="chips" id="tema" role="group" aria-label="Filtrar por tema"></div></div>
-    <div class="fg"><span class="fl">Ordenar</span><div class="chips" id="ord" role="group" aria-label="Ordenar"></div></div>
+    <div class="fg"><span class="fl" data-i="feed.fmt">Formato</span><div class="chips" id="fmt" role="group" aria-label="Filtrar por formato" data-i-aria="feed.afmt"></div></div>
+    <div class="fg"><span class="fl" data-i="feed.tema">Tema</span><div class="chips" id="tema" role="group" aria-label="Filtrar por tema" data-i-aria="feed.atema"></div></div>
+    <div class="fg"><span class="fl" data-i="feed.ord">Ordenar</span><div class="chips" id="ord" role="group" aria-label="Ordenar" data-i-aria="feed.aord"></div></div>
   </div>
   <div class="grid" id="grid"></div>
   <div class="more" id="more"></div>
 </section>
 
 <section id="mural">
-  <h2>Mural dos criadores</h2>
-  <p class="sub">Publicou um vídeo com as hashtags do jogo? Cadastre aqui e apareça para os demais assinantes. Só assinantes podem publicar.</p>
+  <h2 data-i="mural.h2">Mural dos criadores</h2>
+  <p class="sub" data-i="mural.sub">Publicou um vídeo com as hashtags do jogo? Cadastre aqui e apareça para os demais assinantes. Só assinantes podem publicar.</p>
   <form class="mural" id="form">
-    <input id="f-title" placeholder="Título do seu vídeo" required aria-label="Título do vídeo">
-    <input id="f-chan" placeholder="Nome do canal" required aria-label="Nome do canal">
-    <input id="f-url" type="url" placeholder="Link do vídeo (https://...)" required aria-label="Link do vídeo">
-    <select id="f-fmt" aria-label="Tema do vídeo"><option>Short</option><option>Guias</option><option>Easter eggs</option><option>Gameplay</option><option>Notícias</option><option>Teoria</option><option>Outros</option></select>
-    <button class="btn" type="submit">Publicar no mural</button>
+    <input id="f-title" placeholder="Título do seu vídeo" data-i-ph="mural.pt" required aria-label="Título do vídeo" data-i-aria="mural.at">
+    <input id="f-chan" placeholder="Nome do canal" data-i-ph="mural.pc" required aria-label="Nome do canal" data-i-aria="mural.ac">
+    <input id="f-url" type="url" placeholder="Link do vídeo (https://...)" data-i-ph="mural.pu" required aria-label="Link do vídeo" data-i-aria="mural.au">
+    <select id="f-fmt" aria-label="Tema do vídeo" data-i-aria="mural.af"><option value="Short" data-i="lbl.Short">Short</option><option value="Guias" data-i="lbl.Guias">Guias</option><option value="Easter eggs" data-i="lbl.Easter eggs">Easter eggs</option><option value="Gameplay" data-i="lbl.Gameplay">Gameplay</option><option value="Notícias" data-i="lbl.Notícias">Notícias</option><option value="Teoria" data-i="lbl.Teoria">Teoria</option><option value="Outros" data-i="lbl.Outros">Outros</option></select>
+    <button class="btn" type="submit" data-i="mural.btn">Publicar no mural</button>
   </form>
   <div class="grid" id="mural-grid"></div>
 </section>
 
 <section id="planos">
-  <h2>Escolha seu plano</h2>
-  <p class="sub">Cancele quando quiser. O pagamento é feito na Cakto. Use o mesmo e-mail da sua conta do Radar ao pagar.</p>
+  <h2 data-i="plans.h2">Escolha seu plano</h2>
+  <p class="sub" data-i="plans.sub">Cancele quando quiser. O pagamento é feito na Cakto. Use o mesmo e-mail da sua conta do Radar ao pagar.</p>
   <div class="plans">
-    <div class="plan"><h3>Mensal</h3><div class="price">R$ 14,90<small> /mês</small></div>
-      <ul><li>Todas as ideias do radar</li><li>Filtros por formato e crescimento</li><li>Publicação no mural</li></ul>
-      <button class="btn alt" data-plan="Mensal" type="button">Assinar mensal</button></div>
-    <div class="plan best"><span class="tagbest">Mais econômico</span><h3>Anual</h3><div class="price">R$ 9,90<small> /mês</small></div>
-      <ul><li>Tudo do plano mensal</li><li>Cobrança única de R$ 118,80</li><li>Economia de 33%</li></ul>
-      <button class="btn" data-plan="Anual" type="button">Assinar anual</button></div>
+    <div class="plan"><h3 data-i="plans.m">Mensal</h3><div class="price" data-ih="plans.pm">R$ 14,90<small> /mês</small></div>
+      <ul><li data-i="plans.m1">Todas as ideias do radar</li><li data-i="plans.m2">Filtros por formato e crescimento</li><li data-i="plans.m3">Publicação no mural</li></ul>
+      <button class="btn alt" data-plan="Mensal" type="button" data-i="plans.mb">Assinar mensal</button></div>
+    <div class="plan best"><span class="tagbest" data-i="plans.best">Mais econômico</span><h3 data-i="plans.a">Anual</h3><div class="price" data-ih="plans.pa">R$ 118,80<small> /ano</small></div>
+      <p style="margin:-6px 0 0;color:var(--sea);font-weight:700" data-i="plans.eq">equivale a R$ 9,90 por mês</p>
+      <ul><li data-i="plans.a1">Tudo do plano mensal</li><li data-i="plans.a2">Um pagamento por ano, renovado todo ano</li><li data-i="plans.a3">Economia de 33% em relação ao mensal</li></ul>
+      <button class="btn" data-plan="Anual" type="button" data-i="plans.ab">Assinar anual</button></div>
   </div>
-  <p class="note">Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.</p>
+  <p class="note" data-i="plans.n1">O valor final, com qualquer taxa de serviço ou parcelamento, aparece no checkout da Cakto antes de você pagar.</p>
+  <p class="note" data-i="plans.n2">Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.</p>
 </section>
-<footer>Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.</footer>
+<footer data-i="footer">Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.</footer>
 </div>
 
 <div class="auth" id="auth" hidden role="dialog" aria-modal="true" aria-labelledby="a-title">
   <div class="auth-side">
     <div class="logo" style="font-size:28px">Radar Leonida</div>
-    <h2>Ideias novas de GTA 6, todo dia.</h2>
-    <p>Veja o que está crescendo e crie o seu vídeo com um ângulo pronto.</p>
-    <ul><li>Radar atualizado de 3 em 3 horas</li><li>Ideia pronta para cada vídeo</li><li>Mural para divulgar o seu canal</li></ul>
+    <h2 data-i="auth.sh">Ideias novas de GTA 6, todo dia.</h2>
+    <p data-i="auth.sp">Veja o que está crescendo e crie o seu vídeo com um ângulo pronto.</p>
+    <ul><li data-i="auth.s1">Radar atualizado de 2 em 2 horas</li><li data-i="auth.s2">Ideia pronta para cada vídeo</li><li data-i="auth.s3">Mural para divulgar o seu canal</li></ul>
   </div>
   <div class="auth-main">
-    <button class="xbtn" id="a-x" type="button" aria-label="Fechar">×</button>
+    <button class="xbtn" id="a-x" type="button" aria-label="Fechar" data-i-aria="aria.close">×</button>
     <div class="tabs" id="tabs" role="tablist">
-      <button id="t-in" type="button" role="tab" aria-selected="true">Entrar</button>
-      <button id="t-up" type="button" role="tab" aria-selected="false">Criar conta</button>
+      <button id="t-in" type="button" role="tab" aria-selected="true" data-i="auth.tin">Entrar</button>
+      <button id="t-up" type="button" role="tab" aria-selected="false" data-i="auth.tup">Criar conta</button>
     </div>
     <h3 id="a-title">Bem-vindo de volta</h3>
     <p class="sub" id="a-sub">Entre com o seu e-mail e senha.</p>
     <form id="a-form" novalidate>
-      <label class="f" id="w-email">E-mail<input id="a-email" type="email" autocomplete="email" placeholder="voce@email.com"></label>
-      <label class="f">Senha<div class="pw"><input id="a-pass" type="password" autocomplete="current-password" placeholder="Mínimo de 6 caracteres"><button type="button" id="a-eye">Mostrar</button></div></label>
-      <label class="f" id="w-conf" hidden>Confirmar senha<input id="a-conf" type="password" autocomplete="new-password" placeholder="Repita a senha"></label>
+      <label class="f" id="w-email"><span data-i="a.email">E-mail</span><input id="a-email" type="email" autocomplete="email" placeholder="voce@email.com" data-i-ph="a.pe"></label>
+      <label class="f"><span data-i="a.pass">Senha</span><div class="pw"><input id="a-pass" type="password" autocomplete="current-password" placeholder="Mínimo de 6 caracteres" data-i-ph="a.pp"><button type="button" id="a-eye">Mostrar</button></div></label>
+      <label class="f" id="w-conf" hidden><span data-i="a.conf">Confirmar senha</span><input id="a-conf" type="password" autocomplete="new-password" placeholder="Repita a senha" data-i-ph="a.pc"></label>
       <p class="msg" id="a-msg" role="alert"></p>
       <button class="btn" id="a-submit" type="submit" style="width:100%">Entrar</button>
-      <button class="link" id="a-forgot" type="button">Esqueci minha senha</button>
+      <button class="link" id="a-forgot" type="button" data-i="a.forgot">Esqueci minha senha</button>
     </form>
-    <p class="fine">Ao criar a conta, você concorda em usar o Radar Leonida de forma pessoal e respeitar os direitos dos criadores dos vídeos.</p>
+    <p class="fine" data-i="a.fine">Ao criar a conta, você concorda em usar o Radar Leonida de forma pessoal e respeitar os direitos dos criadores dos vídeos.</p>
   </div>
 </div>
 <div class="panel" id="panel" hidden role="dialog" aria-modal="true" aria-labelledby="p-title">
   <div class="p-box">
-    <button class="xbtn" id="p-x" type="button" aria-label="Fechar">×</button>
+    <button class="xbtn" id="p-x" type="button" aria-label="Fechar" data-i-aria="aria.close">×</button>
     <h3 id="p-title"></h3>
-    <div class="tabs"><button id="p-t1" type="button" aria-selected="true">Transcrição</button><button id="p-t2" type="button" aria-selected="false">Roteiro + thumbnail</button></div>
+    <div class="tabs"><button id="p-t1" type="button" aria-selected="true" data-i="p.t1">Transcrição</button><button id="p-t2" type="button" aria-selected="false" data-i="p.t2">Roteiro + thumbnail</button></div>
     <div id="p-body"></div>
   </div>
 </div>
@@ -349,6 +355,118 @@ var SAMPLE={titulo_sugerido:"Antes de ligar o GTA 6: 4 coisas para deixar o cons
  diferencial:"Em vez de repetir notícias, o vídeo vira uma lista prática de preparação, com um formato que ninguém precisa de teoria para entender.",
  hashtags:["#gta6","#ps5","#xbox","#dicas"],
  thumbnail:{texto_principal:"PREPARE O CONSOLE",texto_secundario:"antes do dia 1",cena:"Você segurando o controle, com a tela de download ao fundo",expressao:"ansioso, olhando para a tela",cores:["#7b2ff7","#ff5d73","#ffffff"],posicao_texto:"esquerda",elemento_destaque:"seta"}};
+var I18N={pt:{
+"title":"Radar Leonida: ideias de vídeo sobre GTA 6",
+"nav.plans":"Planos","auth.in":"Entrar","auth.out":"Sair","st.on":"Assinatura ativa","st.free":"Plano gratuito",
+"hero.pill":"🎁 Checklist grátis para o lançamento de GTA 6","hero.h1":"Todo vídeo de GTA 6, virando ideia para o seu.",
+"hero.p":"Coletamos os vídeos e Shorts que estão bombando com as hashtags do jogo e entregamos um ângulo novo para você criar o seu conteúdo. Por menos que um lanche, por mês.",
+"hero.b1":"Explorar o radar","hero.b2":"Ver exemplo","stat.v":"vídeos nas últimas 48 h","stat.s":"Shorts","stat.t":"guias e easter eggs",
+"ex.h2":"Veja o que você recebe","ex.sub":"Exemplo ilustrativo do que o Radar entrega: você acha o vídeo que está subindo, lê a transcrição e recebe um roteiro novo, com o esboço da thumbnail.",
+"ex.s1":"Veja o que está crescendo agora","ex.s2":"Leia a transcrição do vídeo","ex.s3":"Receba o roteiro e a thumbnail","ex.tag":"Exemplo","ex.h4a":"Trecho de uma transcrição",
+"ex.tx":"...a galera vai querer jogar ao mesmo tempo e muita gente vai travar logo no começo, porque deixou tudo para a última hora. Então antes do dia do lançamento eu separei algumas coisas que você precisa conferir no console, desde o espaço livre até a atualização do sistema...",
+"ex.note":"Texto inventado para ilustrar. Na ferramenta, você vê a transcrição real do vídeo que escolher.","ex.h4b":"Roteiro novo gerado pela IA","ex.cta":"Criar conta grátis","ex.plans":"Ver planos",
+"chk.alt":"Capa do material gratuito Checklist de lançamento de GTA 6 para criadores","chk.tag":"Material gratuito · PDF · 8 páginas","chk.h2":"Checklist de lançamento de GTA 6 para criadores",
+"chk.sub":"O passo a passo para chegar preparado ao lançamento e transformar atenção em audiência. Salve no celular ou imprima.",
+"chk.l1":"7 seções: do perfil e do equipamento ao dia 0 e à primeira semana","chk.l2":"Linha do tempo de D-7 a D+7, com o que fazer em cada fase","chk.l3":"Regras e segurança para evitar strikes, golpes e problemas","chk.l4":"10 ganchos prontos para adaptar aos seus vídeos",
+"chk.ph":"Seu melhor e-mail","chk.aria":"E-mail","chk.btn":"Baixar o checklist grátis","chk.consent":"Concordo em receber este material e novidades do Radar Leonida por e-mail. Posso cancelar quando quiser.",
+"chk.dh":"Pronto! O seu download começou.","chk.dp":"Se o arquivo não abrir sozinho, use o botão abaixo. Depois veja o que está crescendo agora no radar.","chk.dl":"Baixar o PDF","chk.radar":"Ver o radar de hoje",
+"chk.fine":"Material independente, sem vínculo com a Rockstar Games nem com a Take-Two Interactive.","chk.eok":"Marque a caixa de concordância para receber o material.",
+"cd":function(d){return d>1?"Faltam "+d+" dias para o lançamento":d===1?"O lançamento é amanhã":d===0?"O lançamento é hoje":"Use as seções do dia 0 e da primeira semana"},
+"feed.h2":"Radar de hoje","feed.sub":"Algumas ideias são grátis. Para liberar todas as outras, assine um plano.","feed.fmt":"Formato","feed.tema":"Tema","feed.ord":"Ordenar","feed.afmt":"Filtrar por formato","feed.atema":"Filtrar por tema","feed.aord":"Ordenar",
+"mural.h2":"Mural dos criadores","mural.sub":"Publicou um vídeo com as hashtags do jogo? Cadastre aqui e apareça para os demais assinantes. Só assinantes podem publicar.",
+"mural.pt":"Título do seu vídeo","mural.pc":"Nome do canal","mural.pu":"Link do vídeo (https://...)","mural.at":"Título do vídeo","mural.ac":"Nome do canal","mural.au":"Link do vídeo","mural.af":"Tema do vídeo","mural.btn":"Publicar no mural",
+"plans.h2":"Escolha seu plano","plans.sub":"Cancele quando quiser. O pagamento é feito na Cakto. Use o mesmo e-mail da sua conta do Radar ao pagar.",
+"plans.m":"Mensal","plans.pm":"R$ 14,90<small> /mês</small>","plans.m1":"Todas as ideias do radar","plans.m2":"Filtros por formato e crescimento","plans.m3":"Publicação no mural","plans.mb":"Assinar mensal",
+"plans.best":"Mais econômico","plans.a":"Anual","plans.pa":"R$ 118,80<small> /ano</small>","plans.eq":"equivale a R$ 9,90 por mês","plans.a1":"Tudo do plano mensal","plans.a2":"Um pagamento por ano, renovado todo ano","plans.a3":"Economia de 33% em relação ao mensal","plans.ab":"Assinar anual",
+"plans.n1":"O valor final, com qualquer taxa de serviço ou parcelamento, aparece no checkout da Cakto antes de você pagar.","plans.n2":"Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.",
+"footer":"Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.",
+"auth.sh":"Ideias novas de GTA 6, todo dia.","auth.sp":"Veja o que está crescendo e crie o seu vídeo com um ângulo pronto.","auth.s1":"Radar atualizado de 2 em 2 horas","auth.s2":"Ideia pronta para cada vídeo","auth.s3":"Mural para divulgar o seu canal",
+"auth.tin":"Entrar","auth.tup":"Criar conta","a.email":"E-mail","a.pass":"Senha","a.conf":"Confirmar senha","a.pe":"voce@email.com","a.pp":"Mínimo de 6 caracteres","a.pc":"Repita a senha","a.forgot":"Esqueci minha senha",
+"a.fine":"Ao criar a conta, você concorda em usar o Radar Leonida de forma pessoal e respeitar os direitos dos criadores dos vídeos.","aria.close":"Fechar","a.show":"Mostrar","a.hide":"Ocultar",
+"a.t.in":"Bem-vindo de volta","a.t.up":"Crie a sua conta","a.t.rs":"Crie uma nova senha","a.s.in":"Entre com o seu e-mail e senha.","a.s.up":"Leva menos de um minuto. Você já vê as 2 ideias grátis.","a.s.rs":"Digite a nova senha para a sua conta.",
+"a.b.in":"Entrar","a.b.up":"Criar conta","a.b.rs":"Salvar nova senha",
+"e.login":"E-mail ou senha incorretos.","e.exists":"Este e-mail já tem conta. Use a aba Entrar.","e.confirm":"Confirme o seu e-mail pelo link que enviamos e tente de novo.","e.rate":"Muitas tentativas. Aguarde alguns minutos e tente de novo.",
+"e.pass6":"A senha precisa ter pelo menos 6 caracteres.","e.same":"Escolha uma senha diferente da anterior.","e.gen":function(x){return "Não foi possível concluir. "+x},"e.email":"Digite um e-mail válido.","e.match":"As senhas não conferem.",
+"e.net":"Falha de conexão. Tente de novo.","e.forgot":"Digite o seu e-mail acima e clique de novo em Esqueci minha senha.","wait":"Aguarde...",
+"ok.pw":"Senha alterada","ok.signup":"Conta criada! Enviamos um link de confirmação para o seu e-mail. Depois de confirmar, volte e entre.","ok.created":"Conta criada. Bem-vindo!","ok.in":"Você entrou","ok.out":"Você saiu",
+"ok.reset":"Enviamos um link para redefinir a senha. Confira a sua caixa de entrada.","ok.copied":"Ideia copiada","e.copy":"Não foi possível copiar","e.sub":"Assine um plano para publicar no mural","e.post":"Não foi possível publicar","ok.posted":"Publicado no mural",
+"ok.active":"Assinatura ativada! Bem-vindo.","e.nopay":"O pagamento ainda não foi configurado.","ok.pay":"Pagamento aberto em uma nova aba. Use o mesmo e-mail da sua conta.","e.needacc":"Crie uma conta grátis para continuar",
+"e.assist":"Não foi possível concluir agora. Tente de novo.","e.server":"Não foi possível falar com o servidor. Confira se a função video-assist está publicada.","e.code":function(c){return " (código "+c+")"},"e.empty":"Resposta vazia. Tente de novo.",
+"p.t1":"Transcrição","p.t2":"Roteiro + thumbnail","p.loadt":"Buscando a transcrição...","p.loads":"A IA está transcrevendo e reescrevendo o roteiro. Isso pode levar até 1 minuto...",
+"up.h":"Roteiro único com IA","up.p":"Disponível para assinantes. A IA faz o trabalho pesado para você produzir mais rápido:","up.l1":"Transcreve o vídeo, mesmo quando ele não tem legenda","up.l2":"Reescreve um roteiro original, com outra estrutura e outro ângulo","up.l3":"Entrega gancho, blocos com tempo e o que mostrar na tela","up.l4":"Inclui título, hashtags e o esboço da thumbnail","up.btn":"Ver planos",
+"tr.copy":"Copiar transcrição","tr.note":"Use a transcrição para estudar o assunto e criar o seu próprio conteúdo. Não republique o texto do outro criador.",
+"tm.scene":"Cena principal","tm.expr":"Expressão:","tm.hl":"Destaque:","tm.none":"nenhum","tm.note":"Esboço de composição. Substitua a área tracejada pela sua imagem real.",
+"sc.title":"Roteiro","sc.hook":"Gancho","sc.say":"Fala","sc.vis":"Visual","sc.end":"Chamada final","sc.diff":"O que muda em relação ao original:","sc.thumb":"Esboço da thumbnail","sc.copy":"Copiar roteiro","sc.again":"Gerar outra versão",
+"txt.hook":"GANCHO","txt.say":"Fala:","txt.vis":"Visual:","txt.end":"CHAMADA FINAL",
+"card.comm":"Vídeo de um criador da comunidade. Assista, veja o ângulo e crie a sua versão.","card.mural":"no mural","card.new":"novo","card.watch":"Assistir: ","card.idea":"Ideia para o seu vídeo","card.locked":"Ideia disponível para assinantes do Radar Leonida.","card.unlock":"Liberar ideia","card.copy":"Copiar ideia","card.tr":"Transcrição","card.sc":"Roteiro único",
+"rise.h":"Subindo mais rápido agora","more":function(n){return "Ver mais vídeos ("+n+")"},"less":"Mostrar menos","empty.f":"Nenhum vídeo com esses filtros nas últimas 48 horas. Tente outra combinação.","loading":"Carregando...","empty.m":"O mural está vazio. Assinantes podem publicar o primeiro vídeo.","e.load":"Não foi possível carregar os vídeos agora. Atualize a página.",
+"ago.now":"agora","ago.h":function(h){return "há "+h+" h"},"ago.d":function(d){return "há "+d+" d"},"u.m":" mi","u.k":" mil",
+"lbl.Todos":"Todos","lbl.Short":"Short","lbl.Vídeo longo":"Vídeo longo","lbl.Guias":"Guias","lbl.Easter eggs":"Easter eggs","lbl.Gameplay":"Gameplay","lbl.Notícias":"Notícias","lbl.Teoria":"Teoria","lbl.Outros":"Outros","lbl.Em alta":"Em alta","lbl.Mais recentes":"Mais recentes","lbl.Mais vistos":"Mais vistos"
+},en:{
+"title":"Radar Leonida: video ideas about GTA 6",
+"nav.plans":"Plans","auth.in":"Sign in","auth.out":"Sign out","st.on":"Subscription active","st.free":"Free plan",
+"hero.pill":"🎁 Free GTA 6 launch checklist","hero.h1":"Every GTA 6 video, turned into an idea for yours.",
+"hero.p":"We collect the videos and Shorts that are taking off with the game's hashtags and hand you a fresh angle to create your own content. For less than a snack, per month.",
+"hero.b1":"Explore the radar","hero.b2":"See an example","stat.v":"videos in the last 48 h","stat.s":"Shorts","stat.t":"guides and easter eggs",
+"ex.h2":"See what you get","ex.sub":"An illustrative example of what Radar delivers: you spot the video that is taking off, read the transcript and get a brand-new script, with a thumbnail sketch.",
+"ex.s1":"See what's growing right now","ex.s2":"Read the video's transcript","ex.s3":"Get the script and the thumbnail","ex.tag":"Example","ex.h4a":"Transcript excerpt",
+"ex.tx":"...everybody will want to play at the same time and a lot of people will get stuck right at the start because they left everything for the last minute. So before launch day I listed a few things you need to check on your console, from free space to the system update...",
+"ex.note":"Made-up text for illustration. In the tool, you see the real transcript of the video you pick.","ex.h4b":"New script generated by AI","ex.cta":"Create free account","ex.plans":"See plans",
+"chk.alt":"Cover of the free GTA 6 launch checklist for creators","chk.tag":"Free material · PDF · 8 pages · in Portuguese","chk.h2":"GTA 6 launch checklist for creators",
+"chk.sub":"A step-by-step guide to arrive prepared for launch and turn attention into an audience. Save it on your phone or print it. The PDF is in Portuguese.",
+"chk.l1":"7 sections: from profile and gear to day 0 and the first week","chk.l2":"Timeline from D-7 to D+7, with what to do in each phase","chk.l3":"Rules and safety to avoid strikes, scams and trouble","chk.l4":"10 ready-made hooks to adapt to your videos",
+"chk.ph":"Your best email","chk.aria":"Email","chk.btn":"Download the free checklist","chk.consent":"I agree to receive this material and Radar Leonida news by email. I can unsubscribe anytime.",
+"chk.dh":"Done! Your download has started.","chk.dp":"If the file doesn't open on its own, use the button below. Then see what's growing right now on the radar.","chk.dl":"Download the PDF","chk.radar":"See today's radar",
+"chk.fine":"Independent material, not affiliated with Rockstar Games or Take-Two Interactive.","chk.eok":"Tick the agreement box to receive the material.",
+"cd":function(d){return d>1?d+" days until launch":d===1?"Launch is tomorrow":d===0?"Launch is today":"Use the day 0 and first-week sections"},
+"feed.h2":"Today's radar","feed.sub":"Some ideas are free. To unlock all the others, subscribe to a plan.","feed.fmt":"Format","feed.tema":"Topic","feed.ord":"Sort","feed.afmt":"Filter by format","feed.atema":"Filter by topic","feed.aord":"Sort",
+"mural.h2":"Creators' wall","mural.sub":"Posted a video with the game's hashtags? Add it here and show up for the other subscribers. Only subscribers can post.",
+"mural.pt":"Your video title","mural.pc":"Channel name","mural.pu":"Video link (https://...)","mural.at":"Video title","mural.ac":"Channel name","mural.au":"Video link","mural.af":"Video topic","mural.btn":"Post to the wall",
+"plans.h2":"Choose your plan","plans.sub":"Cancel anytime. Payment is handled by Cakto. Use the same email as your Radar account when paying.",
+"plans.m":"Monthly","plans.pm":"R$ 14.90<small> /month</small>","plans.m1":"All of the radar's ideas","plans.m2":"Filters by format and growth","plans.m3":"Posting on the wall","plans.mb":"Subscribe monthly",
+"plans.best":"Best value","plans.a":"Yearly","plans.pa":"R$ 118.80<small> /year</small>","plans.eq":"equals R$ 9.90 per month","plans.a1":"Everything in the monthly plan","plans.a2":"One payment per year, renewed every year","plans.a3":"33% savings compared to monthly","plans.ab":"Subscribe yearly",
+"plans.n1":"The final amount, including any service fee or installments, is shown at Cakto's checkout before you pay. Prices are in Brazilian reais (BRL).","plans.n2":"Videos come from the YouTube Data API and open on YouTube, on the original channel.",
+"footer":"Radar Leonida is not affiliated with Rockstar Games or Take-Two. The videos belong to their creators.",
+"auth.sh":"New GTA 6 ideas, every day.","auth.sp":"See what's growing and create your video with a ready-made angle.","auth.s1":"Radar updated every 2 hours","auth.s2":"A ready idea for every video","auth.s3":"A wall to promote your channel",
+"auth.tin":"Sign in","auth.tup":"Create account","a.email":"Email","a.pass":"Password","a.conf":"Confirm password","a.pe":"you@email.com","a.pp":"At least 6 characters","a.pc":"Repeat the password","a.forgot":"Forgot my password",
+"a.fine":"By creating an account, you agree to use Radar Leonida for personal use and to respect the rights of the video creators.","aria.close":"Close","a.show":"Show","a.hide":"Hide",
+"a.t.in":"Welcome back","a.t.up":"Create your account","a.t.rs":"Create a new password","a.s.in":"Sign in with your email and password.","a.s.up":"Takes less than a minute. You'll already see the 2 free ideas.","a.s.rs":"Enter the new password for your account.",
+"a.b.in":"Sign in","a.b.up":"Create account","a.b.rs":"Save new password",
+"e.login":"Incorrect email or password.","e.exists":"This email already has an account. Use the Sign in tab.","e.confirm":"Confirm your email using the link we sent and try again.","e.rate":"Too many attempts. Wait a few minutes and try again.",
+"e.pass6":"The password must be at least 6 characters.","e.same":"Choose a password different from the previous one.","e.gen":function(x){return "Couldn't complete the request. "+x},"e.email":"Enter a valid email.","e.match":"The passwords don't match.",
+"e.net":"Connection failed. Try again.","e.forgot":"Enter your email above and click Forgot my password again.","wait":"Please wait...",
+"ok.pw":"Password changed","ok.signup":"Account created! We sent a confirmation link to your email. After confirming, come back and sign in.","ok.created":"Account created. Welcome!","ok.in":"You're signed in","ok.out":"You're signed out",
+"ok.reset":"We sent a link to reset your password. Check your inbox.","ok.copied":"Idea copied","e.copy":"Couldn't copy","e.sub":"Subscribe to a plan to post on the wall","e.post":"Couldn't post","ok.posted":"Posted to the wall",
+"ok.active":"Subscription activated! Welcome.","e.nopay":"Payment isn't set up yet.","ok.pay":"Payment opened in a new tab. Use the same email as your account.","e.needacc":"Create a free account to continue",
+"e.assist":"Couldn't complete that right now. Try again.","e.server":"Couldn't reach the server. Please try again later.","e.code":function(c){return " (code "+c+")"},"e.empty":"Empty response. Try again.",
+"p.t1":"Transcript","p.t2":"Script + thumbnail","p.loadt":"Fetching the transcript...","p.loads":"The AI is transcribing and rewriting the script. This can take up to 1 minute...",
+"up.h":"Unique script with AI","up.p":"Available to subscribers. The AI does the heavy lifting so you can produce faster:","up.l1":"Transcribes the video, even when it has no captions","up.l2":"Rewrites an original script, with a different structure and angle","up.l3":"Delivers a hook, timed blocks and what to show on screen","up.l4":"Includes a title, hashtags and a thumbnail sketch","up.btn":"See plans",
+"tr.copy":"Copy transcript","tr.note":"Use the transcript to study the topic and create your own content. Don't republish the other creator's text.",
+"tm.scene":"Main scene","tm.expr":"Expression:","tm.hl":"Highlight:","tm.none":"none","tm.note":"Composition sketch. Replace the dashed area with your real image.",
+"sc.title":"Script","sc.hook":"Hook","sc.say":"Line","sc.vis":"Visual","sc.end":"Closing call to action","sc.diff":"What changes compared to the original:","sc.thumb":"Thumbnail sketch","sc.copy":"Copy script","sc.again":"Generate another version",
+"txt.hook":"HOOK","txt.say":"Line:","txt.vis":"Visual:","txt.end":"CLOSING CALL TO ACTION",
+"card.comm":"A video from a community creator. Watch it, see the angle and create your own version.","card.mural":"on the wall","card.new":"new","card.watch":"Watch: ","card.idea":"Idea for your video","card.locked":"Idea available to Radar Leonida subscribers.","card.unlock":"Unlock idea","card.copy":"Copy idea","card.tr":"Transcript","card.sc":"Unique script",
+"rise.h":"Rising fastest right now","more":function(n){return "Show more videos ("+n+")"},"less":"Show less","empty.f":"No videos with these filters in the last 48 hours. Try another combination.","loading":"Loading...","empty.m":"The wall is empty. Subscribers can post the first video.","e.load":"Couldn't load the videos right now. Refresh the page.",
+"ago.now":"just now","ago.h":function(h){return h+"h ago"},"ago.d":function(d){return d+"d ago"},"u.m":"M","u.k":"K",
+"lbl.Todos":"All","lbl.Short":"Short","lbl.Vídeo longo":"Long video","lbl.Guias":"Guides","lbl.Easter eggs":"Easter eggs","lbl.Gameplay":"Gameplay","lbl.Notícias":"News","lbl.Teoria":"Theory","lbl.Outros":"Other","lbl.Em alta":"Trending","lbl.Mais recentes":"Newest","lbl.Mais vistos":"Most viewed",
+"err.auth":"Please sign in to continue.","err.limit":"You've reached today's limit. Subscribe for more, or try again tomorrow.","err.no_captions":"This video has no captions available to transcribe.","err.paywall":"AI scripts are for subscribers only.","err.service":"The transcription service is unavailable right now. Try again later.","err.failed":"Couldn't transcribe this video.","err.timeout":"The transcription took too long. Try again shortly.","err.ai_limit":"The AI limit was reached for now. Try again in a few minutes.","err.ai_busy":"Google's AI is overloaded right now. Try again in a moment.","err.ai_error":"The AI didn't respond. Try again later.","err.format":"The AI returned an invalid format. Try again.",
+"el.seta":"arrow","el.círculo":"circle","el.nenhum":"none"
+}};
+var SAMPLE_EN={titulo_sugerido:"Before you launch GTA 6: 4 things to get your console ready",
+ gancho:"If you want to play on day one, don't start with the game. Start with these four things, which spare you the biggest headache of launch.",
+ roteiro:[
+  {secao:"Opening",tempo:"0:00-0:20",fala:"Everybody will want to play at the same time, and anyone who leaves everything for the last minute will get stuck at the start. I picked four quick checks.",visual:"You facing the camera, with the console in the background and a clock on screen."},
+  {secao:"Check 1: free space",tempo:"0:20-1:10",fala:"Games this big cost a lot of space. See how much you have free and delete what you don't use before the download starts.",visual:"The console's storage screen, with the free-space bar highlighted."},
+  {secao:"Check 2: download ahead of time",tempo:"1:10-2:00",fala:"If your game lets you download early, do it now. The earlier you start, the less queueing and the fewer surprises.",visual:"Download screen with the percentage climbing and an arrow pointing at it."},
+  {secao:"Checks 3 and 4: system and controller",tempo:"2:00-2:50",fala:"Update the console's system and charge the controller. It sounds silly, but these two things cause the most trouble at the last minute.",visual:"Quick cut between the update screen and the controller on its charger."}],
+ chamada_final:"Which of these have you forgotten before? Tell me in the comments and save this video for launch day.",
+ diferencial:"Instead of repeating news, the video becomes a practical preparation list, in a format nobody needs theory to follow.",
+ hashtags:["#gta6","#ps5","#xbox","#tips"],
+ thumbnail:{texto_principal:"GET YOUR CONSOLE READY",texto_secundario:"before day 1",cena:"You holding the controller, with the download screen in the background",expressao:"eager, looking at the screen",cores:["#7b2ff7","#ff5d73","#ffffff"],posicao_texto:"esquerda",elemento_destaque:"seta"}};
+var lang=(function(){try{var q=localStorage.getItem("radar_lang");if(q==="pt"||q==="en")return q}catch(e){}return /^pt/i.test(navigator.language||"")?"pt":"en"})();
+function t(k,a){var d=I18N[lang],v=d[k];if(v==null)v=I18N.pt[k];if(v==null)return k;return typeof v==="function"?v(a):v}
+function L(x){var s=t("lbl."+x);return s==="lbl."+x?x:s}
+function elv(v){var k="el."+v;return (lang==="en"&&I18N.en[k])?I18N.en[k]:v}
 function $(id){return document.getElementById(id)}
 function esc(s){var e=document.createElement("div");e.textContent=s==null?"":s;return e.innerHTML.replace(/"/g,"&quot;")}
 function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:"#"}
@@ -364,10 +482,10 @@ function tema(v){
  if(/teoria|theory|rumor|vazou|leak|especula|speculation|explicad|explained|significa|meaning/.test(t))return "Teoria";
  if(/not[íi]cias?|\bnews\b|atualiza[çc][ãa]o|\bupdate\b|patch|an[uú]nci|announce|confirm|revel|pr[ée][- ]?(load|download|venda)|pre[- ]?(load|order)|\blaunch\b|lan[çc]amento|data de lan|release date|pre[çc]o|\bprice\b|tamanho|\d+ ?gb|rockstar|take-two/.test(t))return "Notícias";
  return "Outros"}
-function views(n){n=Number(n)||0;if(n>=1e6)return(n/1e6).toFixed(1).replace(".",",")+" mi";if(n>=1e3)return Math.round(n/1e3)+" mil";return String(n)}
+function views(n){n=Number(n)||0;if(n>=1e6)return(n/1e6).toFixed(1).replace(".",lang==="en"?".":",")+t("u.m");if(n>=1e3)return Math.round(n/1e3)+t("u.k");return String(n)}
 function rate(n){n=Number(n)||0;return n>=1000?views(n):String(Math.round(n))}
 function vph(v){var t=T[v.id];return t&&Number(t.views_per_hour)>0?Number(t.views_per_hour):-1}
-function ago(d){var h=Math.round((Date.now()-new Date(d))/36e5);if(h<1)return "agora";if(h<24)return "há "+h+" h";return "há "+Math.round(h/24)+" d"}
+function ago(d){var h=Math.round((Date.now()-new Date(d))/36e5);if(h<1)return t("ago.now");if(h<24)return t("ago.h",h);return t("ago.d",Math.round(h/24))}
 function dur(s){if(!s)return "";var m=Math.floor(s/60),r=s%60;return m+":"+(r<10?"0":"")+r}
 function ytThumb(u){var m=/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/.exec(u||"");return m?"https://i.ytimg.com/vi/"+m[1]+"/mqdefault.jpg":""}
 
@@ -375,25 +493,25 @@ function card(v,comm){
  var tm=comm?(v.format||"Outros"):tema(v),sh=comm?(v.format==="Short"):isShort(v);
  var url=comm?safeUrl(v.url):"https://www.youtube.com/watch?v="+encodeURIComponent(v.id);
  var th=comm?ytThumb(v.url):v.thumb;
- var idea=comm?"Vídeo de um criador da comunidade. Assista, veja o ângulo e crie a sua versão.":ideas[v.id];
+ var idea=comm?t("card.comm"):ideas[v.id];
  var locked=!comm&&!idea;
- var meta=comm?"no mural":views(v.views)+" views · "+ago(v.published_at);
- var hot="",t=!comm&&T[v.id];
- if(t&&Number(t.views_per_hour)>=1)hot='<span class="hot">🔥 +'+rate(t.views_per_hour)+' views/h</span>';
- else if(!comm&&(Date.now()-new Date(v.published_at))<3*36e5)hot='<span class="hot new">✨ novo</span>';
- return '<article class="card"><a class="media" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" aria-label="Assistir: '+esc(v.title)+'">'+
+ var meta=comm?t("card.mural"):views(v.views)+" views · "+ago(v.published_at);
+ var hot="",tr=!comm&&T[v.id];
+ if(tr&&Number(tr.views_per_hour)>=1)hot='<span class="hot">🔥 +'+rate(tr.views_per_hour)+' views/h</span>';
+ else if(!comm&&(Date.now()-new Date(v.published_at))<3*36e5)hot='<span class="hot new">✨ '+t("card.new")+'</span>';
+ return '<article class="card"><a class="media" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" aria-label="'+t("card.watch")+esc(v.title)+'">'+
   (th?'<img loading="lazy" src="'+esc(th)+'" alt="" onerror="this.remove()">':"")+
-  '<span class="badges">'+(sh?'<span class="badge Short">Short</span>':"")+'<span class="badge '+(TKEY[tm]||"Outros")+'">'+esc(tm)+'</span></span>'+(v.duration_s?'<span class="dur">'+dur(v.duration_s)+'</span>':"")+hot+'<span class="play">▶</span></a>'+
+  '<span class="badges">'+(sh?'<span class="badge Short">Short</span>':"")+'<span class="badge '+(TKEY[tm]||"Outros")+'">'+esc(L(tm))+'</span></span>'+(v.duration_s?'<span class="dur">'+dur(v.duration_s)+'</span>':"")+hot+'<span class="play">▶</span></a>'+
   '<div class="body"><h3 class="title">'+esc(v.title)+'</h3>'+
   '<div class="chan"><span class="av">'+esc((v.channel||"?").charAt(0).toUpperCase())+'</span><span><b>'+esc(v.channel)+'</b><br>'+meta+'</span></div>'+
-  '<div class="idea'+(locked?" locked":"")+'"><div class="ihead">💡 Ideia para o seu vídeo</div><p>'+esc(idea||"Ideia disponível para assinantes do Radar Leonida.")+'</p>'+
-  (locked?'<div class="lock"><button class="btn sm" type="button" data-unlock data-id="'+esc(v.id)+'">Liberar ideia</button></div>':'<button class="copy" type="button" data-copy="'+esc(idea)+'">Copiar ideia</button>')+
-  '</div>'+(comm?"":'<div class="acts"><button class="btn alt sm" type="button" data-assist="transcript" data-id="'+esc(v.id)+'">📝 Transcrição</button><button class="btn sm" type="button" data-assist="script" data-id="'+esc(v.id)+'">✨ Roteiro único'+(active?'':' · PRO')+'</button></div>')+'</div></article>'}
+  '<div class="idea'+(locked?" locked":"")+'"><div class="ihead">💡 '+t("card.idea")+'</div><p>'+esc(idea||t("card.locked"))+'</p>'+
+  (locked?'<div class="lock"><button class="btn sm" type="button" data-unlock data-id="'+esc(v.id)+'">'+t("card.unlock")+'</button></div>':'<button class="copy" type="button" data-copy="'+esc(idea)+'">'+t("card.copy")+'</button>')+
+  '</div>'+(comm?"":'<div class="acts"><button class="btn alt sm" type="button" data-assist="transcript" data-id="'+esc(v.id)+'">📝 '+t("card.tr")+'</button><button class="btn sm" type="button" data-assist="script" data-id="'+esc(v.id)+'">✨ '+t("card.sc")+(active?'':' · PRO')+'</button></div>')+'</div></article>'}
 
-function chips(box,list,cur,fn,counts){box.innerHTML="";list.forEach(function(x){var b=document.createElement("button");b.type="button";b.className="chip";b.innerHTML=esc(x)+(counts?"<small>"+counts[x]+"</small>":"");b.setAttribute("aria-pressed",x===cur);b.onclick=function(){fn(x)};box.appendChild(b)})}
+function chips(box,list,cur,fn,counts){box.innerHTML="";list.forEach(function(x){var b=document.createElement("button");b.type="button";b.className="chip";b.innerHTML=esc(L(x))+(counts?"<small>"+counts[x]+"</small>":"");b.setAttribute("aria-pressed",x===cur);b.onclick=function(){fn(x)};box.appendChild(b)})}
 function renderRising(){
  var l=D.filter(function(v){return vph(v)>=1}).sort(function(a,b){return vph(b)-vph(a)}).slice(0,3);
- $("rising").innerHTML=l.length?'<div class="rise"><h3>🚀 Subindo mais rápido agora</h3><ol>'+l.map(function(v,i){return '<li><a href="https://www.youtube.com/watch?v='+encodeURIComponent(v.id)+'" target="_blank" rel="noopener noreferrer"><span class="n">'+(i+1)+'</span><span class="rt">'+esc(v.title)+'</span><span class="rv">+'+rate(vph(v))+' views/h</span></a></li>'}).join("")+'</ol></div>':""}
+ $("rising").innerHTML=l.length?'<div class="rise"><h3>🚀 '+t("rise.h")+'</h3><ol>'+l.map(function(v,i){return '<li><a href="https://www.youtube.com/watch?v='+encodeURIComponent(v.id)+'" target="_blank" rel="noopener noreferrer"><span class="n">'+(i+1)+'</span><span class="rt">'+esc(v.title)+'</span><span class="rv">+'+rate(vph(v))+' views/h</span></a></li>'}).join("")+'</ol></div>':""}
 function render(){
  var nS=D.filter(isShort).length,cT={Todos:D.length},cF={Todos:D.length,"Short":nS,"Vídeo longo":D.length-nS};
  TEMAS.forEach(function(x){cT[x]=0});D.forEach(function(v){cT[tema(v)]++});
@@ -406,11 +524,11 @@ function render(){
   if(ord==="Mais vistos")return (b.views||0)-(a.views||0);
   return (vph(b)-vph(a))||((b.growth||0)-(a.growth||0))||((b.views||0)-(a.views||0))});
  var vis=l.slice(0,shown);
- $("more").innerHTML=(l.length>shown?'<button class="btn alt" type="button" data-more>Ver mais vídeos ('+(l.length-shown)+')</button>':"")+(shown>6?'<button class="btn alt" type="button" data-less>Mostrar menos</button>':"");
- $("grid").innerHTML=l.length?vis.map(function(v){return card(v,false)}).join(""):'<div class="empty">'+(loaded?'Nenhum vídeo com esses filtros nas últimas 48 horas. Tente outra combinação.':'Carregando...')+'</div>';
- $("mural-grid").innerHTML=M.length?M.slice(0,6).map(function(v){return card(v,true)}).join(""):'<div class="empty">O mural está vazio. Assinantes podem publicar o primeiro vídeo.</div>';
- $("auth-btn").textContent=user?"Sair":"Entrar";
- var st=$("status");st.hidden=!user;st.textContent=active?"Assinatura ativa":"Plano gratuito";st.className="pill"+(active?" on":"");
+ $("more").innerHTML=(l.length>shown?'<button class="btn alt" type="button" data-more>'+t("more",l.length-shown)+'</button>':"")+(shown>6?'<button class="btn alt" type="button" data-less>'+t("less")+'</button>':"");
+ $("grid").innerHTML=l.length?vis.map(function(v){return card(v,false)}).join(""):'<div class="empty">'+(loaded?t("empty.f"):t("loading"))+'</div>';
+ $("mural-grid").innerHTML=M.length?M.slice(0,6).map(function(v){return card(v,true)}).join(""):'<div class="empty">'+t("empty.m")+'</div>';
+ $("auth-btn").textContent=user?t("auth.out"):t("auth.in");
+ var st=$("status");st.hidden=!user;st.textContent=active?t("st.on"):t("st.free");st.className="pill"+(active?" on":"");
  $("s-v").textContent=D.length;$("s-s").textContent=nS;$("s-t").textContent=cT["Guias"]+cT["Easter eggs"];
  renderRising();
 }
@@ -432,55 +550,55 @@ function setMode(m){
  $("tabs").hidden=rs;
  $("t-in").setAttribute("aria-selected",!up);$("t-up").setAttribute("aria-selected",up);
  $("w-email").hidden=rs;$("w-conf").hidden=!(up||rs);$("a-forgot").hidden=(up||rs);
- $("a-title").textContent=rs?"Crie uma nova senha":up?"Crie a sua conta":"Bem-vindo de volta";
- $("a-sub").textContent=rs?"Digite a nova senha para a sua conta.":up?"Leva menos de um minuto. Você já vê as 2 ideias grátis.":"Entre com o seu e-mail e senha.";
- $("a-submit").textContent=rs?"Salvar nova senha":up?"Criar conta":"Entrar";
+ $("a-title").textContent=rs?t("a.t.rs"):up?t("a.t.up"):t("a.t.in");
+ $("a-sub").textContent=rs?t("a.s.rs"):up?t("a.s.up"):t("a.s.in");
+ $("a-submit").textContent=rs?t("a.b.rs"):up?t("a.b.up"):t("a.b.in");
  $("a-pass").autocomplete=(up||rs)?"new-password":"current-password"}
 function openAuth(m){setMode(m||"in");$("auth").hidden=false;document.body.style.overflow="hidden";setTimeout(function(){(m==="reset"?$("a-pass"):$("a-email")).focus()},50)}
 function closeAuth(){$("auth").hidden=true;document.body.style.overflow=""}
-function ptErr(e){var t=(e&&e.message)||"";
- if(/invalid login/i.test(t))return "E-mail ou senha incorretos.";
- if(/already registered|already been registered/i.test(t))return "Este e-mail já tem conta. Use a aba Entrar.";
- if(/not confirmed/i.test(t))return "Confirme o seu e-mail pelo link que enviamos e tente de novo.";
- if(/rate limit|too many/i.test(t))return "Muitas tentativas. Aguarde alguns minutos e tente de novo.";
- if(/at least 6/i.test(t))return "A senha precisa ter pelo menos 6 caracteres.";
- if(/same password/i.test(t))return "Escolha uma senha diferente da anterior.";
- return "Não foi possível concluir. "+t}
-function busy(b){var s=$("a-submit");s.disabled=b;if(b)s.textContent="Aguarde..."}
+function ptErr(e){var m=(e&&e.message)||"";
+ if(/invalid login/i.test(m))return t("e.login");
+ if(/already registered|already been registered/i.test(m))return t("e.exists");
+ if(/not confirmed/i.test(m))return t("e.confirm");
+ if(/rate limit|too many/i.test(m))return t("e.rate");
+ if(/at least 6/i.test(m))return t("e.pass6");
+ if(/same password/i.test(m))return t("e.same");
+ return t("e.gen",m)}
+function busy(b){var s=$("a-submit");s.disabled=b;if(b)s.textContent=t("wait")}
 $("a-form").onsubmit=async function(e){
  e.preventDefault();msg("");
  var email=$("a-email").value.trim(),pass=$("a-pass").value,conf=$("a-conf").value;
- if(mode!=="reset"&&!/^\S+@\S+\.\S+$/.test(email))return msg("Digite um e-mail válido.");
- if(pass.length<6)return msg("A senha precisa ter pelo menos 6 caracteres.");
- if(mode!=="in"&&pass!==conf)return msg("As senhas não conferem.");
+ if(mode!=="reset"&&!/^\S+@\S+\.\S+$/.test(email))return msg(t("e.email"));
+ if(pass.length<6)return msg(t("e.pass6"));
+ if(mode!=="in"&&pass!==conf)return msg(t("e.match"));
  busy(true);
  try{
   if(mode==="reset"){
    var u=await sb.auth.updateUser({password:pass});
    if(u.error){msg(ptErr(u.error));return}
-   closeAuth();toast("Senha alterada");load();return}
+   closeAuth();toast(t("ok.pw"));load();return}
   if(mode==="up"){
    var r=await sb.auth.signUp({email:email,password:pass,options:{emailRedirectTo:location.origin+location.pathname}});
    if(r.error){msg(ptErr(r.error));return}
-   if(r.data.user&&r.data.user.identities&&r.data.user.identities.length===0){msg("Este e-mail já tem conta. Use a aba Entrar.");return}
-   if(!r.data.session){msg("Conta criada! Enviamos um link de confirmação para o seu e-mail. Depois de confirmar, volte e entre.",true);return}
-   closeAuth();toast("Conta criada. Bem-vindo!");load();return}
+   if(r.data.user&&r.data.user.identities&&r.data.user.identities.length===0){msg(t("e.exists"));return}
+   if(!r.data.session){msg(t("ok.signup"),true);return}
+   closeAuth();toast(t("ok.created"));load();return}
   var s=await sb.auth.signInWithPassword({email:email,password:pass});
   if(s.error){msg(ptErr(s.error));return}
-  closeAuth();toast("Você entrou");load();
- }catch(err){msg("Falha de conexão. Tente de novo.")}
- finally{busy(false);if(mode!=="reset")$("a-submit").textContent=mode==="up"?"Criar conta":"Entrar";else $("a-submit").textContent="Salvar nova senha"}};
+  closeAuth();toast(t("ok.in"));load();
+ }catch(err){msg(t("e.net"))}
+ finally{busy(false);if(mode!=="reset")$("a-submit").textContent=mode==="up"?t("a.b.up"):t("a.b.in");else $("a-submit").textContent=t("a.b.rs")}};
 $("a-forgot").onclick=async function(){
  var email=$("a-email").value.trim();
- if(!/^\S+@\S+\.\S+$/.test(email))return msg("Digite o seu e-mail acima e clique de novo em Esqueci minha senha.");
+ if(!/^\S+@\S+\.\S+$/.test(email))return msg(t("e.forgot"));
  var r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
  if(r.error)return msg(ptErr(r.error));
- msg("Enviamos um link para redefinir a senha. Confira a sua caixa de entrada.",true)};
+ msg(t("ok.reset"),true)};
 $("t-in").onclick=function(){setMode("in")};$("t-up").onclick=function(){setMode("up")};
 $("a-x").onclick=closeAuth;
-$("a-eye").onclick=function(){var p=$("a-pass"),show=p.type==="password";p.type=show?"text":"password";$("a-conf").type=p.type;this.textContent=show?"Ocultar":"Mostrar"};
+$("a-eye").onclick=function(){var p=$("a-pass"),show=p.type==="password";p.type=show?"text":"password";$("a-conf").type=p.type;this.textContent=show?t("a.hide"):t("a.show")};
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("auth").hidden&&mode!=="reset")closeAuth()});
-$("auth-btn").onclick=async function(){if(user){await sb.auth.signOut();toast("Você saiu");load()}else openAuth("in")};
+$("auth-btn").onclick=async function(){if(user){await sb.auth.signOut();toast(t("ok.out"));load()}else openAuth("in")};
 sb.auth.onAuthStateChange(function(ev){if(ev==="PASSWORD_RECOVERY")openAuth("reset")});
 
 /* Ações nos cards, mural e planos */
@@ -494,64 +612,64 @@ document.addEventListener("click",function(e){
  if(e.target.closest("[data-more]")){shown+=6;render();return}
  if(e.target.closest("[data-less]")){shown=6;render();$("feed").scrollIntoView();return}
  var c=e.target.closest("[data-copy]");
- if(c){try{navigator.clipboard.writeText(c.getAttribute("data-copy"));toast("Ideia copiada")}catch(x){toast("Não foi possível copiar")}}});
+ if(c){try{navigator.clipboard.writeText(c.getAttribute("data-copy"));toast(t("ok.copied"))}catch(x){toast(t("e.copy"))}}});
 $("form").onsubmit=async function(e){e.preventDefault();
  if(!user){openAuth("up");return}
- if(!active){toast("Assine um plano para publicar no mural");location.hash="planos";return}
+ if(!active){toast(t("e.sub"));location.hash="planos";return}
  var r=await sb.from("community").insert({user_id:user.id,title:$("f-title").value,channel:$("f-chan").value,url:$("f-url").value,format:$("f-fmt").value});
- if(r.error){toast("Não foi possível publicar");return}
- e.target.reset();toast("Publicado no mural");load()};
+ if(r.error){toast(t("e.post"));return}
+ e.target.reset();toast(t("ok.posted"));load()};
 var watching=null;
 function watchAccess(){
  if(watching)return;var n=0;
  watching=setInterval(async function(){
   n++;if(!user||active||n>60){clearInterval(watching);watching=null;return}
   var p=await sb.from("profiles").select("active").eq("id",user.id).maybeSingle();
-  if(p.data&&p.data.active){active=true;toast("Assinatura ativada! Bem-vindo.");load()}},5000)}
+  if(p.data&&p.data.active){active=true;toast(t("ok.active"));load()}},5000)}
 document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){
  if(!user){openAuth("up");return}
  var base=(cfg.CHECKOUT||{})[b.dataset.plan];
- if(!base||/SEU-LINK/.test(base)){toast("O pagamento ainda não foi configurado.");return}
+ if(!base||/SEU-LINK/.test(base)){toast(t("e.nopay"));return}
  var url=base+(base.indexOf("?")>-1?"&":"?")+"callback="+encodeURIComponent(user.id);
  window.open(url,"_blank","noopener");
- toast("Pagamento aberto em uma nova aba. Use o mesmo e-mail da sua conta.");
+ toast(t("ok.pay"));
  watchAccess()}});
 
 /* Transcrição e roteiro com IA */
 var R={t:{},s:{}},pv=null,ptab="transcript";
 async function callAssist(action,id,again){
- var r=await sb.functions.invoke((cfg.ASSIST_FN||"video-assist"),{body:{action:action,video_id:id,again:!!again}});
- if(r.error){var m="Não foi possível concluir agora. Tente de novo.",code="",st="";
-  try{var c=r.error.context;st=c.status;var j=await c.json();m=j.error||j.message||m;code=j.code||""}
-  catch(x){if(!st)m="Não foi possível falar com o servidor. Confira se a função video-assist está publicada."}
-  return {error:m+(st?" (código "+st+")":""),code:code}}
- return r.data||{error:"Resposta vazia. Tente de novo.",code:""}}
+ var r=await sb.functions.invoke((cfg.ASSIST_FN||"video-assist"),{body:{action:action,video_id:id,again:!!again,lang:lang}});
+ if(r.error){var m=t("e.assist"),code="",st="";
+  try{var c=r.error.context;st=c.status;var j=await c.json();m=j.error||j.message||m;code=j.code||"";if(lang==="en"&&code&&I18N.en["err."+code])m=I18N.en["err."+code]}
+  catch(x){if(!st)m=t("e.server")}
+  return {error:m+(st?t("e.code",st):""),code:code}}
+ return r.data||{error:t("e.empty"),code:""}}
 function openAssist(id,tab){
- if(!user){toast("Crie uma conta grátis para continuar");openAuth("up");return}
+ if(!user){toast(t("e.needacc"));openAuth("up");return}
  pv=D.filter(function(v){return v.id===id})[0];if(!pv)return;
  ptab=tab;$("panel").hidden=false;document.body.style.overflow="hidden";renderPanel()}
 function closePanel(){$("panel").hidden=true;document.body.style.overflow=""}
 function hex(c,f){return /^#[0-9a-f]{6}$/i.test(c||"")?c:f}
-function upsell(){return '<div class="up"><h4>Roteiro único com IA</h4><p class="sub">Disponível para assinantes. A IA faz o trabalho pesado para você produzir mais rápido:</p><ul><li>Transcreve o vídeo, mesmo quando ele não tem legenda</li><li>Reescreve um roteiro original, com outra estrutura e outro ângulo</li><li>Entrega gancho, blocos com tempo e o que mostrar na tela</li><li>Inclui título, hashtags e o esboço da thumbnail</li></ul><button class="btn" type="button" data-plans>Ver planos</button></div>'}
+function upsell(){return '<div class="up"><h4>'+t("up.h")+'</h4><p class="sub">'+t("up.p")+'</p><ul><li>'+t("up.l1")+'</li><li>'+t("up.l2")+'</li><li>'+t("up.l3")+'</li><li>'+t("up.l4")+'</li></ul><button class="btn" type="button" data-plans>'+t("up.btn")+'</button></div>'}
 function viewTranscript(d){
- return '<div class="tbox">'+esc(d.text)+'</div><div class="acts"><button class="btn alt sm" type="button" data-copy="'+esc(d.text)+'">Copiar transcrição</button></div><p class="note">Use a transcrição para estudar o assunto e criar o seu próprio conteúdo. Não republique o texto do outro criador.</p>'}
-function thumbMock(t){
- t=t||{};var c=t.cores||[],a=hex(c[0],"#7b2ff7"),b=hex(c[1],"#ff5d73"),tx=hex(c[2],"#ffffff");
- var pos=["esquerda","direita","centro"].indexOf(t.posicao_texto)>-1?t.posicao_texto:"esquerda";
- return '<div class="tm" style="background:linear-gradient(135deg,'+a+','+b+')"><div class="tm-scene '+pos+'">'+esc(t.cena||"Cena principal")+'</div><div class="tm-txt '+pos+'" style="color:'+tx+'"><b>'+esc(t.texto_principal||"")+'</b><span>'+esc(t.texto_secundario||"")+'</span></div></div>'+
- '<div class="specs"><div><b>Expressão:</b> '+esc(t.expressao||"-")+'</div><div><b>Destaque:</b> '+esc(t.elemento_destaque||"nenhum")+'</div><div class="sw"><i style="background:'+a+'"></i><i style="background:'+b+'"></i><i style="background:'+tx+'"></i></div></div><p class="note">Esboço de composição. Substitua a área tracejada pela sua imagem real.</p>'}
+ return '<div class="tbox">'+esc(d.text)+'</div><div class="acts"><button class="btn alt sm" type="button" data-copy="'+esc(d.text)+'">'+t("tr.copy")+'</button></div><p class="note">'+t("tr.note")+'</p>'}
+function thumbMock(tk){
+ tk=tk||{};var c=tk.cores||[],a=hex(c[0],"#7b2ff7"),b=hex(c[1],"#ff5d73"),tx=hex(c[2],"#ffffff");
+ var pos=["esquerda","direita","centro"].indexOf(tk.posicao_texto)>-1?tk.posicao_texto:"esquerda";
+ return '<div class="tm" style="background:linear-gradient(135deg,'+a+','+b+')"><div class="tm-scene '+pos+'">'+esc(tk.cena||t("tm.scene"))+'</div><div class="tm-txt '+pos+'" style="color:'+tx+'"><b>'+esc(tk.texto_principal||"")+'</b><span>'+esc(tk.texto_secundario||"")+'</span></div></div>'+
+ '<div class="specs"><div><b>'+t("tm.expr")+'</b> '+esc(tk.expressao||"-")+'</div><div><b>'+t("tm.hl")+'</b> '+esc(elv(tk.elemento_destaque||"nenhum"))+'</div><div class="sw"><i style="background:'+a+'"></i><i style="background:'+b+'"></i><i style="background:'+tx+'"></i></div></div><p class="note">'+t("tm.note")+'</p>'}
 function scriptText(o){
- var s=(o.titulo_sugerido||"")+"\n\nGANCHO\n"+(o.gancho||"")+"\n";
- (o.roteiro||[]).forEach(function(x){s+="\n["+(x.tempo||"")+"] "+(x.secao||"")+"\nFala: "+(x.fala||"")+"\nVisual: "+(x.visual||"")+"\n"});
- return s+"\nCHAMADA FINAL\n"+(o.chamada_final||"")+"\n\n"+(o.hashtags||[]).join(" ")}
+ var s=(o.titulo_sugerido||"")+"\n\n"+t("txt.hook")+"\n"+(o.gancho||"")+"\n";
+ (o.roteiro||[]).forEach(function(x){s+="\n["+(x.tempo||"")+"] "+(x.secao||"")+"\n"+t("txt.say")+" "+(x.fala||"")+"\n"+t("txt.vis")+" "+(x.visual||"")+"\n"});
+ return s+"\n"+t("txt.end")+"\n"+(o.chamada_final||"")+"\n\n"+(o.hashtags||[]).join(" ")}
 function viewScript(o,demo){
- var h='<h4>'+esc(o.titulo_sugerido||"Roteiro")+'</h4><div class="hook"><b>Gancho</b>'+esc(o.gancho||"")+'</div>';
- (o.roteiro||[]).forEach(function(x){h+='<div class="sec"><div class="sh"><b>'+esc(x.secao)+'</b><span>'+esc(x.tempo)+'</span></div><p><em>Fala</em>'+esc(x.fala)+'</p><p class="vis"><em>Visual</em>'+esc(x.visual)+'</p></div>'});
- h+='<div class="sec"><div class="sh"><b>Chamada final</b></div><p>'+esc(o.chamada_final||"")+'</p></div>';
- h+='<p class="note"><b>O que muda em relação ao original:</b> '+esc(o.diferencial||"")+'</p>';
+ var h='<h4>'+esc(o.titulo_sugerido||t("sc.title"))+'</h4><div class="hook"><b>'+t("sc.hook")+'</b>'+esc(o.gancho||"")+'</div>';
+ (o.roteiro||[]).forEach(function(x){h+='<div class="sec"><div class="sh"><b>'+esc(x.secao)+'</b><span>'+esc(x.tempo)+'</span></div><p><em>'+t("sc.say")+'</em>'+esc(x.fala)+'</p><p class="vis"><em>'+t("sc.vis")+'</em>'+esc(x.visual)+'</p></div>'});
+ h+='<div class="sec"><div class="sh"><b>'+t("sc.end")+'</b></div><p>'+esc(o.chamada_final||"")+'</p></div>';
+ h+='<p class="note"><b>'+t("sc.diff")+'</b> '+esc(o.diferencial||"")+'</p>';
  h+='<div class="tags">'+(o.hashtags||[]).map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join("")+'</div>';
- h+='<h4 style="margin-top:22px">Esboço da thumbnail</h4>'+thumbMock(o.thumbnail);
- if(!demo)h+='<div class="acts"><button class="btn sm" type="button" data-copy="'+esc(scriptText(o))+'">Copiar roteiro</button><button class="btn alt sm" type="button" data-again>Gerar outra versão</button></div>';
+ h+='<h4 style="margin-top:22px">'+t("sc.thumb")+'</h4>'+thumbMock(o.thumbnail);
+ if(!demo)h+='<div class="acts"><button class="btn sm" type="button" data-copy="'+esc(scriptText(o))+'">'+t("sc.copy")+'</button><button class="btn alt sm" type="button" data-again>'+t("sc.again")+'</button></div>';
  return h}
 function renderPanel(again){
  var b=$("p-body"),id=pv.id;
@@ -559,7 +677,7 @@ function renderPanel(again){
  $("p-t1").setAttribute("aria-selected",ptab==="transcript");$("p-t2").setAttribute("aria-selected",ptab==="script");
  if(ptab==="transcript"){
   if(R.t[id]){b.innerHTML=viewTranscript(R.t[id]);return}
-  b.innerHTML='<div class="load">Buscando a transcrição...</div>';
+  b.innerHTML='<div class="load">'+t("p.loadt")+'</div>';
   callAssist("transcript",id).then(function(d){
    if(!d.error)R.t[id]=d;
    if(!pv||pv.id!==id||ptab!=="transcript"||$("panel").hidden)return;
@@ -568,7 +686,7 @@ function renderPanel(again){
   return}
  if(!active){b.innerHTML=upsell();return}
  if(R.s[id]&&!again){b.innerHTML=viewScript(R.s[id]);return}
- b.innerHTML='<div class="load">A IA está transcrevendo e reescrevendo o roteiro. Isso pode levar até 1 minuto...</div>';
+ b.innerHTML='<div class="load">'+t("p.loads")+'</div>';
  callAssist("script",id,again).then(function(d){
   if(!d.error)R.s[id]=d.output;
   if(!pv||pv.id!==id||ptab!=="script"||$("panel").hidden)return;
@@ -580,29 +698,45 @@ $("p-x").onclick=closePanel;
 $("panel").onclick=function(e){if(e.target===this)closePanel()};
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("panel").hidden&&$("auth").hidden)closePanel()});
 
-$("demo-out").innerHTML=viewScript(SAMPLE,true);
 document.addEventListener("click",function(e){if(e.target.closest("[data-demo-signup]")){if(user){location.hash="feed"}else openAuth("up")}});
 /* Material gratuito (checklist em PDF) */
 function giftCount(){
- var d=Math.ceil((Date.UTC(2026,10,19,3,0,0)-Date.now())/864e5),el=$("g-count");
- el.textContent=d>1?"Faltam "+d+" dias para o lançamento":d===1?"O lançamento é amanhã":d===0?"O lançamento é hoje":"Use as seções do dia 0 e da primeira semana"}
-function gmsg(t){$("g-msg").textContent=t||""}
+ var d=Math.ceil((Date.UTC(2026,10,19,3,0,0)-Date.now())/864e5);$("g-count").textContent=t("cd",d)}
+function gmsg(m){$("g-msg").textContent=m||""}
 function startDownload(){var a=document.createElement("a");a.href=$("g-dl").getAttribute("href");a.download="";a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove()}
 $("gift-form").onsubmit=async function(e){
  e.preventDefault();gmsg("");
  if($("g-hp").value)return;
  var email=$("g-email").value.trim().toLowerCase();
- if(!/^\S+@\S+\.\S+$/.test(email))return gmsg("Digite um e-mail válido.");
- if(!$("g-ok").checked)return gmsg("Marque a caixa de concordância para receber o material.");
- var b=$("g-btn");b.disabled=true;b.textContent="Aguarde...";
+ if(!/^\S+@\S+\.\S+$/.test(email))return gmsg(t("e.email"));
+ if(!$("g-ok").checked)return gmsg(t("chk.eok"));
+ var b=$("g-btn");b.disabled=true;b.textContent=t("wait");
  try{await sb.from("leads").insert({email:email,material:"checklist-gta6",consent:true})}catch(x){}
- b.disabled=false;b.textContent="Baixar o checklist grátis";
+ b.disabled=false;b.textContent=t("chk.btn");
  $("gift-form-wrap").hidden=true;$("gift-done").hidden=false;$("g-acc").hidden=!!user;
  startDownload()};
 $("g-acc").onclick=function(){openAuth("up")};
 giftCount();
+
+/* Idioma */
+function applyLang(){
+ document.documentElement.lang=lang==="en"?"en":"pt-BR";document.title=t("title");
+ document.querySelectorAll("[data-i]").forEach(function(el){el.textContent=t(el.getAttribute("data-i"))});
+ document.querySelectorAll("[data-ih]").forEach(function(el){el.innerHTML=t(el.getAttribute("data-ih"))});
+ document.querySelectorAll("[data-i-ph]").forEach(function(el){el.placeholder=t(el.getAttribute("data-i-ph"))});
+ document.querySelectorAll("[data-i-aria]").forEach(function(el){el.setAttribute("aria-label",t(el.getAttribute("data-i-aria")))});
+ document.querySelectorAll("[data-i-alt]").forEach(function(el){el.alt=t(el.getAttribute("data-i-alt"))});
+ document.querySelectorAll("[data-lang]").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-lang")===lang)});
+ $("demo-out").innerHTML=viewScript(lang==="en"?SAMPLE_EN:SAMPLE,true);
+ $("a-eye").textContent=$("a-pass").type==="password"?t("a.show"):t("a.hide");
+ giftCount();setMode(mode);render();
+ if(!$("panel").hidden&&pv)renderPanel()}
+document.querySelectorAll("[data-lang]").forEach(function(b){b.onclick=function(){
+ lang=b.getAttribute("data-lang");try{localStorage.setItem("radar_lang",lang)}catch(e){}
+ R.s={};applyLang()}});
+applyLang();
 $("grid").innerHTML=new Array(6).join('<div class="skel"></div>');
-load().catch(function(){loaded=true;$("grid").innerHTML='<div class="empty">Não foi possível carregar os vídeos agora. Atualize a página.</div>'});
+load().catch(function(){loaded=true;$("grid").innerHTML='<div class="empty">'+t("e.load")+'</div>'});
 </script>
 </body>
 </html>
