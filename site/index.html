@@ -89,6 +89,7 @@ input,select{flex:1 1 190px;background:var(--surface);color:var(--text);border:1
 footer{padding:30px 0 30px;color:var(--muted);font-size:14px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sea);color:#102;padding:10px 20px;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
 .toast.on{opacity:1}
+.toast{white-space:nowrap;max-width:calc(100vw - 32px);overflow:hidden;text-overflow:ellipsis}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
 .panel{position:fixed;inset:0;z-index:70;background:rgba(10,5,20,.72);display:flex;justify-content:flex-end}
 .panel[hidden]{display:none}
@@ -256,6 +257,24 @@ img{max-width:100%}
 .bfstrip .in{position:relative;z-index:1}
 .bfcode{animation:bfGlow 2.4s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.bfstrip,.bfstrip::after,.bfcode{animation:none!important}.bfstrip::after{display:none}}
+/* Minha assinatura */
+.pill.acct{cursor:pointer;font-family:inherit}
+.pill.acct:hover{border-color:var(--sun)}
+.acc-box{max-width:560px}
+.acc-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+.acc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.acc-row:last-child{border-bottom:0}
+.acc-row>span{color:var(--muted)}
+.acc-row b{text-align:right;overflow-wrap:anywhere}
+.acc-badge{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;background:var(--sea);color:#102}
+.acc-badge.off{background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.acc-badge.warn{background:var(--sun);color:#1a0f2e}
+.acc-note{font-size:14px;color:var(--muted);margin:10px 0}
+.acc-note a{color:var(--sea)}
+.acc-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.btn.danger{background:transparent;border:2px solid var(--hot);color:var(--hot)}
+.acc-confirm{border:2px solid var(--hot);border-radius:16px;padding:18px;margin-bottom:14px}
+.acc-confirm h4{font:400 24px Anton,sans-serif;margin:0 0 8px}
 /* Tela de login */
 .auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
 .auth[hidden]{display:none}
@@ -295,7 +314,7 @@ img{max-width:100%}
 <nav>
   <div class="logo">Radar <span class="sun">Leonida</span></div>
   <div class="navr">
-    <span class="pill" id="status" hidden></span>
+    <button class="pill acct" id="status" type="button" hidden></button>
     <button class="themeb" id="theme-btn" type="button" aria-label="Ativar modo claro"><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
     <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
     <a class="btn alt sm" href="pacote.html" data-i="nav.pack">E-book</a>
@@ -436,6 +455,13 @@ img{max-width:100%}
     <div id="p-body"></div>
   </div>
 </div>
+<div class="legalp" id="accp" hidden role="dialog" aria-modal="true" aria-labelledby="acc-title">
+  <div class="lg-box acc-box">
+    <button class="xbtn" id="acc-x" type="button" aria-label="Fechar" data-i-aria="aria.close">×</button>
+    <h3 id="acc-title" data-i="acc.title">Minha assinatura</h3>
+    <div id="acc-body"></div>
+  </div>
+</div>
 <div class="legalp" id="legalp" hidden role="dialog" aria-modal="true" aria-labelledby="lg-title">
   <div class="lg-box">
     <button class="xbtn" id="lg-x" type="button" aria-label="Fechar" data-i-aria="aria.close">×</button>
@@ -493,7 +519,11 @@ var I18N={pt:{
 "plans.m":"Mensal","plans.pm":"R$ 14,90<small> /mês</small>","plans.m1":"Todas as ideias do radar","plans.m2":"Filtros por formato e crescimento","plans.m3":"Publicação no mural","plans.mb":"Assinar mensal",
 "plans.best":"Mais econômico","plans.a":"Anual","plans.pa":"R$ 118,80<small> /ano</small>","plans.eq":"equivale a R$ 9,90 por mês","plans.a1":"Tudo do plano mensal","plans.a2":"Um pagamento por ano, renovado todo ano","plans.a3":"Economia de 33% em relação ao mensal","plans.ab":"Assinar anual",
 "plans.n1":"O valor final, com qualquer taxa de serviço ou parcelamento, aparece no checkout da Cakto antes de você pagar.","plans.n2":"Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.",
-"nav.pack":"E-book","bf.t":"Black Friday:","bf.txt":"Pacote Vice City Paga com acesso vitalício e 30% off","bf.short":"30% off no pacote vitalício","bf.copy":"Copiar","bf.see":"Ver pacote","bf.close":"Fechar aviso","bf.copied":"Cupom copiado: BLACK30","th.light":"Ativar modo claro","th.dark":"Ativar modo escuro","lg.title":"Termos e políticas","lg.t1":"Termos","lg.t2":"Privacidade","lg.t3":"Cancelamento","lg.ptonly":"Disponível apenas em português.","lg.terms":"Termos de Uso","lg.priv":"Política de Privacidade","lg.canc":"Cancelamento e Reembolso","lg.agree":"Ao continuar, você aceita os","lg.and":"e a",
+"nav.pack":"E-book","bf.t":"Black Friday:","bf.txt":"Pacote Vice City Paga com acesso vitalício e 30% off","bf.short":"30% off no pacote vitalício","bf.copy":"Copiar","bf.see":"Ver pacote","bf.close":"Fechar aviso","bf.copied":"Cupom copiado: BLACK30","acc.title":"Minha assinatura","acc.email":"E-mail","acc.plan":"Plano","acc.status":"Situação","acc.next":"Próxima cobrança","acc.until":"Acesso até","acc.free":"Gratuito","acc.paid":"Assinatura paga","acc.monthly":"Mensal","acc.yearly":"Anual","acc.active":"Ativa","acc.canceled":"Cancelada",
+"acc.freenote":"Você está no plano gratuito. Assine para liberar todas as ideias e o roteiro com IA.","acc.cancel":"Cancelar assinatura","acc.sure":"Cancelar a assinatura?","acc.surep":function(d){return "A cobrança para agora e nenhum valor novo será cobrado. Você continua com acesso completo até "+d+"."},"acc.surep2":"A cobrança para agora e nenhum valor novo será cobrado. Você continua com acesso até o fim do período já pago.",
+"acc.confirm":"Confirmar cancelamento","acc.keep":"Manter assinatura","acc.done":"Assinatura cancelada","acc.cancnote":"Sua assinatura foi cancelada e não haverá novas cobranças. Você pode assinar de novo quando quiser.","acc.resub":"Assinar de novo",
+"acc.refund":"Cancelar não devolve valores já pagos. Nos primeiros 7 dias após o pagamento, você pode pedir o reembolso integral pelo e-mail de suporte.","acc.help":"Dúvidas ou problemas? Escreva para","acc.noapi":"Não foi possível consultar sua assinatura agora. Para cancelar, escreva para o suporte com o e-mail da sua conta.","acc.err":"Não foi possível concluir agora. Tente de novo.",
+"th.light":"Ativar modo claro","th.dark":"Ativar modo escuro","lg.title":"Termos e políticas","lg.t1":"Termos","lg.t2":"Privacidade","lg.t3":"Cancelamento","lg.ptonly":"Disponível apenas em português.","lg.terms":"Termos de Uso","lg.priv":"Política de Privacidade","lg.canc":"Cancelamento e Reembolso","lg.agree":"Ao continuar, você aceita os","lg.and":"e a",
 "footer":"Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.",
 "auth.sh":"Ideias novas de GTA 6, todo dia.","auth.sp":"Veja o que está crescendo e crie o seu vídeo com um ângulo pronto.","auth.s1":"Radar atualizado de 2 em 2 horas","auth.s2":"Ideia pronta para cada vídeo","auth.s3":"Mural para divulgar o seu canal",
 "auth.tin":"Entrar","auth.tup":"Criar conta","a.email":"E-mail","a.pass":"Senha","a.conf":"Confirmar senha","a.pe":"voce@email.com","a.pp":"Mínimo de 6 caracteres","a.pc":"Repita a senha","a.forgot":"Esqueci minha senha",
@@ -541,7 +571,11 @@ var I18N={pt:{
 "plans.m":"Monthly","plans.pm":"R$ 14.90<small> /month</small>","plans.m1":"All of the radar's ideas","plans.m2":"Filters by format and growth","plans.m3":"Posting on the wall","plans.mb":"Subscribe monthly",
 "plans.best":"Best value","plans.a":"Yearly","plans.pa":"R$ 118.80<small> /year</small>","plans.eq":"equals R$ 9.90 per month","plans.a1":"Everything in the monthly plan","plans.a2":"One payment per year, renewed every year","plans.a3":"33% savings compared to monthly","plans.ab":"Subscribe yearly",
 "plans.n1":"The final amount, including any service fee or installments, is shown at Cakto's checkout before you pay. Prices are in Brazilian reais (BRL).","plans.n2":"Videos come from the YouTube Data API and open on YouTube, on the original channel.",
-"nav.pack":"E-book","bf.t":"Black Friday:","bf.txt":"Vice City Paga bundle with lifetime access, 30% off","bf.short":"30% off, lifetime access","bf.copy":"Copy","bf.see":"See the bundle","bf.close":"Close notice","bf.copied":"Code copied: BLACK30","th.light":"Switch to light mode","th.dark":"Switch to dark mode","lg.title":"Terms and policies","lg.t1":"Terms","lg.t2":"Privacy","lg.t3":"Cancellation","lg.ptonly":"These documents are available in Portuguese only.","lg.terms":"Terms of Use (PT)","lg.priv":"Privacy Policy (PT)","lg.canc":"Cancellation and Refunds (PT)","lg.agree":"By continuing, you accept the","lg.and":"and the",
+"nav.pack":"E-book","bf.t":"Black Friday:","bf.txt":"Vice City Paga bundle with lifetime access, 30% off","bf.short":"30% off, lifetime access","bf.copy":"Copy","bf.see":"See the bundle","bf.close":"Close notice","bf.copied":"Code copied: BLACK30","acc.title":"My subscription","acc.email":"Email","acc.plan":"Plan","acc.status":"Status","acc.next":"Next charge","acc.until":"Access until","acc.free":"Free","acc.paid":"Paid subscription","acc.monthly":"Monthly","acc.yearly":"Yearly","acc.active":"Active","acc.canceled":"Canceled",
+"acc.freenote":"You're on the free plan. Subscribe to unlock every idea and the AI script.","acc.cancel":"Cancel subscription","acc.sure":"Cancel your subscription?","acc.surep":function(d){return "Billing stops now and you won't be charged again. You keep full access until "+d+"."},"acc.surep2":"Billing stops now and you won't be charged again. You keep access until the end of the period you already paid for.",
+"acc.confirm":"Confirm cancellation","acc.keep":"Keep subscription","acc.done":"Subscription canceled","acc.cancnote":"Your subscription is canceled and there will be no new charges. You can subscribe again anytime.","acc.resub":"Subscribe again",
+"acc.refund":"Canceling doesn't refund amounts already paid. Within 7 days of payment, you can request a full refund through the support email.","acc.help":"Questions or problems? Email","acc.noapi":"We couldn't check your subscription right now. To cancel, email support from your account's email address.","acc.err":"Couldn't complete that right now. Try again.",
+"th.light":"Switch to light mode","th.dark":"Switch to dark mode","lg.title":"Terms and policies","lg.t1":"Terms","lg.t2":"Privacy","lg.t3":"Cancellation","lg.ptonly":"These documents are available in Portuguese only.","lg.terms":"Terms of Use (PT)","lg.priv":"Privacy Policy (PT)","lg.canc":"Cancellation and Refunds (PT)","lg.agree":"By continuing, you accept the","lg.and":"and the",
 "footer":"Radar Leonida is not affiliated with Rockstar Games or Take-Two. The videos belong to their creators.",
 "auth.sh":"New GTA 6 ideas, every day.","auth.sp":"See what's growing and create your video with a ready-made angle.","auth.s1":"Radar updated every 2 hours","auth.s2":"A ready idea for every video","auth.s3":"A wall to promote your channel",
 "auth.tin":"Sign in","auth.tup":"Create account","a.email":"Email","a.pass":"Password","a.conf":"Confirm password","a.pe":"you@email.com","a.pp":"At least 6 characters","a.pc":"Repeat the password","a.forgot":"Forgot my password",
@@ -644,13 +678,13 @@ function render(){
  $("grid").innerHTML=l.length?vis.map(function(v){return card(v,false)}).join(""):'<div class="empty">'+(loaded?t("empty.f"):t("loading"))+'</div>';
  $("mural-grid").innerHTML=M.length?M.slice(0,6).map(function(v){return card(v,true)}).join(""):'<div class="empty">'+t("empty.m")+'</div>';
  $("auth-btn").textContent=user?t("auth.out"):t("auth.in");
- var st=$("status");st.hidden=!user;st.textContent=active?t("st.on"):t("st.free");st.className="pill"+(active?" on":"");
+ var st=$("status");st.hidden=!user;st.textContent=(active?t("st.on"):t("st.free"))+" ▾";st.className="pill acct"+(active?" on":"");st.title=t("acc.title");st.setAttribute("aria-label",t("acc.title"));
  $("s-v").textContent=D.length;$("s-s").textContent=nS;$("s-t").textContent=cT["Guias"]+cT["Easter eggs"];
  renderRising();
 }
 async function load(){
  var s=await sb.auth.getSession();user=s.data.session?s.data.session.user:null;active=false;
- if(user){var p=await sb.from("profiles").select("active").eq("id",user.id).maybeSingle();active=!!(p.data&&p.data.active)}
+ if(user){var p=await sb.from("profiles").select("active,access_until").eq("id",user.id).maybeSingle();active=!!(p.data&&p.data.active&&(!p.data.access_until||new Date(p.data.access_until)>new Date()))}
  var since=new Date(Date.now()-48*36e5).toISOString();
  var v=await sb.from("videos").select("*").gte("published_at",since).limit(200);D=v.data||[];
  var i=await sb.from("ideas").select("video_id,idea");ideas={};(i.data||[]).forEach(function(x){ideas[x.video_id]=x.idea});
@@ -858,7 +892,7 @@ function openLegal(k){
  lgRender(k||"termos");setTimeout(function(){$("lg-x").focus()},30);
  try{history.replaceState(null,"","#"+(k||"termos"))}catch(e){}}
 function closeLegal(){
- $("legalp").hidden=true;document.body.style.overflow=($("auth").hidden&&$("panel").hidden)?"":"hidden";
+ $("legalp").hidden=true;document.body.style.overflow=($("auth").hidden&&$("panel").hidden&&$("accp").hidden)?"":"hidden";
  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
  if(lgPrevFocus&&lgPrevFocus.focus)lgPrevFocus.focus()}
 document.addEventListener("click",function(e){var a=e.target.closest("[data-legal]");if(!a)return;e.preventDefault();
@@ -887,6 +921,72 @@ var BF_END=new Date("2026-11-30T23:59:59-03:00");
  $("bf-copy").onclick=function(){try{navigator.clipboard.writeText("BLACK30").then(function(){toast(t("bf.copied"))},function(){toast("BLACK30")})}catch(x){toast("BLACK30")}};
 })();
 
+/* Minha assinatura */
+var ACC={data:null,confirm:false,busy:false},SUPPORT=["radarvicecitysuporte","outlook.com"].join("@");
+function fdate(d){try{return new Date(d).toLocaleDateString(lang==="en"?"en-US":"pt-BR",{day:"2-digit",month:"2-digit",year:"numeric"})}catch(e){return ""}}
+async function callAcc(action){
+ var r=await sb.functions.invoke((cfg.ACCOUNT_FN||"my-subscription"),{body:{action:action}});
+ if(r.error){var j={};try{j=await r.error.context.json()}catch(x){}return Object.assign({error:j.error||t("acc.err"),code:j.code||"net"},j)}
+ return r.data||{error:t("acc.err"),code:"empty"}}
+function supportLine(){return '<p class="acc-note">'+t("acc.help")+' <b>'+SUPPORT+'</b></p>'}
+function renderAcc(){
+ var b=$("acc-body"),d=ACC.data;
+ if(!d){b.innerHTML='<div class="load">'+t("loading")+'</div>';return}
+ var h='<div class="acc-card"><div class="acc-row"><span>'+t("acc.email")+'</span><b>'+esc(d.email||(user&&user.email)||"")+'</b></div>';
+ var sub=d.sub,canceled=(d.sub_status==="canceled")||(sub&&sub.canceled);
+ var isAct=!!d.active;
+ if(!isAct){
+  h+='<div class="acc-row"><span>'+t("acc.plan")+'</span><b><span class="acc-badge off">'+t("acc.free")+'</span></b></div></div>';
+  h+='<p class="acc-note">'+t("acc.freenote")+'</p><div class="acc-acts"><button class="btn" type="button" data-plans>'+t("up.btn")+'</button></div>';
+ }else{
+  var pl=sub?t(sub.plan==="anual"?"acc.yearly":"acc.monthly"):t("acc.paid");
+  h+='<div class="acc-row"><span>'+t("acc.plan")+'</span><b>'+pl+'</b></div>';
+  if(canceled){
+   h+='<div class="acc-row"><span>'+t("acc.status")+'</span><b><span class="acc-badge warn">'+t("acc.canceled")+'</span></b></div>';
+   if(d.access_until)h+='<div class="acc-row"><span>'+t("acc.until")+'</span><b>'+fdate(d.access_until)+'</b></div>';
+   h+='</div><p class="acc-note">'+t("acc.cancnote")+'</p><div class="acc-acts"><button class="btn alt" type="button" data-plans>'+t("acc.resub")+'</button></div>';
+  }else{
+   h+='<div class="acc-row"><span>'+t("acc.status")+'</span><b><span class="acc-badge">'+t("acc.active")+'</span></b></div>';
+   if(sub&&sub.next_payment_date)h+='<div class="acc-row"><span>'+t("acc.next")+'</span><b>'+fdate(sub.next_payment_date)+'</b></div>';
+   h+='</div>';
+   if(d.code==="not_configured"||d.code==="cakto"||d.code==="net"){
+    h+='<p class="acc-note">'+t("acc.noapi")+'</p>';
+   }else if(ACC.confirm){
+    var end=sub&&sub.next_payment_date?fdate(sub.next_payment_date):"";
+    h+='<div class="acc-confirm"><h4>'+t("acc.sure")+'</h4><p class="acc-note">'+(end?t("acc.surep",end):t("acc.surep2"))+'</p><p class="msg" id="acc-msg" role="alert" style="min-height:0"></p><div class="acc-acts"><button class="btn" type="button" id="acc-do"'+(ACC.busy?' disabled':'')+'>'+(ACC.busy?t("wait"):t("acc.confirm"))+'</button><button class="btn alt" type="button" id="acc-back">'+t("acc.keep")+'</button></div></div>';
+   }else{
+    h+='<div class="acc-acts"><button class="btn danger" type="button" id="acc-cancel">'+t("acc.cancel")+'</button></div>';
+   }
+   h+='<p class="acc-note">'+t("acc.refund")+' <a href="#cancelamento" data-legal="cancelamento">'+t("lg.canc")+'</a></p>';
+  }
+ }
+ if(d.error&&d.code!=="not_configured"&&d.code!=="cakto"&&d.code!=="net"&&!ACC.confirm)h+='<p class="msg">'+esc(d.error)+'</p>';
+ h+=supportLine()+'<div class="acc-acts" style="margin-top:18px"><button class="btn alt sm" type="button" id="acc-out">'+t("auth.out")+'</button></div>';
+ b.innerHTML=h;
+ var c=$("acc-cancel");if(c)c.onclick=function(){ACC.confirm=true;renderAcc()};
+ var bk=$("acc-back");if(bk)bk.onclick=function(){ACC.confirm=false;renderAcc()};
+ var o=$("acc-out");if(o)o.onclick=async function(){closeAcc();await sb.auth.signOut();toast(t("ok.out"));load()};
+ var go=$("acc-do");if(go)go.onclick=async function(){
+  ACC.busy=true;renderAcc();
+  var r=await callAcc("cancel");ACC.busy=false;
+  if(r.error){ACC.data=Object.assign({},ACC.data);renderAcc();var m=$("acc-msg");if(m)m.textContent=r.error;return}
+  ACC.confirm=false;ACC.data=Object.assign({},ACC.data,{sub_status:"canceled",access_until:r.access_until,active:true});
+  if(ACC.data.sub)ACC.data.sub.canceled=true;
+  toast(t("acc.done"));renderAcc()}}
+async function openAcc(){
+ if(!user){openAuth("in");return}
+ ACC={data:null,confirm:false,busy:false};$("accp").hidden=false;document.body.style.overflow="hidden";renderAcc();
+ setTimeout(function(){$("acc-x").focus()},30);
+ var r=await callAcc("status");
+ if(r.error&&r.active===undefined)r=Object.assign({email:user.email,active:active},r);
+ ACC.data=r;if(!$("accp").hidden)renderAcc()}
+function closeAcc(){$("accp").hidden=true;document.body.style.overflow=($("auth").hidden&&$("panel").hidden&&$("legalp").hidden)?"":"hidden"}
+$("status").onclick=openAcc;
+$("acc-x").onclick=closeAcc;
+$("accp").onclick=function(e){if(e.target===this)closeAcc()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("accp").hidden&&$("legalp").hidden){e.stopImmediatePropagation();closeAcc()}},true);
+document.addEventListener("click",function(e){if(e.target.closest("#accp [data-plans]")){closeAcc()}},true);
+
 /* Idioma */
 function applyLang(){
  document.documentElement.lang=lang==="en"?"en":"pt-BR";document.title=t("title");
@@ -900,7 +1000,8 @@ function applyLang(){
  $("a-eye").textContent=$("a-pass").type==="password"?t("a.show"):t("a.hide");
  giftCount();setMode(mode);render();paintThemeBtn();
  if(!$("panel").hidden&&pv)renderPanel();
- if(!$("legalp").hidden)lgRender(lgk)}
+ if(!$("legalp").hidden)lgRender(lgk);
+ if(!$("accp").hidden)renderAcc()}
 document.querySelectorAll("[data-lang]").forEach(function(b){b.onclick=function(){
  lang=b.getAttribute("data-lang");try{localStorage.setItem("radar_lang",lang)}catch(e){}
  R.s={};applyLang()}});
