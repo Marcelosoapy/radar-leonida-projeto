@@ -813,6 +813,10 @@ function lgRender(k){
  fetch(k+".html").then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(h){
   var d=new DOMParser().parseFromString(h,"text/html"),w=d.querySelector(".wrap");if(!w)throw 0;
   w.querySelectorAll("nav,footer,script,style").forEach(function(e){e.remove()});
+  // o Cloudflare esconde e-mails no HTML; aqui eles são decodificados de volta
+  function cfDec(h){try{var k=parseInt(h.substr(0,2),16),o="";for(var i=2;i<h.length;i+=2)o+=String.fromCharCode(parseInt(h.substr(i,2),16)^k);return decodeURIComponent(escape(o))}catch(e){return ""}}
+  w.querySelectorAll("[data-cfemail]").forEach(function(e){var m=cfDec(e.getAttribute("data-cfemail"));if(m)e.replaceWith(d.createTextNode(m))});
+  w.querySelectorAll('a[href*="/cdn-cgi/l/email-protection"]').forEach(function(a){var h=(a.getAttribute("href").split("#")[1]||""),m=cfDec(h);if(m){a.setAttribute("href","mailto:"+m);if(/email.protected/i.test(a.textContent)||!a.textContent.trim())a.textContent=m}});
   w.querySelectorAll("a[href]").forEach(function(a){var m=/^(termos|privacidade|cancelamento)\.html$/.exec(a.getAttribute("href"));
    if(m){a.setAttribute("href","#"+m[1]);a.setAttribute("data-legal",m[1])}else if(/^https?:/.test(a.getAttribute("href"))){a.target="_blank";a.rel="noopener"}});
   LGC[k]=w.innerHTML;if(lgk===k&&!$("legalp").hidden)lgRender(k)
