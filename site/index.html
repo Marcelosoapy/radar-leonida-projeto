@@ -243,6 +243,16 @@ img{max-width:100%}
 .bfx{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:50%;background:transparent;color:#b9a8d0;font-size:20px;cursor:pointer}
 .bfx:hover{color:#fff}
 @media (max-width:480px){.bfstrip{font-size:13px}.bfstrip .in{padding:8px 44px 8px 12px}}
+
+/* Animação da faixa: entrada suave, brilho passando de tempos em tempos e cupom pulsando de leve */
+@keyframes bfIn{from{transform:translateY(-100%);opacity:0}to{transform:none;opacity:1}}
+@keyframes bfShine{0%,72%{transform:translateX(-120%) skewX(-20deg)}100%{transform:translateX(320%) skewX(-20deg)}}
+@keyframes bfGlow{0%,100%{box-shadow:0 0 0 0 rgba(255,179,71,0)}50%{box-shadow:0 0 0 4px rgba(255,179,71,.18),0 0 14px 2px rgba(255,179,71,.35)}}
+.bfstrip{position:relative;overflow:hidden;animation:bfIn .5s ease-out both}
+.bfstrip::after{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(90deg,transparent,rgba(255,179,71,.16),transparent);animation:bfShine 6s ease-in-out infinite;pointer-events:none}
+.bfstrip .in{position:relative;z-index:1}
+.bfcode{animation:bfGlow 2.4s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.bfstrip,.bfstrip::after,.bfcode{animation:none!important}.bfstrip::after{display:none}}
 /* Tela de login */
 .auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
 .auth[hidden]{display:none}
