@@ -12,6 +12,7 @@
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fff4e4;--surface:#ffffff;--surface2:#fff9f0;--line:#ecd5b8;--text:#2a1745;--muted:#6f5a8a;--hot:#d6304a;--sun:#c9700a;--sea:#0b8f7c;--ink:#fff4e4;color-scheme:light}}
 :root[data-theme="light"]{--bg:#fff4e4;--surface:#ffffff;--surface2:#fff9f0;--line:#ecd5b8;--text:#2a1745;--muted:#6f5a8a;--hot:#d6304a;--sun:#c9700a;--sea:#0b8f7c;--ink:#fff4e4;color-scheme:light}
 *,*:before,*:after{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.55 "DM Sans",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 h1,h2,h3{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.01em;line-height:1.05;margin:0}
@@ -168,7 +169,7 @@ footer{padding:30px 0 30px;color:var(--muted);font-size:14px}
 .lang button{border:0;background:transparent;color:var(--muted);font:700 13px "DM Sans",sans-serif;padding:7px 12px;cursor:pointer;min-height:36px}
 .lang button[aria-pressed="true"]{background:var(--sun);color:#1a0f2e}
 /* Termos e políticas (painel interno) */
-.legalp{position:fixed;inset:0;z-index:75;background:rgba(10,5,20,.72);display:flex;justify-content:flex-end}
+.legalp{position:fixed;inset:0;z-index:85;background:rgba(10,5,20,.72);display:flex;justify-content:flex-end}
 .legalp[hidden]{display:none}
 .lg-box{background:var(--bg);width:100%;max-width:760px;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;padding:28px 26px 56px;position:relative;border-left:1px solid var(--line)}
 .lg-box .xbtn{top:16px;right:16px}
@@ -393,7 +394,7 @@ img{max-width:100%}
       <button class="btn" id="a-submit" type="submit" style="width:100%">Entrar</button>
       <button class="link" id="a-forgot" type="button" data-i="a.forgot">Esqueci minha senha</button>
     </form>
-    <p class="fine"><span data-i="lg.agree">Ao criar a conta, você aceita os</span> <a href="#termos" data-legal="termos" data-i="lg.terms">Termos de Uso</a> <span data-i="lg.and">e a</span> <a href="#privacidade" data-legal="privacidade" data-i="lg.priv">Política de Privacidade</a>.</p>
+    <p class="fine"><span data-i="lg.agree">Ao continuar, você aceita os</span> <a href="#termos" data-legal="termos" data-i="lg.terms">Termos de Uso</a> <span data-i="lg.and">e a</span> <a href="#privacidade" data-legal="privacidade" data-i="lg.priv">Política de Privacidade</a>.</p>
   </div>
 </div>
 <div class="panel" id="panel" hidden role="dialog" aria-modal="true" aria-labelledby="p-title">
@@ -461,7 +462,7 @@ var I18N={pt:{
 "plans.m":"Mensal","plans.pm":"R$ 14,90<small> /mês</small>","plans.m1":"Todas as ideias do radar","plans.m2":"Filtros por formato e crescimento","plans.m3":"Publicação no mural","plans.mb":"Assinar mensal",
 "plans.best":"Mais econômico","plans.a":"Anual","plans.pa":"R$ 118,80<small> /ano</small>","plans.eq":"equivale a R$ 9,90 por mês","plans.a1":"Tudo do plano mensal","plans.a2":"Um pagamento por ano, renovado todo ano","plans.a3":"Economia de 33% em relação ao mensal","plans.ab":"Assinar anual",
 "plans.n1":"O valor final, com qualquer taxa de serviço ou parcelamento, aparece no checkout da Cakto antes de você pagar.","plans.n2":"Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.",
-"th.light":"Ativar modo claro","th.dark":"Ativar modo escuro","lg.title":"Termos e políticas","lg.t1":"Termos","lg.t2":"Privacidade","lg.t3":"Cancelamento","lg.ptonly":"Disponível apenas em português.","lg.terms":"Termos de Uso","lg.priv":"Política de Privacidade","lg.canc":"Cancelamento e Reembolso","lg.agree":"Ao criar a conta, você aceita os","lg.and":"e a",
+"th.light":"Ativar modo claro","th.dark":"Ativar modo escuro","lg.title":"Termos e políticas","lg.t1":"Termos","lg.t2":"Privacidade","lg.t3":"Cancelamento","lg.ptonly":"Disponível apenas em português.","lg.terms":"Termos de Uso","lg.priv":"Política de Privacidade","lg.canc":"Cancelamento e Reembolso","lg.agree":"Ao continuar, você aceita os","lg.and":"e a",
 "footer":"Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.",
 "auth.sh":"Ideias novas de GTA 6, todo dia.","auth.sp":"Veja o que está crescendo e crie o seu vídeo com um ângulo pronto.","auth.s1":"Radar atualizado de 2 em 2 horas","auth.s2":"Ideia pronta para cada vídeo","auth.s3":"Mural para divulgar o seu canal",
 "auth.tin":"Entrar","auth.tup":"Criar conta","a.email":"E-mail","a.pass":"Senha","a.conf":"Confirmar senha","a.pe":"voce@email.com","a.pp":"Mínimo de 6 caracteres","a.pc":"Repita a senha","a.forgot":"Esqueci minha senha",
@@ -509,7 +510,7 @@ var I18N={pt:{
 "plans.m":"Monthly","plans.pm":"R$ 14.90<small> /month</small>","plans.m1":"All of the radar's ideas","plans.m2":"Filters by format and growth","plans.m3":"Posting on the wall","plans.mb":"Subscribe monthly",
 "plans.best":"Best value","plans.a":"Yearly","plans.pa":"R$ 118.80<small> /year</small>","plans.eq":"equals R$ 9.90 per month","plans.a1":"Everything in the monthly plan","plans.a2":"One payment per year, renewed every year","plans.a3":"33% savings compared to monthly","plans.ab":"Subscribe yearly",
 "plans.n1":"The final amount, including any service fee or installments, is shown at Cakto's checkout before you pay. Prices are in Brazilian reais (BRL).","plans.n2":"Videos come from the YouTube Data API and open on YouTube, on the original channel.",
-"th.light":"Switch to light mode","th.dark":"Switch to dark mode","lg.title":"Terms and policies","lg.t1":"Terms","lg.t2":"Privacy","lg.t3":"Cancellation","lg.ptonly":"These documents are available in Portuguese only.","lg.terms":"Terms of Use (PT)","lg.priv":"Privacy Policy (PT)","lg.canc":"Cancellation and Refunds (PT)","lg.agree":"By creating an account, you accept the","lg.and":"and the",
+"th.light":"Switch to light mode","th.dark":"Switch to dark mode","lg.title":"Terms and policies","lg.t1":"Terms","lg.t2":"Privacy","lg.t3":"Cancellation","lg.ptonly":"These documents are available in Portuguese only.","lg.terms":"Terms of Use (PT)","lg.priv":"Privacy Policy (PT)","lg.canc":"Cancellation and Refunds (PT)","lg.agree":"By continuing, you accept the","lg.and":"and the",
 "footer":"Radar Leonida is not affiliated with Rockstar Games or Take-Two. The videos belong to their creators.",
 "auth.sh":"New GTA 6 ideas, every day.","auth.sp":"See what's growing and create your video with a ready-made angle.","auth.s1":"Radar updated every 2 hours","auth.s2":"A ready idea for every video","auth.s3":"A wall to promote your channel",
 "auth.tin":"Sign in","auth.tup":"Create account","a.email":"Email","a.pass":"Password","a.conf":"Confirm password","a.pe":"you@email.com","a.pp":"At least 6 characters","a.pc":"Repeat the password","a.forgot":"Forgot my password",
