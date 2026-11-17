@@ -201,8 +201,9 @@ img{max-width:100%}
  .wrap{padding:0 16px}
  nav{padding:14px 0}
  .logo{font-size:21px}
- .navr{gap:8px}
- .navr .btn.sm{padding:8px 13px}
+ .navr{gap:6px}
+ .navr .btn.sm{padding:7px 11px;font-size:13.5px}
+ .themeb{width:34px;height:34px}
  .hero{padding:22px 0 10px}
  .hero p{font-size:16.5px}
  .hero .btn{padding:11px 18px}
@@ -232,6 +233,16 @@ img{max-width:100%}
 .themeb:hover{border-color:var(--sun);color:var(--sun)}
 .themeb .i-moon{display:none}
 .themeb.is-light .i-sun{display:none}.themeb.is-light .i-moon{display:block}
+/* Faixa da Black Friday */
+.bfstrip{background:#0e0819;color:#f8ecdc;font-size:14px}
+.bfstrip .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:8px 14px;flex-wrap:wrap;padding:9px 48px 9px 16px;position:relative;text-align:center}
+.bfstrip strong{color:#ffb347}
+.bfstrip a{color:#f8ecdc;font-weight:700}
+.bfcode{display:inline-flex;align-items:center;gap:8px;border:1.5px dashed #ffb347;border-radius:8px;padding:2px 4px 2px 10px;font-weight:700;letter-spacing:.08em;color:#ffb347}
+.bfcode button{border:0;border-radius:6px;background:#ffb347;color:#1a0f2e;font:700 12px "DM Sans",sans-serif;padding:4px 9px;cursor:pointer;letter-spacing:0}
+.bfx{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:50%;background:transparent;color:#b9a8d0;font-size:20px;cursor:pointer}
+.bfx:hover{color:#fff}
+@media (max-width:480px){.bfstrip{font-size:13px}.bfstrip .in{padding:8px 44px 8px 12px}}
 /* Tela de login */
 .auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
 .auth[hidden]{display:none}
@@ -261,6 +272,12 @@ img{max-width:100%}
 </style>
 </head>
 <body>
+<div class="bfstrip" id="bfstrip" hidden><div class="in">
+  <span><strong data-i="bf.t">Black Friday:</strong> <span data-i="bf.txt">Pacote Vice City Paga com 30% off</span></span>
+  <span class="bfcode">BLACK30 <button type="button" id="bf-copy" data-i="bf.copy">Copiar</button></span>
+  <a href="pacote.html" data-i="bf.see">Ver pacote</a>
+  <button class="bfx" type="button" id="bf-x" aria-label="Fechar aviso" data-i-aria="bf.close">×</button>
+</div></div>
 <div class="wrap">
 <nav>
   <div class="logo">Radar <span class="sun">Leonida</span></div>
@@ -268,6 +285,7 @@ img{max-width:100%}
     <span class="pill" id="status" hidden></span>
     <button class="themeb" id="theme-btn" type="button" aria-label="Ativar modo claro"><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
     <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+    <a class="btn alt sm" href="pacote.html" data-i="nav.pack">Pacote</a>
     <a class="btn alt sm" href="#planos" data-i="nav.plans">Planos</a>
     <button class="btn sm" id="auth-btn" type="button">Entrar</button>
   </div>
@@ -462,7 +480,7 @@ var I18N={pt:{
 "plans.m":"Mensal","plans.pm":"R$ 14,90<small> /mês</small>","plans.m1":"Todas as ideias do radar","plans.m2":"Filtros por formato e crescimento","plans.m3":"Publicação no mural","plans.mb":"Assinar mensal",
 "plans.best":"Mais econômico","plans.a":"Anual","plans.pa":"R$ 118,80<small> /ano</small>","plans.eq":"equivale a R$ 9,90 por mês","plans.a1":"Tudo do plano mensal","plans.a2":"Um pagamento por ano, renovado todo ano","plans.a3":"Economia de 33% em relação ao mensal","plans.ab":"Assinar anual",
 "plans.n1":"O valor final, com qualquer taxa de serviço ou parcelamento, aparece no checkout da Cakto antes de você pagar.","plans.n2":"Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.",
-"th.light":"Ativar modo claro","th.dark":"Ativar modo escuro","lg.title":"Termos e políticas","lg.t1":"Termos","lg.t2":"Privacidade","lg.t3":"Cancelamento","lg.ptonly":"Disponível apenas em português.","lg.terms":"Termos de Uso","lg.priv":"Política de Privacidade","lg.canc":"Cancelamento e Reembolso","lg.agree":"Ao continuar, você aceita os","lg.and":"e a",
+"nav.pack":"Pacote","bf.t":"Black Friday:","bf.txt":"Pacote Vice City Paga com 30% off","bf.copy":"Copiar","bf.see":"Ver pacote","bf.close":"Fechar aviso","bf.copied":"Cupom copiado: BLACK30","th.light":"Ativar modo claro","th.dark":"Ativar modo escuro","lg.title":"Termos e políticas","lg.t1":"Termos","lg.t2":"Privacidade","lg.t3":"Cancelamento","lg.ptonly":"Disponível apenas em português.","lg.terms":"Termos de Uso","lg.priv":"Política de Privacidade","lg.canc":"Cancelamento e Reembolso","lg.agree":"Ao continuar, você aceita os","lg.and":"e a",
 "footer":"Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.",
 "auth.sh":"Ideias novas de GTA 6, todo dia.","auth.sp":"Veja o que está crescendo e crie o seu vídeo com um ângulo pronto.","auth.s1":"Radar atualizado de 2 em 2 horas","auth.s2":"Ideia pronta para cada vídeo","auth.s3":"Mural para divulgar o seu canal",
 "auth.tin":"Entrar","auth.tup":"Criar conta","a.email":"E-mail","a.pass":"Senha","a.conf":"Confirmar senha","a.pe":"voce@email.com","a.pp":"Mínimo de 6 caracteres","a.pc":"Repita a senha","a.forgot":"Esqueci minha senha",
@@ -510,7 +528,7 @@ var I18N={pt:{
 "plans.m":"Monthly","plans.pm":"R$ 14.90<small> /month</small>","plans.m1":"All of the radar's ideas","plans.m2":"Filters by format and growth","plans.m3":"Posting on the wall","plans.mb":"Subscribe monthly",
 "plans.best":"Best value","plans.a":"Yearly","plans.pa":"R$ 118.80<small> /year</small>","plans.eq":"equals R$ 9.90 per month","plans.a1":"Everything in the monthly plan","plans.a2":"One payment per year, renewed every year","plans.a3":"33% savings compared to monthly","plans.ab":"Subscribe yearly",
 "plans.n1":"The final amount, including any service fee or installments, is shown at Cakto's checkout before you pay. Prices are in Brazilian reais (BRL).","plans.n2":"Videos come from the YouTube Data API and open on YouTube, on the original channel.",
-"th.light":"Switch to light mode","th.dark":"Switch to dark mode","lg.title":"Terms and policies","lg.t1":"Terms","lg.t2":"Privacy","lg.t3":"Cancellation","lg.ptonly":"These documents are available in Portuguese only.","lg.terms":"Terms of Use (PT)","lg.priv":"Privacy Policy (PT)","lg.canc":"Cancellation and Refunds (PT)","lg.agree":"By continuing, you accept the","lg.and":"and the",
+"nav.pack":"Bundle","bf.t":"Black Friday:","bf.txt":"Vice City Paga bundle 30% off","bf.copy":"Copy","bf.see":"See the bundle","bf.close":"Close notice","bf.copied":"Code copied: BLACK30","th.light":"Switch to light mode","th.dark":"Switch to dark mode","lg.title":"Terms and policies","lg.t1":"Terms","lg.t2":"Privacy","lg.t3":"Cancellation","lg.ptonly":"These documents are available in Portuguese only.","lg.terms":"Terms of Use (PT)","lg.priv":"Privacy Policy (PT)","lg.canc":"Cancellation and Refunds (PT)","lg.agree":"By continuing, you accept the","lg.and":"and the",
 "footer":"Radar Leonida is not affiliated with Rockstar Games or Take-Two. The videos belong to their creators.",
 "auth.sh":"New GTA 6 ideas, every day.","auth.sp":"See what's growing and create your video with a ready-made angle.","auth.s1":"Radar updated every 2 hours","auth.s2":"A ready idea for every video","auth.s3":"A wall to promote your channel",
 "auth.tin":"Sign in","auth.tup":"Create account","a.email":"Email","a.pass":"Password","a.conf":"Confirm password","a.pe":"you@email.com","a.pp":"At least 6 characters","a.pc":"Repeat the password","a.forgot":"Forgot my password",
@@ -846,6 +864,15 @@ function paintThemeBtn(){var b=$("theme-btn"),l=curTheme()==="light";b.classList
 $("theme-btn").onclick=function(){var n=curTheme()==="light"?"dark":"light";
  document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("radar_theme",n)}catch(e){}paintThemeBtn()};
 if(mqLight&&mqLight.addEventListener)mqLight.addEventListener("change",paintThemeBtn);
+
+/* Faixa da Black Friday: some depois do fim da promoção ou quando a pessoa fecha */
+var BF_END=new Date("2026-11-30T23:59:59-03:00");
+(function(){
+ var closed=false;try{closed=localStorage.getItem("radar_bf_closed")==="1"}catch(e){}
+ if(Date.now()<BF_END.getTime()&&!closed)$("bfstrip").hidden=false;
+ $("bf-x").onclick=function(){$("bfstrip").hidden=true;try{localStorage.setItem("radar_bf_closed","1")}catch(e){}};
+ $("bf-copy").onclick=function(){try{navigator.clipboard.writeText("BLACK30").then(function(){toast(t("bf.copied"))},function(){toast("BLACK30")})}catch(x){toast("BLACK30")}};
+})();
 
 /* Idioma */
 function applyLang(){
