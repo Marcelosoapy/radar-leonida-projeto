@@ -95,13 +95,18 @@ footer a{color:var(--sea)}
 .toast.on{opacity:1}
 @media (max-width:820px){
  .pack{grid-template-columns:minmax(0,1fr);gap:22px;padding-top:18px}
- .stack{height:280px;max-width:330px;width:100%;margin:0 auto}
- .cv strong{font-size:19px}.cv.c1 strong{font-size:26px}.cv.c4{top:110px}
+ .stack{height:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:440px;width:100%;margin:0 auto}
+ .stack .cv{position:relative;left:auto;top:auto;width:auto;transform:none;padding:9px;border-radius:9px;box-shadow:0 10px 22px rgba(0,0,0,.35)}
+ .stack .cv.c1{order:0}.stack .cv.c2{order:1;transform:rotate(-2deg)}.stack .cv.c3{order:2;transform:rotate(2deg)}.stack .cv.c4{order:3}
+ .cv small{font-size:8px}.cv strong{font-size:15px}.cv.c1 strong{font-size:16px}
 }
 @media (max-width:480px){
  .wrap{padding:0 16px}
  nav{padding:14px 0}.logo{font-size:21px}
  .price .now{font-size:46px}
+ .strip{font-size:13px}.strip .in{padding:8px 12px;gap:6px 10px}
+ .cv strong{font-size:clamp(11px,3.4vw,14px);line-height:1.08;hyphens:manual}.cv.c1 strong{font-size:clamp(12px,3.6vw,15px)}.cv small{font-size:7.5px}.stack .cv{padding:8px 7px}
+ .pack h1{font-size:34px}
  .cta .btn{flex:1 1 auto}
  .lang button{padding:7px 10px}
 }
@@ -110,7 +115,7 @@ footer a{color:var(--sea)}
 </head>
 <body>
 <div class="strip" id="strip"><div class="in">
-  <span><strong data-i="s.bf">Black Friday:</strong> <span data-i="s.txt">30% off no pacote com o cupom</span></span>
+  <span><strong data-i="s.bf">Black Friday:</strong> <span data-i="s.txt">30% off com o cupom</span></span>
   <span class="code">BLACK30 <button type="button" data-copy="BLACK30" data-i="copy">Copiar</button></span>
 </div></div>
 
@@ -127,7 +132,7 @@ footer a{color:var(--sea)}
 <main>
 <section class="pack">
   <div class="stack" aria-hidden="true">
-    <div class="cv c4"><small>Templates</small><strong>Thumbnails</strong></div>
+    <div class="cv c4"><small>Templates</small><strong>Thumb&shy;nails</strong></div>
     <div class="cv c2"><small data-i="cv.bonus">Bônus</small><strong>100 Ganchos</strong></div>
     <div class="cv c3"><small data-i="cv.sheet">Planilha</small><strong data-i="cv.sheet2">do Criador</strong></div>
     <div class="cv c1"><small data-i="cv.ebook">E-book completo</small><strong>Vice City Paga</strong></div>
@@ -169,7 +174,7 @@ footer a{color:var(--sea)}
 
 <script>
 var I={pt:{
-"title":"Pacote Vice City Paga | Radar Leonida","s.bf":"Black Friday:","s.txt":"30% off no pacote com o cupom","copy":"Copiar","back":"Voltar ao radar",
+"title":"Pacote Vice City Paga | Radar Leonida","s.bf":"Black Friday:","s.txt":"30% off com o cupom","copy":"Copiar","back":"Voltar ao radar",
 "cv.bonus":"Bônus","cv.sheet":"Planilha","cv.sheet2":"do Criador","cv.ebook":"E-book completo","tag":"Black Friday · 30% off",
 "h1":"O pacote completo para lucrar com GTA 6","lead":"Tudo o que o checklist gratuito resume, em detalhes, com material pronto para usar desde o primeiro vídeo.",
 "i1":"o e-book completo de criação de conteúdo","i2b":"Bônus 100 Ganchos","i2":"aberturas prontas para adaptar aos seus vídeos","i3b":"Planilha do Criador","i3":"para organizar ideias, gravações e publicações","i4b":"Templates de Thumbnail","i4":"modelos editáveis para as suas capas",
@@ -180,7 +185,7 @@ var I={pt:{
 "foot":"Material independente, sem vínculo com a Rockstar Games nem com a Take-Two Interactive.","l.t":"Termos de Uso","l.p":"Política de Privacidade","l.c":"Cancelamento e Reembolso",
 "copied":"Cupom copiado: BLACK30","copyfail":"Cupom: BLACK30","th.light":"Ativar modo claro","th.dark":"Ativar modo escuro"
 },en:{
-"title":"Vice City Paga bundle | Radar Leonida","s.bf":"Black Friday:","s.txt":"30% off the bundle with code","copy":"Copy","back":"Back to the radar",
+"title":"Vice City Paga bundle | Radar Leonida","s.bf":"Black Friday:","s.txt":"30% off with code","copy":"Copy","back":"Back to the radar",
 "cv.bonus":"Bonus","cv.sheet":"Creator's","cv.sheet2":"Spreadsheet","cv.ebook":"Full e-book","tag":"Black Friday · 30% off",
 "h1":"The complete bundle to earn with GTA 6","lead":"Everything the free checklist summarizes, in depth, with ready-to-use material from your very first video. All materials are in Portuguese.",
 "i1":"the complete content creation e-book","i2b":"Bonus: 100 Hooks","i2":"ready-made openings to adapt to your videos","i3b":"Creator's Spreadsheet","i3":"to organize ideas, recordings and uploads","i4b":"Thumbnail Templates","i4":"editable templates for your thumbnails",
