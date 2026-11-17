@@ -82,7 +82,8 @@ input,select{flex:1 1 190px;background:var(--surface);color:var(--text);border:1
 .price small{font:500 16px "DM Sans",sans-serif;color:var(--muted)}
 .plan ul{padding-left:20px;margin:14px 0 22px;color:var(--muted)}
 .note{font-size:14px;color:var(--muted);margin-top:22px}
-footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
+.legal{margin:-20px 0 0;padding-bottom:50px;font-size:14px;color:var(--muted)}.legal a,.consent a,.fine a{color:var(--sea)}
+footer{padding:30px 0 30px;color:var(--muted);font-size:14px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sea);color:#102;padding:10px 20px;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
 .toast.on{opacity:1}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
@@ -243,7 +244,7 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
           <input id="g-email" type="email" placeholder="Seu melhor e-mail" data-i-ph="chk.ph" autocomplete="email" aria-label="E-mail" data-i-aria="chk.aria">
           <input id="g-hp" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn" id="g-btn" type="submit" data-i="chk.btn">Baixar o checklist grátis</button>
-          <label class="consent"><input type="checkbox" id="g-ok"><span data-i="chk.consent">Concordo em receber este material e novidades do Radar Leonida por e-mail. Posso cancelar quando quiser.</span></label>
+          <label class="consent"><input type="checkbox" id="g-ok"><span data-i="chk.consent">Concordo em receber este material e novidades do Radar Leonida por e-mail. Posso cancelar quando quiser.</span> <a href="privacidade.html" target="_blank" rel="noopener" data-i="lg.priv">Política de Privacidade</a></label>
           <p class="msg" id="g-msg" role="alert"></p>
         </form>
       </div>
@@ -299,6 +300,7 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
   <p class="note" data-i="plans.n2">Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.</p>
 </section>
 <footer data-i="footer">Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.</footer>
+<p class="legal"><a href="termos.html" target="_blank" rel="noopener" data-i="lg.terms">Termos de Uso</a> · <a href="privacidade.html" target="_blank" rel="noopener" data-i="lg.priv">Política de Privacidade</a> · <a href="cancelamento.html" target="_blank" rel="noopener" data-i="lg.canc">Cancelamento e Reembolso</a></p>
 </div>
 
 <div class="auth" id="auth" hidden role="dialog" aria-modal="true" aria-labelledby="a-title">
@@ -325,6 +327,7 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:14px}
       <button class="link" id="a-forgot" type="button" data-i="a.forgot">Esqueci minha senha</button>
     </form>
     <p class="fine" data-i="a.fine">Ao criar a conta, você concorda em usar o Radar Leonida de forma pessoal e respeitar os direitos dos criadores dos vídeos.</p>
+    <p class="fine"><span data-i="lg.agree">Ao criar a conta, você aceita os</span> <a href="termos.html" target="_blank" rel="noopener" data-i="lg.terms">Termos de Uso</a> <span data-i="lg.and">e a</span> <a href="privacidade.html" target="_blank" rel="noopener" data-i="lg.priv">Política de Privacidade</a>.</p>
   </div>
 </div>
 <div class="panel" id="panel" hidden role="dialog" aria-modal="true" aria-labelledby="p-title">
@@ -379,6 +382,7 @@ var I18N={pt:{
 "plans.m":"Mensal","plans.pm":"R$ 14,90<small> /mês</small>","plans.m1":"Todas as ideias do radar","plans.m2":"Filtros por formato e crescimento","plans.m3":"Publicação no mural","plans.mb":"Assinar mensal",
 "plans.best":"Mais econômico","plans.a":"Anual","plans.pa":"R$ 118,80<small> /ano</small>","plans.eq":"equivale a R$ 9,90 por mês","plans.a1":"Tudo do plano mensal","plans.a2":"Um pagamento por ano, renovado todo ano","plans.a3":"Economia de 33% em relação ao mensal","plans.ab":"Assinar anual",
 "plans.n1":"O valor final, com qualquer taxa de serviço ou parcelamento, aparece no checkout da Cakto antes de você pagar.","plans.n2":"Os vídeos vêm da YouTube Data API e abrem no YouTube, no canal de origem.",
+"lg.terms":"Termos de Uso","lg.priv":"Política de Privacidade","lg.canc":"Cancelamento e Reembolso","lg.agree":"Ao criar a conta, você aceita os","lg.and":"e a",
 "footer":"Radar Leonida não é afiliado à Rockstar Games nem à Take-Two. Os vídeos pertencem aos seus criadores.",
 "auth.sh":"Ideias novas de GTA 6, todo dia.","auth.sp":"Veja o que está crescendo e crie o seu vídeo com um ângulo pronto.","auth.s1":"Radar atualizado de 2 em 2 horas","auth.s2":"Ideia pronta para cada vídeo","auth.s3":"Mural para divulgar o seu canal",
 "auth.tin":"Entrar","auth.tup":"Criar conta","a.email":"E-mail","a.pass":"Senha","a.conf":"Confirmar senha","a.pe":"voce@email.com","a.pp":"Mínimo de 6 caracteres","a.pc":"Repita a senha","a.forgot":"Esqueci minha senha",
@@ -426,6 +430,7 @@ var I18N={pt:{
 "plans.m":"Monthly","plans.pm":"R$ 14.90<small> /month</small>","plans.m1":"All of the radar's ideas","plans.m2":"Filters by format and growth","plans.m3":"Posting on the wall","plans.mb":"Subscribe monthly",
 "plans.best":"Best value","plans.a":"Yearly","plans.pa":"R$ 118.80<small> /year</small>","plans.eq":"equals R$ 9.90 per month","plans.a1":"Everything in the monthly plan","plans.a2":"One payment per year, renewed every year","plans.a3":"33% savings compared to monthly","plans.ab":"Subscribe yearly",
 "plans.n1":"The final amount, including any service fee or installments, is shown at Cakto's checkout before you pay. Prices are in Brazilian reais (BRL).","plans.n2":"Videos come from the YouTube Data API and open on YouTube, on the original channel.",
+"lg.terms":"Terms of Use (PT)","lg.priv":"Privacy Policy (PT)","lg.canc":"Cancellation and Refunds (PT)","lg.agree":"By creating an account, you accept the","lg.and":"and the",
 "footer":"Radar Leonida is not affiliated with Rockstar Games or Take-Two. The videos belong to their creators.",
 "auth.sh":"New GTA 6 ideas, every day.","auth.sp":"See what's growing and create your video with a ready-made angle.","auth.s1":"Radar updated every 2 hours","auth.s2":"A ready idea for every video","auth.s3":"A wall to promote your channel",
 "auth.tin":"Sign in","auth.tup":"Create account","a.email":"Email","a.pass":"Password","a.conf":"Confirm password","a.pe":"you@email.com","a.pp":"At least 6 characters","a.pc":"Repeat the password","a.forgot":"Forgot my password",
