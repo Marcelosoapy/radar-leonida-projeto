@@ -54,16 +54,12 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:12px;paddi
 @media (prefers-reduced-motion:reduce){.strip,.strip::after,.code{animation:none!important}.strip::after{display:none}}
 /* oferta */
 .pack{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:center;padding:34px 0 40px}
-.stack{position:relative;height:400px;max-width:100%}
-.cv{position:absolute;width:52%;aspect-ratio:3/4.2;border-radius:12px;box-shadow:0 22px 46px rgba(0,0,0,.45);overflow:hidden;color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:14px;isolation:isolate}
-.cv small{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
-.cv strong{font:400 24px/1 Anton,sans-serif}
-.cv.c1{left:24%;top:0;z-index:4;background:linear-gradient(180deg,#1a0f2e 0%,#5b1f6b 48%,#ff5d73 72%,#ffb347 100%)}
-.cv.c1:after{content:"";position:absolute;left:22%;right:22%;bottom:20%;aspect-ratio:2/1;border-radius:200px 200px 0 0;background:#ffb347;opacity:.9;z-index:-1}
-.cv.c1 strong{font-size:34px}
-.cv.c2{left:3%;top:48px;transform:rotate(-8deg);z-index:2;background:linear-gradient(160deg,#ff5d73,#7b2ff7)}
-.cv.c3{left:46%;top:52px;transform:rotate(7deg);z-index:3;background:linear-gradient(160deg,#35d0ba,#174a66)}
-.cv.c4{left:13%;top:150px;width:40%;transform:rotate(-3deg);z-index:1;background:linear-gradient(160deg,#ffb347,#c9700a);color:#1a0f2e}
+.stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:440px;width:100%;margin:0 auto}
+.cv{margin:0;border-radius:10px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45);aspect-ratio:1819/2573;background:#1a0f2e;transition:transform .25s ease,box-shadow .25s ease}
+.cv img{display:block;width:100%;height:100%;object-fit:cover}
+.cv.c1{transform:rotate(-1.5deg)}.cv.c2{transform:rotate(1.5deg)}.cv.c3{transform:rotate(1.2deg)}.cv.c4{transform:rotate(-1.2deg)}
+.cv:hover{transform:translateY(-4px) rotate(0);box-shadow:0 24px 50px rgba(0,0,0,.5)}
+@media (max-width:820px){.stack{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:520px}.cv{border-radius:7px;box-shadow:0 10px 22px rgba(0,0,0,.35)}}
 .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--hot);border-radius:999px;padding:3px 12px}
 .pack h1{font-size:clamp(36px,5.6vw,60px);margin:14px 0 10px}
 .lead{color:var(--muted);margin:0 0 18px;max-width:52ch;font-size:17px}
@@ -97,17 +93,12 @@ footer a{color:var(--sea)}
 .toast.on{opacity:1}
 @media (max-width:820px){
  .pack{grid-template-columns:minmax(0,1fr);gap:22px;padding-top:18px}
- .stack{height:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:440px;width:100%;margin:0 auto}
- .stack .cv{position:relative;left:auto;top:auto;width:auto;transform:none;padding:9px;border-radius:9px;box-shadow:0 10px 22px rgba(0,0,0,.35)}
- .stack .cv.c1{order:0}.stack .cv.c2{order:1;transform:rotate(-2deg)}.stack .cv.c3{order:2;transform:rotate(2deg)}.stack .cv.c4{order:3}
- .cv small{font-size:8px}.cv strong{font-size:15px}.cv.c1 strong{font-size:16px}
 }
 @media (max-width:480px){
  .wrap{padding:0 16px}
  nav{padding:14px 0}.logo{font-size:21px}
  .price .now{font-size:46px}
  .strip{font-size:13px}.strip .in{padding:8px 12px;gap:6px 10px}
- .cv strong{font-size:clamp(11px,3.4vw,14px);line-height:1.08;hyphens:manual}.cv.c1 strong{font-size:clamp(12px,3.6vw,15px)}.cv small{font-size:7.5px}.stack .cv{padding:8px 7px}
  .pack h1{font-size:34px}
  .cta .btn{flex:1 1 auto}
  .lang button{padding:7px 10px}
@@ -133,11 +124,11 @@ footer a{color:var(--sea)}
 
 <main>
 <section class="pack">
-  <div class="stack" aria-hidden="true">
-    <div class="cv c4"><small>Templates</small><strong>Thumb&shy;nails</strong></div>
-    <div class="cv c2"><small data-i="cv.bonus">Bônus</small><strong>100 Ganchos</strong></div>
-    <div class="cv c3"><small data-i="cv.sheet">Planilha</small><strong data-i="cv.sheet2">do Criador</strong></div>
-    <div class="cv c1"><small data-i="cv.ebook">E-book completo</small><strong>Vice City Paga</strong></div>
+  <div class="stack">
+    <figure class="cv c1"><img src="materiais/pacote/capa-vice-city-paga.webp" width="640" height="905" alt="Capa do e-book Vice City Paga" data-i-alt="alt.c1" fetchpriority="high"></figure>
+    <figure class="cv c2"><img src="materiais/pacote/capa-100-ganchos.webp" width="640" height="905" alt="Capa do bônus 100 Ganchos" data-i-alt="alt.c2" loading="lazy"></figure>
+    <figure class="cv c3"><img src="materiais/pacote/capa-planilha-do-criador.webp" width="640" height="905" alt="Capa da Planilha do Criador" data-i-alt="alt.c3" loading="lazy"></figure>
+    <figure class="cv c4"><img src="materiais/pacote/capa-templates-thumbnail.webp" width="640" height="905" alt="Capa dos Templates de Thumbnail" data-i-alt="alt.c4" loading="lazy"></figure>
   </div>
   <div style="min-width:0">
     <div class="tags"><span class="tag" data-i="tag">Black Friday · 30% off</span><span class="life" data-i="life">Pagamento único · acesso vitalício</span></div>
@@ -185,7 +176,7 @@ var I={pt:{
 "fine":"Pagamento único, sem mensalidade: os arquivos são seus para sempre. Pagamento seguro pela Cakto. Você tem 7 dias para desistir da compra e receber o valor de volta.","fine.l":"Ver política de reembolso",
 "h.1t":"Copie o cupom","h.1p":"Clique em Copiar cupom e cole o código BLACK30 no campo de desconto do checkout.","h.2t":"Pague com Pix ou cartão","h.2p":"O pagamento é feito na página segura da Cakto.","h.3t":"Receba os arquivos","h.3p":"Depois da confirmação, a Cakto envia o acesso aos 4 arquivos para o seu e-mail.",
 "foot":"Material independente, sem vínculo com a Rockstar Games nem com a Take-Two Interactive.","l.t":"Termos de Uso","l.p":"Política de Privacidade","l.c":"Cancelamento e Reembolso",
-"copied":"Cupom copiado: BLACK30","copyfail":"Cupom: BLACK30","th.light":"Ativar modo claro","th.dark":"Ativar modo escuro"
+"alt.c1":"Capa do e-book Vice City Paga","alt.c2":"Capa do bônus 100 Ganchos","alt.c3":"Capa da Planilha do Criador","alt.c4":"Capa dos Templates de Thumbnail","copied":"Cupom copiado: BLACK30","copyfail":"Cupom: BLACK30","th.light":"Ativar modo claro","th.dark":"Ativar modo escuro"
 },en:{
 "title":"Vice City Paga bundle | Radar Leonida","s.bf":"Black Friday:","s.txt":"lifetime bundle, 30% off","copy":"Copy","back":"Back to the radar",
 "cv.bonus":"Bonus","cv.sheet":"Creator's","cv.sheet2":"Spreadsheet","cv.ebook":"Full e-book","tag":"Black Friday · 30% off","life":"One-time payment · lifetime access",
@@ -196,7 +187,7 @@ var I={pt:{
 "fine":"One-time payment, no subscription: the files are yours forever. Secure payment via Cakto. You have 7 days to cancel the purchase and get your money back.","fine.l":"See the refund policy (PT)",
 "h.1t":"Copy the code","h.1p":"Click Copy code and paste BLACK30 into the discount field at checkout.","h.2t":"Pay with Pix or card","h.2p":"Payment happens on Cakto's secure page.","h.3t":"Get the files","h.3p":"Once payment is confirmed, Cakto emails you access to the 4 files.",
 "foot":"Independent material, not affiliated with Rockstar Games or Take-Two Interactive.","l.t":"Terms of Use (PT)","l.p":"Privacy Policy (PT)","l.c":"Cancellation and Refunds (PT)",
-"copied":"Code copied: BLACK30","copyfail":"Code: BLACK30","th.light":"Switch to light mode","th.dark":"Switch to dark mode"
+"alt.c1":"Cover of the Vice City Paga e-book","alt.c2":"Cover of the 100 Hooks bonus","alt.c3":"Cover of the Creator's Spreadsheet","alt.c4":"Cover of the Thumbnail Templates","copied":"Code copied: BLACK30","copyfail":"Code: BLACK30","th.light":"Switch to light mode","th.dark":"Switch to dark mode"
 }};
 var lang=(function(){try{var q=localStorage.getItem("radar_lang");if(q==="pt"||q==="en")return q}catch(e){}return /^pt/i.test(navigator.language||"")?"pt":"en"})();
 function t(k){return (I[lang]&&I[lang][k])||I.pt[k]||k}
@@ -208,6 +199,7 @@ function paintTheme(){var b=$("theme-btn"),l=curTheme()==="light";b.classList.to
 function apply(){
  document.documentElement.lang=lang==="en"?"en":"pt-BR";document.title=t("title");
  document.querySelectorAll("[data-i]").forEach(function(e){e.textContent=t(e.getAttribute("data-i"))});
+ document.querySelectorAll("[data-i-alt]").forEach(function(e){e.alt=t(e.getAttribute("data-i-alt"))});
  document.querySelectorAll("[data-ih]").forEach(function(e){e.textContent=t(e.getAttribute("data-ih"))});
  document.querySelectorAll("[data-lang]").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-lang")===lang)});
  paintTheme()}
