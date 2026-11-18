@@ -293,6 +293,8 @@ img{max-width:100%}
 .acc-empty{text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;padding:26px 16px}
 .acc-empty p{margin:0 0 14px}
 .saved-note{font-size:13px;color:var(--muted);margin:12px 0 0}
+.trbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:14px;color:var(--muted)}
+.trbar .btn[disabled]{opacity:.7;cursor:wait}
 /* Tela de login */
 .auth{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;grid-template-columns:1.05fr 1fr;overflow:auto}
 .auth[hidden]{display:none}
@@ -568,7 +570,7 @@ var I18N={pt:{
 "e.assist":"Não foi possível concluir agora. Tente de novo.","e.server":"Não foi possível falar com o servidor. Confira se a função video-assist está publicada.","e.code":function(c){return " (código "+c+")"},"e.empty":"Resposta vazia. Tente de novo.",
 "p.t1":"Transcrição","p.t2":"Roteiro + thumbnail","p.loadt":"Buscando a transcrição...","p.loads":"A IA está transcrevendo e reescrevendo o roteiro. Isso pode levar até 1 minuto...",
 "up.h":"Roteiro único com IA","up.p":"Disponível para assinantes. A IA faz o trabalho pesado para você produzir mais rápido:","up.l1":"Transcreve o vídeo, mesmo quando ele não tem legenda","up.l2":"Reescreve um roteiro original, com outra estrutura e outro ângulo","up.l3":"Entrega gancho, blocos com tempo e o que mostrar na tela","up.l4":"Inclui título, hashtags e o esboço da thumbnail","up.btn":"Ver planos",
-"tr.copy":"Copiar transcrição","tr.note":"Use a transcrição para estudar o assunto e criar o seu próprio conteúdo. Não republique o texto do outro criador.",
+"tr.copy":"Copiar transcrição","tr.other":"Esta transcrição está em outro idioma.","tr.do":"Traduzir para português","tr.doing":"Traduzindo... (pode levar até 1 minuto)","tr.showing":"Mostrando a tradução para português.","tr.orig":"Mostrando o texto original.","tr.seeorig":"Ver original","tr.seetr":"Ver tradução","tr.note":"Use a transcrição para estudar o assunto e criar o seu próprio conteúdo. Não republique o texto do outro criador.",
 "tm.scene":"Cena principal","tm.expr":"Expressão:","tm.hl":"Destaque:","tm.none":"nenhum","tm.note":"Esboço de composição. Substitua a área tracejada pela sua imagem real.",
 "sc.title":"Roteiro","sc.hook":"Gancho","sc.say":"Fala","sc.vis":"Visual","sc.end":"Chamada final","sc.diff":"O que muda em relação ao original:","sc.thumb":"Esboço da thumbnail","sc.copy":"Copiar roteiro","sc.again":"Gerar outra versão",
 "txt.hook":"GANCHO","txt.say":"Fala:","txt.vis":"Visual:","txt.end":"CHAMADA FINAL",
@@ -625,7 +627,7 @@ var I18N={pt:{
 "e.assist":"Couldn't complete that right now. Try again.","e.server":"Couldn't reach the server. Please try again later.","e.code":function(c){return " (code "+c+")"},"e.empty":"Empty response. Try again.",
 "p.t1":"Transcript","p.t2":"Script + thumbnail","p.loadt":"Fetching the transcript...","p.loads":"The AI is transcribing and rewriting the script. This can take up to 1 minute...",
 "up.h":"Unique script with AI","up.p":"Available to subscribers. The AI does the heavy lifting so you can produce faster:","up.l1":"Transcribes the video, even when it has no captions","up.l2":"Rewrites an original script, with a different structure and angle","up.l3":"Delivers a hook, timed blocks and what to show on screen","up.l4":"Includes a title, hashtags and a thumbnail sketch","up.btn":"See plans",
-"tr.copy":"Copy transcript","tr.note":"Use the transcript to study the topic and create your own content. Don't republish the other creator's text.",
+"tr.copy":"Copy transcript","tr.other":"This transcript is in another language.","tr.do":"Translate to English","tr.doing":"Translating... (may take up to 1 minute)","tr.showing":"Showing the English translation.","tr.orig":"Showing the original text.","tr.seeorig":"See original","tr.seetr":"See translation","tr.note":"Use the transcript to study the topic and create your own content. Don't republish the other creator's text.",
 "tm.scene":"Main scene","tm.expr":"Expression:","tm.hl":"Highlight:","tm.none":"none","tm.note":"Composition sketch. Replace the dashed area with your real image.",
 "sc.title":"Script","sc.hook":"Hook","sc.say":"Line","sc.vis":"Visual","sc.end":"Closing call to action","sc.diff":"What changes compared to the original:","sc.thumb":"Thumbnail sketch","sc.copy":"Copy script","sc.again":"Generate another version",
 "txt.hook":"HOOK","txt.say":"Line:","txt.vis":"Visual:","txt.end":"CLOSING CALL TO ACTION",
@@ -828,7 +830,7 @@ document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(
  watchAccess()}});
 
 /* Transcrição e roteiro com IA */
-var R={t:{},s:{}},pv=null,ptab="transcript";
+var R={t:{},s:{},x:{}},XV={},pv=null,ptab="transcript";
 async function callAssist(action,id,again){
  var r=await sb.functions.invoke((cfg.ASSIST_FN||"video-assist"),{body:{action:action,video_id:id,again:!!again,lang:lang}});
  if(r.error){var m=t("e.assist"),code="",st="";
@@ -844,8 +846,14 @@ function openAssist(id,tab){
 function closePanel(){$("panel").hidden=true;document.body.style.overflow=""}
 function hex(c,f){return /^#[0-9a-f]{6}$/i.test(c||"")?c:f}
 function upsell(){return '<div class="up"><h4>'+t("up.h")+'</h4><p class="sub">'+t("up.p")+'</p><ul><li>'+t("up.l1")+'</li><li>'+t("up.l2")+'</li><li>'+t("up.l3")+'</li><li>'+t("up.l4")+'</li></ul><button class="btn" type="button" data-plans>'+t("up.btn")+'</button></div>'}
-function viewTranscript(d){
- return '<div class="tbox">'+esc(d.text)+'</div><div class="acts"><button class="btn alt sm" type="button" data-copy="'+esc(d.text)+'">'+t("tr.copy")+'</button></div><p class="note">'+t("tr.note")+'</p>'}
+function trSame(d){return (d.lang||"").toLowerCase().indexOf(lang)===0}
+function viewTranscript(d,id){
+ var key=id+"|"+lang,tr=R.x[key],showTr=!!tr&&XV[id]!==false,txt=showTr?tr.text:d.text,h="";
+ if(!trSame(d)){
+  if(tr)h+='<div class="trbar"><span>'+(showTr?t("tr.showing"):t("tr.orig"))+'</span><button class="btn alt sm" type="button" data-trview="'+esc(id)+'">'+(showTr?t("tr.seeorig"):t("tr.seetr"))+'</button></div>';
+  else h+='<div class="trbar"><span>'+t("tr.other")+'</span><button class="btn sun sm" type="button" data-translate="'+esc(id)+'">🌐 '+t("tr.do")+'</button></div>';
+ }
+ return h+'<div class="tbox">'+esc(txt)+'</div><div class="acts"><button class="btn alt sm" type="button" data-copy="'+esc(txt)+'">'+t("tr.copy")+'</button></div><p class="note">'+t("tr.note")+'</p>'}
 function thumbMock(tk){
  tk=tk||{};var c=tk.cores||[],a=hex(c[0],"#7b2ff7"),b=hex(c[1],"#ff5d73"),tx=hex(c[2],"#ffffff");
  var pos=["esquerda","direita","centro"].indexOf(tk.posicao_texto)>-1?tk.posicao_texto:"esquerda";
@@ -870,7 +878,7 @@ function renderPanel(again){
  $("p-title").textContent=pv.title;
  $("p-t1").setAttribute("aria-selected",ptab==="transcript");$("p-t2").setAttribute("aria-selected",ptab==="script");
  if(ptab==="transcript"){
-  if(R.t[id]){b.innerHTML=viewTranscript(R.t[id]);return}
+  if(R.t[id]){b.innerHTML=viewTranscript(R.t[id],id);return}
   b.innerHTML='<div class="load">'+t("p.loadt")+'</div>';
   callAssist("transcript",id).then(function(d){
    if(!d.error)R.t[id]=d;
@@ -886,6 +894,18 @@ function renderPanel(again){
   if(!pv||pv.id!==id||ptab!=="script"||$("panel").hidden)return;
   if(d.error){b.innerHTML='<p class="msg">'+esc(d.error)+'</p>';return}
   renderPanel()})}
+
+/* Tradução da transcrição */
+document.addEventListener("click",function(e){
+ var v=e.target.closest("[data-trview]");
+ if(v){var id=v.getAttribute("data-trview");XV[id]=XV[id]===false;renderPanel();return}
+ var b=e.target.closest("[data-translate]");if(!b)return;
+ var id2=b.getAttribute("data-translate"),key=id2+"|"+lang,body=$("p-body");
+ b.disabled=true;b.textContent=t("tr.doing");
+ callAssist("translate",id2).then(function(d){
+  if(!pv||pv.id!==id2||ptab!=="transcript"||$("panel").hidden)return;
+  if(d.error){b.disabled=false;b.textContent="🌐 "+t("tr.do");var m=document.createElement("p");m.className="msg";m.textContent=d.error;b.closest(".trbar").after(m);return}
+  R.x[key]={text:d.text};XV[id2]=true;renderPanel()})});
 $("p-t1").onclick=function(){ptab="transcript";renderPanel()};
 $("p-t2").onclick=function(){ptab="script";renderPanel()};
 $("p-x").onclick=closePanel;
