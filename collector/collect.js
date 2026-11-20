@@ -72,7 +72,8 @@ async function makeIdea(v) {
     }
   }
   if (lives.length) { // apaga lives que já tinham entrado no banco
-    await sb(`videos?id=in.(${lives.map((x) => `"${x}"`).join(",")})`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
+    try { await sb(`videos?id=in.(${lives.map((x) => `"${x}"`).join(",")})`, { method: "DELETE", headers: { Prefer: "return=minimal" } }); }
+    catch (e) { console.warn("aviso: não foi possível apagar lives antigas:", e.message); }
   }
   console.log(`${lives.length} lives ignoradas`);
   if (rows.length) {
@@ -80,7 +81,8 @@ async function makeIdea(v) {
     await sb("video_stats", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify(rows.map((r) => ({ video_id: r.id, views: r.views }))) });
   }
   // encerra o acesso de quem cancelou e já passou do período pago
-  await sb(`profiles?active=eq.true&access_until=lt.${encodeURIComponent(new Date().toISOString())}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ active: false }) });
+  try { await sb(`profiles?active=eq.true&access_until=lt.${encodeURIComponent(new Date().toISOString())}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ active: false }) }); }
+  catch (e) { console.warn("aviso: não foi possível encerrar acessos vencidos (rode o migration-subscription.sql):", e.message); }
   // apaga fotos com mais de 7 dias para o banco não crescer sem parar
   await sb(`video_stats?captured_at=lt.${encodeURIComponent(new Date(Date.now() - 7 * 24 * 3600e3).toISOString())}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
   console.log(`${rows.length} vídeos salvos`);
