@@ -659,6 +659,10 @@ function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:"#"}
 function toast(m){var t=$("toast");t.textContent=m;t.className="toast on";setTimeout(function(){t.className="toast"},2800)}
 
 /* Formato e tema de cada vídeo, deduzidos do título e da duração */
+/* Lives não entram no radar (o coletor já barra; isto esconde as que ficaram no banco) */
+function looksLive(v){var s=v.duration_s||0,t=v.title||"";
+ if(s>=3*3600)return true;
+ return /\blive\b|\blives\b|ao vivo|livestream|\bstream(ing)?\b|🔴/i.test(t)&&(s===0||s>=20*60)}
 function isShort(v){return !!((v.duration_s&&v.duration_s<=90)||/#shorts?\b/i.test(v.title||""))}
 function tema(v){
  var t=(v.title||"").toLowerCase();
@@ -726,7 +730,7 @@ async function load(){
  var s=await sb.auth.getSession();user=s.data.session?s.data.session.user:null;active=false;
  if(user){var p=await sb.from("profiles").select("active,access_until").eq("id",user.id).maybeSingle();active=!!(p.data&&p.data.active&&(!p.data.access_until||new Date(p.data.access_until)>new Date()))}
  var since=new Date(Date.now()-48*36e5).toISOString();
- var v=await sb.from("videos").select("*").gte("published_at",since).limit(200);D=v.data||[];
+ var v=await sb.from("videos").select("*").gte("published_at",since).limit(200);D=(v.data||[]).filter(function(x){return !looksLive(x)});
  var i=await sb.from("ideas").select("video_id,idea");ideas={};(i.data||[]).forEach(function(x){ideas[x.video_id]=x.idea});
  var tr=await sb.from("video_trends").select("*");T={};(tr.data||[]).forEach(function(x){T[x.video_id]=x});
  var m=await sb.from("community").select("*").order("created_at",{ascending:false}).limit(30);M=m.data||[];
