@@ -4,6 +4,20 @@ const BASE = (SUPABASE_URL || "").trim().replace(/\/+$/, "").replace(/\/rest\/v1
 const QUERIES = ["#gta6", "#gta6trailer", "#gta6leonida", "#gtavi"]; // cada busca custa 100 unidades de cota
 const sbH = { apikey: SUPABASE_SERVICE_KEY, Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`, "Content-Type": "application/json" };
 
+// Lives: em andamento, agendadas ou já encerradas (gravações de transmissão). Estreias curtas continuam.
+const LIVE_WORDS = /\blive\b|\blives\b|ao vivo|livestream|\bstream(ing)?\b|\blive ?on\b|🔴/i;
+function isLive(v, seconds) {
+  const lbc = v.snippet?.liveBroadcastContent;
+  if (lbc === "live" || lbc === "upcoming") return true;
+  const ls = v.liveStreamingDetails;
+  if (ls && (ls.actualStartTime || ls.scheduledStartTime)) {
+    if (seconds >= 20 * 60 || seconds === 0) return true; // transmissão longa ou ainda sem duração
+    if (LIVE_WORDS.test(v.snippet?.title || "")) return true;
+    return false; // estreia de um vídeo editado
+  }
+  return LIVE_WORDS.test(v.snippet?.title || "") && seconds >= 30 * 60; // live reenviada como vídeo comum
+}
+
 const dur = (iso) => { const m = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/.exec(iso || "") || []; return (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0); };
 
 async function yt(path, params) {
@@ -42,12 +56,13 @@ async function makeIdea(v) {
   (known || []).forEach((x) => ids.add(x.id));
 
   const list = [...ids];
-  const rows = [], desc = {};
+  const rows = [], desc = {}, lives = [];
   for (let i = 0; i < list.length; i += 50) {
-    const d = await yt("videos", { part: "snippet,statistics,contentDetails", id: list.slice(i, i + 50).join(",") });
+    const d = await yt("videos", { part: "snippet,statistics,contentDetails,liveStreamingDetails", id: list.slice(i, i + 50).join(",") });
     for (const v of d.items) {
       const txt = (v.snippet.title + " " + v.snippet.description).toLowerCase();
       if (!/#?gta\s?(6|vi)|leonida|vice city/.test(txt)) continue; // descarta resultados fora do tema
+      if (isLive(v, dur(v.contentDetails?.duration))) { lives.push(v.id); continue; } // lives não entram no radar
       desc[v.id] = v.snippet.description;
       rows.push({
         id: v.id, title: v.snippet.title, channel: v.snippet.channelTitle, duration_s: dur(v.contentDetails.duration),
@@ -56,6 +71,10 @@ async function makeIdea(v) {
       });
     }
   }
+  if (lives.length) { // apaga lives que já tinham entrado no banco
+    await sb(`videos?id=in.(${lives.map((x) => `"${x}"`).join(",")})`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
+  }
+  console.log(`${lives.length} lives ignoradas`);
   if (rows.length) {
     await sb("videos?on_conflict=id", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" }, body: JSON.stringify(rows) });
     await sb("video_stats", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify(rows.map((r) => ({ video_id: r.id, views: r.views }))) });
