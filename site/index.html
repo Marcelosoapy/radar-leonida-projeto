@@ -729,6 +729,7 @@ function render(){
 async function load(){
  var s=await sb.auth.getSession();user=s.data.session?s.data.session.user:null;active=false;
  if(user){var p=await sb.from("profiles").select("active,access_until").eq("id",user.id).maybeSingle();active=!!(p.data&&p.data.active&&(!p.data.access_until||new Date(p.data.access_until)>new Date()))}
+ if(user&&!active)syncAccess();
  var since=new Date(Date.now()-48*36e5).toISOString();
  var v=await sb.from("videos").select("*").gte("published_at",since).limit(200);D=(v.data||[]).filter(function(x){return !looksLive(x)});
  var i=await sb.from("ideas").select("video_id,idea");ideas={};(i.data||[]).forEach(function(x){ideas[x.video_id]=x.idea});
@@ -817,11 +818,19 @@ $("form").onsubmit=async function(e){e.preventDefault();
  var r=await sb.from("community").insert({user_id:user.id,title:$("f-title").value,channel:$("f-chan").value,url:$("f-url").value,format:$("f-fmt").value});
  if(r.error){toast(t("e.post"));return}
  e.target.reset();toast(t("ok.posted"));load()};
+/* Se pagou e o aviso da Cakto não liberou, confere direto na Cakto pelo e-mail da conta */
+var lastSync=0,syncing=false;
+async function syncAccess(force){
+ if(!user||active||syncing||(!force&&Date.now()-lastSync<60000))return;
+ syncing=true;lastSync=Date.now();
+ try{var r=await callAcc("sync");if(r&&r.active&&!active){active=true;toast(t("ok.active"));load()}}catch(e){}
+ syncing=false}
 var watching=null;
 function watchAccess(){
  if(watching)return;var n=0;
  watching=setInterval(async function(){
   n++;if(!user||active||n>60){clearInterval(watching);watching=null;return}
+  if(n%6===0)syncAccess(true);
   var p=await sb.from("profiles").select("active").eq("id",user.id).maybeSingle();
   if(p.data&&p.data.active){active=true;toast(t("ok.active"));load()}},5000)}
 document.querySelectorAll("[data-plan]").forEach(function(b){b.onclick=function(){
@@ -1047,7 +1056,8 @@ async function openAcc(tab){
  setTimeout(function(){$("acc-x").focus()},30);
  var r=await callAcc("status");
  if(r.error&&r.active===undefined)r=Object.assign({email:user.email,active:active},r);
- ACC.data=r;if(!$("accp").hidden)renderAcc()}
+ ACC.data=r;if(!$("accp").hidden)renderAcc();
+ if(r.active&&!active){active=true;toast(t("ok.active"));load()}}
 function closeAcc(){$("accp").hidden=true;document.body.style.overflow=($("auth").hidden&&$("panel").hidden&&$("legalp").hidden)?"":"hidden"}
 $("status").onclick=function(){openAcc("sub")};
 $("acc-x").onclick=closeAcc;
